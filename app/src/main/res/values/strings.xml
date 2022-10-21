@@ -6,7 +6,7 @@
     <string name="nav_header_subtitle">Gestionnaire de courts de badminton</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Paramètres</string>
-    <string name="menu_home">Courts</string>
+    <string name="menu_home">Terrains de badminton</string>
     <string name="menu_gallery">Joueurs</string>
     <string name="menu_slideshow">Réservations</string>
 </resources>
