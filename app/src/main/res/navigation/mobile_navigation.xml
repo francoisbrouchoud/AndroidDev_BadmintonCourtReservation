@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.example.androiddev_badmintoncourtreservation.ui.player.PlayersActivity"
+        android:name="com.example.androiddev_badmintoncourtreservation.ui.player.PlayersActivity_old"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
