@@ -1,6 +1,7 @@
 package com.example.androiddev_badmintoncourtreservation.adapter;
 
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,11 +61,11 @@ public class CourtsRecyclerAdapter<T> extends RecyclerView.Adapter<CourtsRecycle
         //Assign values to each row, depends on the position of the recycler view
         T item = data.get(position);
         if(item.getClass().equals(CourtEntity.class))
-            //holder.tvCourtName.setText(((CourtEntity) item).getName());
+            holder.tvCourtName.setText(((CourtEntity) item).getCourtsName());
         if(item.getClass().equals(CourtEntity.class))
-            //holder.tvCourtAddress.setText(((CourtEntity) item).getAddress());
+            holder.tvCourtAddress.setText(((CourtEntity) item).getAddress());
         if(item.getClass().equals(CourtEntity.class)) {
-            //holder.imageView.setImageURI(((CourtEntity) item).getImagePath());
+            holder.imageView.setImageURI(Uri.parse(((CourtEntity) item).getImagePath()));
         }
     }
 

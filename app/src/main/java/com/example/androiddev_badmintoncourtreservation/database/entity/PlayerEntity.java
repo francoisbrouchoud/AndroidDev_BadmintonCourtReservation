@@ -70,7 +70,7 @@ public class PlayerEntity {
         this.lastname = lastname;
     }
 
-    public Date getAge() {
+    public Date getBirthdate() {
         return birthdate;
     }
 
