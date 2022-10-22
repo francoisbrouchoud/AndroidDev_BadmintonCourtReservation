@@ -5,6 +5,8 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import java.util.Date;
+
 @Entity(tableName = "accounts",
         foreignKeys =
         @ForeignKey(
@@ -23,7 +25,7 @@ public class PlayerEntity {
     private Long id;
     private String firstname;
     private String lastname;
-    private int age;
+    private Date birthdate;
     private String gender;
     private String phone;
     private String address;
@@ -33,10 +35,10 @@ public class PlayerEntity {
     public PlayerEntity() {
     }
 
-    public PlayerEntity(String firstname, String lastname, int age, String gender, String phone, String address, String place, int level) {
+    public PlayerEntity(String firstname, String lastname, Date birthdate, String gender, String phone, String address, String place, int level) {
         this.firstname = firstname;
         this.lastname = lastname;
-        this.age = age;
+        this.birthdate = birthdate;
         this.gender = gender;
         this.phone = phone;
         this.address = address;
@@ -68,12 +70,12 @@ public class PlayerEntity {
         this.lastname = lastname;
     }
 
-    public int getAge() {
-        return age;
+    public Date getAge() {
+        return birthdate;
     }
 
     public void setAge(int age) {
-        this.age = age;
+        this.birthdate = birthdate;
     }
 
     public String getGender() {
