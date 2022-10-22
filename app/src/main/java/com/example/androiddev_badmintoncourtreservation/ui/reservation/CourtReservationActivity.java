@@ -18,8 +18,8 @@ public class CourtReservationActivity extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        ReservationsActivity reservationsActivity =
-                new ViewModelProvider(this).get(ReservationsActivity.class);
+        ReservationsActivity_old reservationsActivity =
+                new ViewModelProvider(this).get(ReservationsActivity_old.class);
 
         binding = FragmentSlideshowBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
