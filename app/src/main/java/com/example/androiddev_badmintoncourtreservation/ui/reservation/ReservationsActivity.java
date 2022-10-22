@@ -1,19 +1,21 @@
 package com.example.androiddev_badmintoncourtreservation.ui.reservation;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class ReservationsActivity extends ViewModel {
+import android.os.Bundle;
 
-    private final MutableLiveData<String> mText;
+import com.example.androiddev_badmintoncourtreservation.R;
+import com.example.androiddev_badmintoncourtreservation.util.RecyclerViewItemClickListener;
 
-    public ReservationsActivity() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is slideshow fragment");
-    }
+import java.util.List;
 
-    public LiveData<String> getText() {
-        return mText;
+public class ReservationsActivity extends AppCompatActivity {
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_reservations);
     }
 }
