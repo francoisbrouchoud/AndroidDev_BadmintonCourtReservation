@@ -34,6 +34,10 @@ public class PlayersRecycleAdapter<T> extends RecyclerView.Adapter<PlayersRecycl
         }
     }
 
+    public PlayersRecycleAdapter(RecyclerViewItemClickListener rvClickListerner) {
+        this.rvClickListerner = rvClickListerner;
+    }
+
 
     @NonNull
     @Override

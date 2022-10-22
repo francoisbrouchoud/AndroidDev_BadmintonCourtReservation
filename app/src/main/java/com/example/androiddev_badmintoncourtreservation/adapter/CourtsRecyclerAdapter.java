@@ -37,6 +37,9 @@ public class CourtsRecyclerAdapter<T> extends RecyclerView.Adapter<CourtsRecycle
         }
     }
 
+    public CourtsRecyclerAdapter(RecyclerViewItemClickListener rvClickListerner) {
+        this.rvClickListerner = rvClickListerner;
+    }
 
     @NonNull
     @Override
