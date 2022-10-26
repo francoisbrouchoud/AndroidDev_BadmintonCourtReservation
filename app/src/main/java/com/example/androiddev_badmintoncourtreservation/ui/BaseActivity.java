@@ -97,12 +97,18 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_player:
                 intent = new Intent(this, PlayersActivity.class);
+                break;
             case R.id.nav_reservation:
                 intent = new Intent(this, ReservationsActivity.class);
+                break;
         }
 
-        if(intent != null)
+        if (intent != null) {
+            intent.setFlags(
+                    Intent.FLAG_ACTIVITY_NO_ANIMATION
+            );
             startActivity(intent);
+        }
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
