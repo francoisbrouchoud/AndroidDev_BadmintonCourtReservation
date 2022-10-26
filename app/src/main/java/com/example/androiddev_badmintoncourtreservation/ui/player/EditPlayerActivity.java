@@ -1,19 +1,25 @@
 package com.example.androiddev_badmintoncourtreservation.ui.player;
 
+import android.os.Bundle;
+import android.widget.TextView;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class EditPlayerActivity extends ViewModel {
+import com.example.androiddev_badmintoncourtreservation.R;
+import com.example.androiddev_badmintoncourtreservation.ui.BaseActivity;
 
-    private final MutableLiveData<String> mText;
+public class EditPlayerActivity extends BaseActivity {
 
-    public EditPlayerActivity() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is gallery fragment");
-    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-    public LiveData<String> getText() {
-        return mText;
+        getLayoutInflater().inflate(R.layout.activity_edit_player, frameLayout);
+        navigationView.setCheckedItem(R.id.nav_none);
+
+        TextView textView = findViewById(R.id.textTest);
+        textView.setText("here we edit the players");
     }
 }
