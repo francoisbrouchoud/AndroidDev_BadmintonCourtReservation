@@ -2,8 +2,11 @@ package com.example.androiddev_badmintoncourtreservation.ui.court;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.core.view.GravityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -51,7 +54,7 @@ public class CourtsActivity extends BaseActivity {
             }
         });
 
-        fab = findViewById(R.id.floatingActionButton);
+        fab = findViewById(R.id.floatingActionButtonCourts);
         fab.setOnClickListener(view -> {
                     Intent intent = new Intent(CourtsActivity.this, EditCourtActivity.class);
                     intent.setFlags(
@@ -63,6 +66,19 @@ public class CourtsActivity extends BaseActivity {
         );
 
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == BaseActivity.position) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+            return false;
+        }
+        /*
+        The activity has to be finished manually in order to guarantee the navigation hierarchy working.
+        */
+        finish();
+        return super.onNavigationItemSelected(item);
     }
 
     private void setUpModelData(){

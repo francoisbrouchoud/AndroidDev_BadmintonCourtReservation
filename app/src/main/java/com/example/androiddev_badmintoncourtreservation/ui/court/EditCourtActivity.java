@@ -18,6 +18,6 @@ public class EditCourtActivity extends BaseActivity {
         navigationView.setCheckedItem(R.id.nav_none);
 
         TextView textView = findViewById(R.id.textTest);
-        textView.setText("test");
+        textView.setText("here we add/edit the courts");
     }
 }
