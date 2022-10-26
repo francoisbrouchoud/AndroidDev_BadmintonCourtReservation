@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/nav_court"
-        android:name="com.example.androiddev_badmintoncourtreservation.ui.court.CourtsActivity_old"
+        android:name="com.example.androiddev_badmintoncourtreservation.ui.court.CourtsActivity"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_player"
-        android:name="com.example.androiddev_badmintoncourtreservation.ui.player.PlayersActivity_old"
+        android:name="com.example.androiddev_badmintoncourtreservation.ui.player.PlayersActivity"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 

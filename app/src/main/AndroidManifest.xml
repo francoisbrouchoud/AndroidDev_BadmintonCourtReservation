@@ -49,9 +49,6 @@
                             android:name="android.support.PARENT_ACTIVITY"
                             android:value=".ui.court.CourtsActivity" />
                     </activity>
-                    <activity
-                        android:name=".ui.court.EditCourtActivity_old"
-                        android:exported="false" />
                     <activity android:name=".ui.BaseActivity"
                         android:theme="@style/Theme.AndroidDev_BadmintonCourtReservation.NoActionBar"/>
                 </application>
