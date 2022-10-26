@@ -7,6 +7,7 @@
     tools:context=".ui.court.CourtsActivity">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/CourtRv"
         android:layout_width="409dp"
         android:layout_height="729dp"
         app:layout_constraintBottom_toBottomOf="parent"

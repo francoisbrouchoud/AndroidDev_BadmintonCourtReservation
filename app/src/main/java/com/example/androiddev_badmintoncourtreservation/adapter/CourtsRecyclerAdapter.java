@@ -31,7 +31,7 @@ public class CourtsRecyclerAdapter<T> extends RecyclerView.Adapter<CourtsRecycle
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.imageView3);
+           // imageView = itemView.findViewById(R.id.imageView3);
             tvCourtName = itemView.findViewById(R.id.CourName);
             tvCourtAddress = itemView.findViewById(R.id.CourtAddress);
             tvCourtHourlyPrice = itemView.findViewById(R.id.CourtHourlyPrice);
@@ -64,9 +64,9 @@ public class CourtsRecyclerAdapter<T> extends RecyclerView.Adapter<CourtsRecycle
             holder.tvCourtName.setText(((CourtEntity) item).getCourtsName());
         if(item.getClass().equals(CourtEntity.class))
             holder.tvCourtAddress.setText(((CourtEntity) item).getAddress());
-        if(item.getClass().equals(CourtEntity.class)) {
-            holder.imageView.setImageURI(Uri.parse(((CourtEntity) item).getImagePath()));
-        }
+       /*if(item.getClass().equals(CourtEntity.class)) {
+            holder.imageView.setImageURI(Uri.parse(((CourtEntity) item).getImagePath()))
+        }*/
     }
 
     @Override
