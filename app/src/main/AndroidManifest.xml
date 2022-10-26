@@ -12,44 +12,70 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidDev_BadmintonCourtReservation"
         tools:targetApi="31" >
+
         <activity
             android:name=".ui.management.SettingsActivity"
             android:exported="false" />
+
         <activity
             android:name=".ui.reservation.ReservationsActivity"
-            android:exported="false" >
+            android:parentActivityName=".ui.BaseActivity"
+            android:theme="@style/Theme.AndroidDev_BadmintonCourtReservation.NoActionBar"
+            android:exported="true" >
             <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.BaseActivity" />
         </activity>
+
+
         <activity
             android:name=".ui.player.PlayersActivity"
-            android:exported="false" />
+            android:label="@string/app_name"
+            android:parentActivityName=".ui.BaseActivity"
+            android:theme="@style/Theme.AndroidDev_BadmintonCourtReservation.NoActionBar"
+            android:exported="true">
+                <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ui.BaseActivity" />
+        </activity>
+        <activity
+            android:name=".ui.player.EditPlayerActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".ui.player.PlayersActivity"
+            android:theme="@style/Theme.AndroidDev_BadmintonCourtReservation.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.player.PlayersActivity" />
+        </activity>
+
+
         <activity
             android:name=".ui.court.CourtsActivity"
             android:label="@string/app_name"
             android:parentActivityName=".ui.BaseActivity"
             android:theme="@style/Theme.AndroidDev_BadmintonCourtReservation.NoActionBar"
             android:exported="true">
-                        <intent-filter>
-                           <action android:name="android.intent.action.MAIN" />
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
 
-                           <category android:name="android.intent.category.LAUNCHER" />
-                       </intent-filter>
-                        <meta-data
-                            android:name="android.support.PARENT_ACTIVITY"
-                            android:value=".ui.BaseActivity" />
-                    </activity>
-                    <activity
-                        android:name=".ui.court.EditCourtActivity"
-                        android:label="@string/app_name"
-                        android:parentActivityName=".ui.court.CourtsActivity"
-                        android:theme="@style/Theme.AndroidDev_BadmintonCourtReservation.NoActionBar">
-                        <meta-data
-                            android:name="android.support.PARENT_ACTIVITY"
-                            android:value=".ui.court.CourtsActivity" />
-                    </activity>
-                    <activity android:name=".ui.BaseActivity"
-                        android:theme="@style/Theme.AndroidDev_BadmintonCourtReservation.NoActionBar"/>
-                </application>
-            </manifest>
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
+                <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ui.BaseActivity" />
+        </activity>
+        <activity
+            android:name=".ui.court.EditCourtActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".ui.court.CourtsActivity"
+            android:theme="@style/Theme.AndroidDev_BadmintonCourtReservation.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.court.CourtsActivity" />
+        </activity>
+
+        <activity android:name=".ui.BaseActivity"
+            android:theme="@style/Theme.AndroidDev_BadmintonCourtReservation.NoActionBar"/>
+
+    </application>
+</manifest>
