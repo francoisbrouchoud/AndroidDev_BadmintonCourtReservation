@@ -58,11 +58,11 @@ public class PlayersRecycleAdapter<T> extends RecyclerView.Adapter<PlayersRecycl
         //Assign values to each row, depends on the position of the recycler view
         T item = data.get(position);
         if(item.getClass().equals(PlayerEntity.class))
-            //holder.tvPlayerFirstName.setText(((PlayerEntity) item).getFirstname());
+            holder.tvPlayerFirstName.setText(((PlayerEntity) item).getFirstname());
         if(item.getClass().equals(PlayerEntity.class))
-            //holder.tvPlayerLastName.setText(((PlayerEntity) item).getLastname());
+            holder.tvPlayerLastName.setText(((PlayerEntity) item).getLastname());
         if(item.getClass().equals(PlayerEntity.class)) {
-            //holder.tvPlayerBirthdate.setText(((PlayerEntity) item).getBirthdate());
+            holder.tvPlayerBirthdate.setText((CharSequence) ((PlayerEntity) item).getBirthdate());
         }
     }
 

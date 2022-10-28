@@ -1,19 +1,23 @@
 package com.example.androiddev_badmintoncourtreservation.ui.court;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class EditCourtActivity extends ViewModel {
+import android.os.Bundle;
+import android.widget.TextView;
 
-    private final MutableLiveData<String> mText;
+import com.example.androiddev_badmintoncourtreservation.R;
+import com.example.androiddev_badmintoncourtreservation.ui.BaseActivity;
 
-    public EditCourtActivity() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
-    }
+public class EditCourtActivity extends BaseActivity {
 
-    public LiveData<String> getText() {
-        return mText;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        getLayoutInflater().inflate(R.layout.activity_edit_court, frameLayout);
+        navigationView.setCheckedItem(R.id.nav_none);
+
+        TextView textView = findViewById(R.id.textTest);
+        textView.setText("here we add/edit the courts");
     }
 }
