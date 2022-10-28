@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
-@Entity(tableName = "accounts",
+@Entity(tableName = "players",
         foreignKeys =
         @ForeignKey(
                 entity = CourtEntity.class,
