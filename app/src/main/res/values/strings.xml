@@ -10,4 +10,21 @@
     <string name="menu_home">Terrains de badminton</string>
     <string name="menu_gallery">Joueurs</string>
     <string name="menu_slideshow">Réservations</string>
+
+    <string name="playersActivity_homePage">Players</string>
+
+    <string name="hint_pl_firstname">Firstname</string>
+    <string name="hint_pl_lastname">Lastname</string>
+    <string name="hint_pl_birthdate">Birthdate</string>
+    <string name="hint_pl_gender">Gender</string>
+    <string name="hint_pl_address">Address</string>
+
+    <string name="btn_editPlayerActivity_create">Confirm</string>
+    <string name="btn_editPlayerActivity_edit">Apply</string>
+
+    <string name="title_editPlayerActivity_new">Create player</string>
+    <string name="title_editPlayerActivity_edit">New player</string>
+
+    <string name="toast_editPlayerActivity_new">Player created</string>
+    <string name="toast_editPlayerActivity_edit">Player edited</string>
 </resources>
