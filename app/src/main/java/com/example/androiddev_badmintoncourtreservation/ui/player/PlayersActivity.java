@@ -30,7 +30,7 @@ public class PlayersActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         getLayoutInflater().inflate(R.layout.activity_players, frameLayout);
-        setTitle("Players"/*Replace here with the value from the "Strings" file*/);
+        setTitle(R.string.playersActivity_homePage);
         navigationView.setCheckedItem(R.id.nav_none);
 
         recyclerView = findViewById(R.id.PlayerRv);
@@ -41,12 +41,12 @@ public class PlayersActivity extends BaseActivity {
         adapter = new PlayersRecycleAdapter<>(new RecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                //Access the ReservationsActivity
+                //Edit the player
             }
 
             @Override
             public void onItemLongClick(View v, int position) {
-                //Access the EditCourtActivity
+                //Delete the player
             }
         });
 
