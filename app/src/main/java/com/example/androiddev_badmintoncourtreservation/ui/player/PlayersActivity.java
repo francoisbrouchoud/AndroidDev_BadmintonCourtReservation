@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -68,14 +69,6 @@ public class PlayersActivity extends BaseActivity {
             }
         });
 
-        PlayerListViewModel. Factory factory = new PlayerListViewModel.Factory(getApplication());
-        listViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) factory).get(PlayerListViewModel.class);
-        listViewModel.getPlayers().observe(this, playerEntities -> {
-            if(playerEntities != null){
-                players = playerEntities;
-                adapter.setData(players);
-            }
-        });
 
         fab = findViewById(R.id.floatingActionButtonPlayers);
         fab.setOnClickListener(view -> {
@@ -87,6 +80,15 @@ public class PlayersActivity extends BaseActivity {
                     startActivity(intent);
                 }
         );
+
+        PlayerListViewModel.Factory factory = new PlayerListViewModel.Factory(getApplication());
+        listViewModel = new ViewModelProvider(this, factory).get(PlayerListViewModel.class);
+        listViewModel.getPlayers().observe(this, playerEntities -> {
+            if(playerEntities != null){
+                players = playerEntities;
+                adapter.setData(players);
+            }
+        });
 
         recyclerView.setAdapter(adapter);
     }

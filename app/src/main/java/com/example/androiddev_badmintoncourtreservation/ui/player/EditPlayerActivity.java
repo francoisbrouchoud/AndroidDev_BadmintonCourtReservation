@@ -92,7 +92,7 @@ public class EditPlayerActivity extends BaseActivity {
         }
 
         PlayerViewModel.Factory factory = new PlayerViewModel.Factory(getApplication(), playerId);
-        viewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) factory).get(PlayerViewModel.class);
+        viewModel = new ViewModelProvider(this, factory).get(PlayerViewModel.class);
 
        if(isEdit){
             //We are editing an existing player
