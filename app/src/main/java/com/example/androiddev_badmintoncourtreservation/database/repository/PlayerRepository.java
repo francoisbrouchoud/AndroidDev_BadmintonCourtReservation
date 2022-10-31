@@ -35,6 +35,10 @@ public class PlayerRepository {
         return ((BaseApp) application).getDatabase().playerDao().getById(id);
     }
 
+    public LiveData<List<PlayerEntity>> getPlayers(Application application){
+        return ((BaseApp) application).getDatabase().playerDao().getAll();
+    }
+
     public void insert(final PlayerEntity player, OnAsyncEventListener callback,
                        Application application) {
         new CreatePlayer(application, callback).execute(player);
