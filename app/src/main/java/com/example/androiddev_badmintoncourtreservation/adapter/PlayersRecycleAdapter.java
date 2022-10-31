@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androiddev_badmintoncourtreservation.R;
@@ -16,11 +17,14 @@ import com.example.androiddev_badmintoncourtreservation.database.entity.PlayerEn
 import com.example.androiddev_badmintoncourtreservation.util.RecyclerViewItemClickListener;
 
 import java.util.List;
+import java.util.Objects;
 
 public class PlayersRecycleAdapter<T> extends RecyclerView.Adapter<PlayersRecycleAdapter.ViewHolder> {
 
     private List<T> data;
     RecyclerViewItemClickListener rvClickListerner;
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         //Grabbing the views from the rows, similar to an "onCreate" method
@@ -73,6 +77,52 @@ public class PlayersRecycleAdapter<T> extends RecyclerView.Adapter<PlayersRecycl
             return data.size();
         else
             return 0;
+    }
+
+    public void setData(List<T> players) {
+        if(data == null){
+            data = players;
+            notifyItemRangeInserted(0, players.size());
+        }else{
+            DiffUtil.DiffResult result = DiffUtil.calculateDiff(new DiffUtil.Callback() {
+                @Override
+                public int getOldListSize() {
+                    return data.size();
+                }
+
+                @Override
+                public int getNewListSize() {
+                    return players.size();
+                }
+
+                @Override
+                public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+                    if(data instanceof PlayerEntity)
+                        return ((PlayerEntity) data.get(oldItemPosition)).getId().equals(((PlayerEntity)data.get(newItemPosition)).getId());
+                    return false;
+                }
+
+                @Override
+                public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+                    if(data instanceof PlayerEntity){
+                        PlayerEntity newPlayer = (PlayerEntity) players.get(newItemPosition);
+                        PlayerEntity oldPlayer = (PlayerEntity) data.get(newItemPosition);
+                        return newPlayer.getId().equals(oldPlayer.getId())
+                                && Objects.equals(newPlayer.getFirstname(), oldPlayer.getFirstname())
+                                && Objects.equals(newPlayer.getLastname(), oldPlayer.getLastname())
+                                && Objects.equals(newPlayer.getBirthdate(), oldPlayer.getBirthdate())
+                                && Objects.equals(newPlayer.getGender(), oldPlayer.getGender())
+                                && Objects.equals(newPlayer.getPhone(), oldPlayer.getPhone())
+                                && Objects.equals(newPlayer.getPlace(), oldPlayer.getPlace())
+                                && Objects.equals(newPlayer.getAddress(), oldPlayer.getAddress())
+                                && Objects.equals(newPlayer.getLevel(), oldPlayer.getLevel());
+                    }
+                    return false;
+                }
+            });
+            data = players;
+            result.dispatchUpdatesTo(this);
+        }
     }
 
 }
