@@ -32,9 +32,9 @@ public class PlayersRecycleAdapter<T> extends RecyclerView.Adapter<PlayersRecycl
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvPlayerFirstName = itemView.findViewById(R.id.PlayerFirstName);
-            tvPlayerLastName = itemView.findViewById(R.id.PlayerLastName);
-            tvPlayerBirthdate = itemView.findViewById(R.id.PlayerBirthdate);
+            tvPlayerFirstName = itemView.findViewById(R.id.tv_pl_firstname);
+            tvPlayerLastName = itemView.findViewById(R.id.tv_pl_lastname);
+            tvPlayerBirthdate = itemView.findViewById(R.id.tv_pl_bithdate);
         }
     }
 
@@ -47,10 +47,12 @@ public class PlayersRecycleAdapter<T> extends RecyclerView.Adapter<PlayersRecycl
     @Override
     public PlayersRecycleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //Inflate the layout and give à look to the rows
-        TextView tv = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.player_row, parent, false);
-        final PlayersRecycleAdapter.ViewHolder vh = new PlayersRecycleAdapter.ViewHolder(tv);
-        tv.setOnClickListener(view -> rvClickListerner.onItemClick(view,vh.getAdapterPosition()));
-        tv.setOnLongClickListener(view -> {
+        //TextView tv = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.player_row, parent, false);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.player_row, parent, false);
+        final PlayersRecycleAdapter.ViewHolder vh = new PlayersRecycleAdapter.ViewHolder(view);
+        view.setOnClickListener(v -> rvClickListerner.onItemClick(view,vh.getAdapterPosition()));
+        view.setOnLongClickListener(v -> {
             rvClickListerner.onItemLongClick(view, vh.getAdapterPosition());
             return true;
         });
