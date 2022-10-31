@@ -6,19 +6,21 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "courtsEntity",
+@Entity(tableName = "courtsEntity"/*,
         foreignKeys =
         @ForeignKey(
-                entity = PlayerEntity.class,
-                parentColumns = "",
-                childColumns = "",
+                entity = ReservationEntity.class,
+                parentColumns = "courtId",
+                childColumns = "id",
                 onDelete = ForeignKey.CASCADE
         ),
         indices = {
                 @Index(
-                        value = {""}
-                )}
+                        value = {"id"}
+                )}*/
 )
+
+
 public class CourtEntity {
     @PrimaryKey(autoGenerate = true)
     private Long id;
@@ -32,7 +34,7 @@ public class CourtEntity {
     public CourtEntity() {
     }
 
-    public CourtEntity(String courtsName, String description, String address, String place, String imagePath) {
+    public CourtEntity(String courtsName, String description, String address, String place, String imagePath, double hourlyPrice) {
         this.courtsName = courtsName;
         this.description = description;
         this.address = address;
