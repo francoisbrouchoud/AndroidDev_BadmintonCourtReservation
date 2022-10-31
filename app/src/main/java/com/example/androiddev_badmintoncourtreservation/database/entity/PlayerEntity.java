@@ -1,41 +1,49 @@
 package com.example.androiddev_badmintoncourtreservation.database.entity;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import com.example.androiddev_badmintoncourtreservation.database.AppDatabase;
+
 import java.util.Date;
 
-@Entity(tableName = "accounts",
-        foreignKeys =
+@Entity(tableName = "players" /*,
+       foreignKeys =
         @ForeignKey(
-                entity = CourtEntity.class,
-                parentColumns = "",
-                childColumns = "",
+                entity = ReservationEntity.class,
+                parentColumns = "playerId",
+                childColumns = "id",
                 onDelete = ForeignKey.CASCADE
         ),
         indices = {
                 @Index(
-                        value = {""}
+                        value = {"id"}
                 )}
+        */
 )
+
+
 public class PlayerEntity {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     private Long id;
     private String firstname;
     private String lastname;
-    private Date birthdate;
+    private String birthdate;
     private String gender;
     private String phone;
     private String address;
     private String place;
     private int level;
 
+    @Ignore
     public PlayerEntity() {
     }
 
-    public PlayerEntity(String firstname, String lastname, Date birthdate, String gender, String phone, String address, String place, int level) {
+    public PlayerEntity(String firstname, String lastname, String birthdate, String gender, String phone, String address, String place, int level) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.birthdate = birthdate;
@@ -53,7 +61,6 @@ public class PlayerEntity {
     public void setId(Long id) {
         this.id = id;
     }
-
     public String getFirstname() {
         return firstname;
     }
@@ -70,11 +77,11 @@ public class PlayerEntity {
         this.lastname = lastname;
     }
 
-    public Date getBirthdate() {
+    public String getBirthdate() {
         return birthdate;
     }
 
-    public void setAge(int age) {
+    public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
 

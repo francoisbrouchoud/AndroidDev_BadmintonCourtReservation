@@ -82,10 +82,10 @@ public class CourtsActivity extends BaseActivity {
     }
 
     private void setUpModelData(){
-        CourtEntity court1 = new CourtEntity("Name of the court", "Description", "Address", "Sion", "image.png");
-        CourtEntity court2 = new CourtEntity("Name of the court2", "Description2", "Address", "Sion", "image.png");
-        CourtEntity court3 = new CourtEntity("Name of the court3", "Description3", "Address", "Sion", "image.png");
-        CourtEntity court4 = new CourtEntity("Name of the court4", "Description4", "Address", "Sion", "image.png");
+        CourtEntity court1 = new CourtEntity("Name of the court", "Description", "Address", "Sion", "image.png", 555);
+        CourtEntity court2 = new CourtEntity("Name of the court2", "Description2", "Address", "Sion", "image.png",555);
+        CourtEntity court3 = new CourtEntity("Name of the court3", "Description3", "Address", "Sion", "image.png", 222);
+        CourtEntity court4 = new CourtEntity("Name of the court4", "Description4", "Address", "Sion", "image.png",111);
         courts.add(court1);
         courts.add(court2);
         courts.add(court3);
