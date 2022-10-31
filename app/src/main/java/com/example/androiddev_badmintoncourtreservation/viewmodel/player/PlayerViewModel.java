@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.androiddev_badmintoncourtreservation.BaseApp;
 import com.example.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
+import com.example.androiddev_badmintoncourtreservation.database.repository.PlayerRepository;
 import com.example.androiddev_badmintoncourtreservation.util.OnAsyncEventListener;
 
 public class PlayerViewModel extends AndroidViewModel {
@@ -19,7 +20,7 @@ public class PlayerViewModel extends AndroidViewModel {
     private PlayerRepository repository;
     private final MediatorLiveData<PlayerEntity> observablePlayer;
 
-    public PlayerViewModel(@NonNull Application application, final int playerId, PlayerRepository playerRepository) {
+    public PlayerViewModel(@NonNull Application application, final long playerId, PlayerRepository playerRepository) {
         super(application);
 
         this.application = application;
@@ -37,10 +38,10 @@ public class PlayerViewModel extends AndroidViewModel {
 
         @NonNull
         private final Application application;
-        private final int playerId;
+        private final long playerId;
         private final PlayerRepository repository;
 
-        public Factory(@NonNull Application application, int playerId) {
+        public Factory(@NonNull Application application, long playerId) {
             this.application = application;
             this.playerId = playerId;
             repository = ((BaseApp) application).getPlayerRepository();

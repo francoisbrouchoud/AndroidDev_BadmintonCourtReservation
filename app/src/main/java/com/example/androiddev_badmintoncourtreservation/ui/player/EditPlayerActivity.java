@@ -79,7 +79,7 @@ public class EditPlayerActivity extends BaseActivity {
             }
         });
 
-        int playerId = getIntent().getIntExtra("playerId", 0);
+        long playerId = getIntent().getIntExtra("playerId", 0);
         if(playerId == 0){
             setTitle(getString(R.string.title_editPlayerActivity_new));
             toast = Toast.makeText(this, R.string.toast_editPlayerActivity_new, Toast.LENGTH_LONG);
