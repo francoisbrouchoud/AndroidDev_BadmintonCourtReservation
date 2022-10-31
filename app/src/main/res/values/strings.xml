@@ -27,4 +27,11 @@
 
     <string name="toast_editPlayerActivity_new">Player created</string>
     <string name="toast_editPlayerActivity_edit">Player edited</string>
+    <string name="toast_playersActivity_delete">Player deleted</string>
+
+    <string name="alert_playersActivity_deleteTitle">Delete player</string>
+    <string name="alert_playersActivity_deleteMessage">Do you really want to delete %1$s?</string>
+    <string name="alert_playersActivity_btnPositive">Yes</string>
+    <string name="alert_playersActivity_btnNegative">No</string>
+
 </resources>
