@@ -1,7 +1,7 @@
 package com.example.androiddev_badmintoncourtreservation.viewmodel.player;
 
-import android.app.Application;
 
+import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;

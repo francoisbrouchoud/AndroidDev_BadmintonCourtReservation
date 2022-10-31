@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -82,7 +84,7 @@ public class PlayersActivity extends BaseActivity {
         );
 
         PlayerListViewModel.Factory factory = new PlayerListViewModel.Factory(getApplication());
-        listViewModel = new ViewModelProvider(this, factory).get(PlayerListViewModel.class);
+        listViewModel =  new ViewModelProvider(this, factory).get(PlayerListViewModel.class);
         listViewModel.getPlayers().observe(this, playerEntities -> {
             if(playerEntities != null){
                 players = playerEntities;

@@ -17,6 +17,8 @@ public class BaseApp extends Application {
         return AppDatabase.getInstance(this);
     }
 
-    public PlayerRepository getPlayerRepository(){return PlayerRepository.getInstance();}
+    public PlayerRepository getPlayerRepository() {
+        return PlayerRepository.getInstance();
+    }
 
 }
