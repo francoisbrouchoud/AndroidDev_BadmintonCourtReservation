@@ -18,7 +18,6 @@ import com.example.androiddev_badmintoncourtreservation.database.entity.Reservat
 
 import java.util.concurrent.Executors;
 
-//TODO add data
 @Database(entities = {PlayerEntity.class, CourtEntity.class, ReservationEntity.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase{
 

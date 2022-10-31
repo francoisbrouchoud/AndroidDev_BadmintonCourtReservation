@@ -7,7 +7,6 @@ import com.example.androiddev_badmintoncourtreservation.database.entity.PlayerEn
 
 import java.util.Date;
 
-//TODO add data
 public class DatabaseInitializer {
     public static final String TAG = "DatabaseInitializer";
 
