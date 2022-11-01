@@ -23,7 +23,7 @@
     <string name="btn_editPlayerActivity_edit">Apply</string>
 
     <string name="title_editPlayerActivity_new">Create player</string>
-    <string name="title_editPlayerActivity_edit">New player</string>
+    <string name="title_editPlayerActivity_edit">Edit player</string>
 
     <string name="toast_editPlayerActivity_new">Player created</string>
     <string name="toast_editPlayerActivity_edit">Player edited</string>
