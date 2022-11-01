@@ -2,7 +2,6 @@ package com.example.androiddev_badmintoncourtreservation.ui.player;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -11,7 +10,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -79,7 +77,7 @@ public class EditPlayerActivity extends BaseActivity {
             }
         });
 
-        long playerId = getIntent().getIntExtra("playerId", 0);
+        long playerId = getIntent().getLongExtra("playerId", 0);
         if(playerId == 0){
             setTitle(getString(R.string.title_editPlayerActivity_new));
             toast = Toast.makeText(this, R.string.toast_editPlayerActivity_new, Toast.LENGTH_LONG);
@@ -93,6 +91,8 @@ public class EditPlayerActivity extends BaseActivity {
 
         PlayerViewModel.Factory factory = new PlayerViewModel.Factory(getApplication(), playerId);
         viewModel = new ViewModelProvider(this, factory).get(PlayerViewModel.class);
+
+
 
        if(isEdit){
             //We are editing an existing player
@@ -111,23 +111,19 @@ public class EditPlayerActivity extends BaseActivity {
         }
 
         button.setOnClickListener(view -> {
-            saveChanges(player);
+            saveChanges(getPlayerFromFields());
             onBackPressed();
             toast.show();
         });
 
+
     }
 
-    private void saveChanges(PlayerEntity player){
-        player.setFirstname(etPlayerFirstname.getText().toString());
-        player.setLastname(etPlayerLastname.getText().toString());
-        //Changer pour pouvoir setter le birthdate ici
-        player.setGender(spPlayerGender.getSelectedItem().toString());
-        player.setAddress(etPlayerAddress.getText().toString());
+    private void saveChanges(PlayerEntity playerToSave){
 
         if(isEdit){
             //Edit an existing player
-            viewModel.updatePlayer(player, new OnAsyncEventListener() {
+            viewModel.updatePlayer(playerToSave, new OnAsyncEventListener() {
                 @Override
                 public void onSuccess() {
                     //Log success
@@ -140,7 +136,7 @@ public class EditPlayerActivity extends BaseActivity {
             });
         }else{
             //Create the player
-            viewModel.createPlayer(player, new OnAsyncEventListener() {
+            viewModel.createPlayer(playerToSave, new OnAsyncEventListener() {
                 @Override
                 public void onSuccess() {
 
@@ -152,6 +148,21 @@ public class EditPlayerActivity extends BaseActivity {
                 }
             });
         }
+    }
+
+    private PlayerEntity getPlayerFromFields(){
+        PlayerEntity playerFields;
+        if(player == null)
+            playerFields = new PlayerEntity();
+        else
+            playerFields = player;
+
+        playerFields.setFirstname(etPlayerFirstname.getText().toString());
+        playerFields.setLastname(etPlayerLastname.getText().toString());
+        //Changer pour pouvoir setter le birthdate ici
+        playerFields.setGender(spPlayerGender.getSelectedItem().toString());
+        playerFields.setAddress(etPlayerAddress.getText().toString());
+        return playerFields;
     }
 
     private int getIdxFromSpGender(String gender){
