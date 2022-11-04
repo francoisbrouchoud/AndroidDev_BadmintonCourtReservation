@@ -19,6 +19,7 @@ import com.example.androiddev_badmintoncourtreservation.ui.BaseActivity;
 import com.example.androiddev_badmintoncourtreservation.util.OnAsyncEventListener;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.player.PlayerViewModel;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 
@@ -32,6 +33,7 @@ public class EditPlayerActivity extends BaseActivity {
     private EditText etPlayerBirthdate;
     private Spinner spPlayerGender;
     private TextView tvGender;
+    private EditText etPlayerPhoneNbr;
     private EditText etPlayerAddress;
     private Button button;
     private Toast toast;
@@ -50,6 +52,7 @@ public class EditPlayerActivity extends BaseActivity {
         etPlayerBirthdate = findViewById(R.id.et_PlayerBirthdate);
         spPlayerGender = findViewById(R.id.sp_Gender);
         tvGender = findViewById(R.id.tv_Gender);
+        etPlayerPhoneNbr = findViewById(R.id.et_PlayerPhoneNumber);
         etPlayerAddress = findViewById(R.id.et_PlayerAddress);
         button = findViewById(R.id.button);
 
@@ -103,8 +106,9 @@ public class EditPlayerActivity extends BaseActivity {
                     //Set the values on the fields
                     etPlayerFirstname.setText(player.getFirstname());
                     etPlayerLastname.setText(player.getLastname());
-                    etPlayerBirthdate.setText((CharSequence) player.getBirthdate());
+                    etPlayerBirthdate.setText(player.getBirthdate());
                     spPlayerGender.setSelection(getIdxFromSpGender(playerEntity.getGender()));
+                    etPlayerPhoneNbr.setText(player.getPhone());
                     etPlayerAddress.setText(player.getAddress());
                 }
             });
@@ -159,13 +163,14 @@ public class EditPlayerActivity extends BaseActivity {
 
         playerFields.setFirstname(etPlayerFirstname.getText().toString());
         playerFields.setLastname(etPlayerLastname.getText().toString());
-        //Changer pour pouvoir setter le birthdate ici
+        playerFields.setBirthdate(etPlayerBirthdate.getText().toString());
         playerFields.setGender(spPlayerGender.getSelectedItem().toString());
+        playerFields.setPhone(etPlayerPhoneNbr.getText().toString());
         playerFields.setAddress(etPlayerAddress.getText().toString());
         return playerFields;
     }
 
     private int getIdxFromSpGender(String gender){
-        return Arrays.asList(R.array.genders).indexOf(gender);
+        return Arrays.asList(getResources().getStringArray(R.array.genders)).indexOf(gender);
     }
 }

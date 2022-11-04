@@ -18,6 +18,7 @@
     <string name="hint_pl_birthdate">Birthdate</string>
     <string name="hint_pl_gender">Gender</string>
     <string name="hint_pl_address">Address</string>
+    <string name="hint_pl_phoneNbr">Phone number</string>
 
     <string name="btn_editPlayerActivity_create">Confirm</string>
     <string name="btn_editPlayerActivity_edit">Apply</string>
