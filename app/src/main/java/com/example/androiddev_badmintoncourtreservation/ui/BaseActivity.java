@@ -1,6 +1,7 @@
 package com.example.androiddev_badmintoncourtreservation.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,16 +40,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        AppCompatDelegate.setDefaultNightMode(PreferenceManager.getDefaultSharedPreferences(this).getBoolean("pref_darkMode", false) ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
-        switch (AppCompatDelegate.getDefaultNightMode()){
-            case AppCompatDelegate.MODE_NIGHT_NO:
-                setTheme(R.style.Theme_AndroidDev_BadmintonCourtReservation);
-                break;
-            case AppCompatDelegate.MODE_NIGHT_YES:
-                setTheme(R.style.Theme_AndroidDev_BadmintonCourtReservation_night);
-                break;
-        }
-
         frameLayout = findViewById(R.id.flContent);
 
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -60,10 +51,18 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
+        AppCompatDelegate.setDefaultNightMode(PreferenceManager.getDefaultSharedPreferences(this).getBoolean("pref_darkMode", false) ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+        switch (AppCompatDelegate.getDefaultNightMode()) {
+            case AppCompatDelegate.MODE_NIGHT_NO:
+                setTheme(R.style.Theme_AndroidDev_BadmintonCourtReservation);
+                break;
+            case AppCompatDelegate.MODE_NIGHT_YES:
+                setTheme(R.style.Theme_AndroidDev_BadmintonCourtReservation_night);
+                break;
+        }
     }
 
     @Override
