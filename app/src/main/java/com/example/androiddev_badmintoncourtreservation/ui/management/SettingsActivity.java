@@ -1,83 +1,51 @@
 package com.example.androiddev_badmintoncourtreservation.ui.management;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
-import android.view.MenuItem;
-import android.widget.Spinner;
-import android.widget.TextView;
-
 import com.example.androiddev_badmintoncourtreservation.R;
-import com.example.androiddev_badmintoncourtreservation.ui.BaseActivity;
+import com.example.androiddev_badmintoncourtreservation.ui.court.CourtsActivity;
 
-import java.util.List;
-import java.util.Locale;
 
 public class SettingsActivity extends AppCompatActivity {
+
+    protected SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_settings);
 
-        /*getFragmentManager().beginTransaction()
-                .replace(android.R.id.content,new LanguageSettingFragment())
-                .commit();*/
+        setTitle(getString(R.string.settings_title));
 
-        if (savedInstanceState == null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(android.R.id.content, new LanguageSettingFragment())
-                    .commit();
-        }
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null)
+            actionBar.setDisplayHomeAsUpEnabled(true);
 
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        changeLanguage(sharedPrefs.getString("pref_languages", "fr"));
+        if (savedInstanceState == null)
+            getSupportFragmentManager().beginTransaction().replace(R.id.settings, new DarkModeSettingFragment()).commit();
 
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        if (sharedPreferences.getBoolean("pref_darkMode", false))
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        else
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     }
-
 
     public static class DarkModeSettingFragment extends PreferenceFragmentCompat{
-
-        @Override
-        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-            setPreferencesFromResource(R.xml.preferences, rootKey);
-
-
-
-        }
-    }
-
-    public static class LanguageSettingFragment extends PreferenceFragmentCompat{
-
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.preferences, rootKey);
         }
-    }
-
-    public void changeLanguage(String lang){
-        Locale myLocale = new Locale(lang);
-        Locale.setDefault(myLocale);
-        android.content.res.Configuration config = new android.content.res.Configuration();
-        config.locale = myLocale;
-        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
     }
 
 }
