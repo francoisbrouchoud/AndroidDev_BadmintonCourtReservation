@@ -7,18 +7,18 @@
     <fragment
         android:id="@+id/nav_court"
         android:name="com.example.androiddev_badmintoncourtreservation.ui.court.CourtsActivity"
-        android:label="@string/menu_home"
+        android:label="@string/menu_courts"
         tools:layout="@layout/activity_courts" />
 
     <fragment
         android:id="@+id/nav_player"
         android:name="com.example.androiddev_badmintoncourtreservation.ui.player.PlayersActivity"
-        android:label="@string/menu_gallery"
+        android:label="@string/menu_players"
         tools:layout="@layout/activity_players" />
 
     <fragment
         android:id="@+id/nav_reservation"
         android:name="com.example.androiddev_badmintoncourtreservation.ui.reservation.ReservationsActivity"
-        android:label="@string/menu_slideshow"
+        android:label="@string/menu_reservations"
         tools:layout="@layout/activity_reservations" />
 </navigation>

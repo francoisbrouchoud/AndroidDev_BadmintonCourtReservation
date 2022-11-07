@@ -6,10 +6,10 @@
     <string name="nav_header_title">Badminton courts booking</string>
     <string name="nav_header_subtitle">Gestionnaire de courts de badminton</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Paramètres</string>
-    <string name="menu_home">Terrains de badminton</string>
-    <string name="menu_gallery">Joueurs</string>
-    <string name="menu_slideshow">Réservations</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_courts">Courts</string>
+    <string name="menu_players">Players</string>
+    <string name="menu_reservations">Reservations</string>
 
     <string name="playersActivity_homePage">Players</string>
 
@@ -34,5 +34,8 @@
     <string name="alert_playersActivity_deleteMessage">Do you really want to delete %1$s?</string>
     <string name="alert_playersActivity_btnPositive">Yes</string>
     <string name="alert_playersActivity_btnNegative">No</string>
+
+
+    <string name="pref_darkMode_title">Dark mode</string>
 
 </resources>

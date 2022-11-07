@@ -5,15 +5,15 @@
         <item
             android:id="@+id/nav_court"
             android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:title="@string/menu_courts" />
         <item
             android:id="@+id/nav_player"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:title="@string/menu_players" />
         <item
             android:id="@+id/nav_reservation"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:title="@string/menu_reservations" />
         <item
             android:id="@+id/nav_none"
             android:title=""
