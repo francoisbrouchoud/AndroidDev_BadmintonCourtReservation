@@ -16,7 +16,8 @@
 
         <activity
             android:name=".ui.management.SettingsActivity"
-            android:exported="false" />
+            android:exported="true"
+            android:parentActivityName=".ui.BaseActivity"/>
 
         <activity
             android:name=".ui.reservation.ReservationsActivity"
