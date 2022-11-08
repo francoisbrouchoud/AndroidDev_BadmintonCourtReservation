@@ -68,9 +68,9 @@ public class CourtsRecyclerAdapter<T> extends RecyclerView.Adapter<CourtsRecycle
             holder.tvCourtName.setText(((CourtEntity) item).getCourtsName());
         if(item.getClass().equals(CourtEntity.class))
             holder.tvCourtAddress.setText(((CourtEntity) item).getAddress());
-       /*if(item.getClass().equals(CourtEntity.class)) {
-            holder.imageView.setImageURI(Uri.parse(((CourtEntity) item).getImagePath()))
-        }*/
+       if(item.getClass().equals(CourtEntity.class)) {
+           holder.tvCourtHourlyPrice.setText(Double.toString(((CourtEntity) item).getHourlyPrice()) + " CHF");
+       }
     }
 
     @Override

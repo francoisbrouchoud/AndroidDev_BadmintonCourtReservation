@@ -49,7 +49,7 @@ public class EditCourtActivity extends BaseActivity {
             toast = Toast.makeText(this, R.string.toast_editCourtActivity_new, Toast.LENGTH_LONG);
             isEdit = false;
         }else{
-            setTitle(getString(R.string.btn_editPlayerActivity_edit));
+            setTitle(getString(R.string.title_editCourtActivity_edit));
             button.setText(R.string.btn_editPlayerActivity_edit);
             toast = Toast.makeText(this, R.string.toast_editCourtActivity_edit, Toast.LENGTH_LONG);
             isEdit = true;
@@ -66,7 +66,8 @@ public class EditCourtActivity extends BaseActivity {
                     //Set the values on the fields
                     etCourtName.setText(court.getCourtsName());
                     etCourtAddress.setText(court.getAddress());
-                    etCourtHourlyPrice.setText((int) court.getHourlyPrice());
+                    if(court.getHourlyPrice()!=0.0)
+                        etCourtHourlyPrice.setText(Double.toString(court.getHourlyPrice()));
                     etCourtDescription.setText(court.getDescription());
                 }
             });
@@ -118,7 +119,9 @@ public class EditCourtActivity extends BaseActivity {
 
         courtFields.setCourtsName(etCourtName.getText().toString());
         courtFields.setAddress(etCourtAddress.getText().toString());
-        courtFields.setHourlyPrice(Double.parseDouble(etCourtHourlyPrice.getText().toString()));
+        //courtFields.setHourlyPrice(Double.parseDouble(etCourtHourlyPrice.getText().toString() == null ? "5.0" : etCourtHourlyPrice.getText().toString() ));
+        if(etCourtHourlyPrice.getText().toString() != null)
+            courtFields.setHourlyPrice(Double.parseDouble(etCourtHourlyPrice.getText().toString()));
         courtFields.setDescription(etCourtDescription.getText().toString());
         return courtFields;
     }

@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="409dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -17,21 +17,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/tv_pl_courtsimage"
-                android:layout_width="79dp"
-                android:layout_height="76dp"
-                app:srcCompat="@drawable/ic_menu_gallery"
-                tools:ignore="MissingConstraints" />
-
             <TextView
                 android:id="@+id/tv_pl_courtsname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="3dp"
                 android:text="TextView"
                 android:textSize="32dp"
-                tools:layout_editor_absoluteX="92dp"
-                tools:layout_editor_absoluteY="0dp"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="MissingConstraints" />
 
@@ -39,10 +33,11 @@
                 android:id="@+id/tv_pl_courtsaddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="12dp"
                 android:text="TextView"
                 app:layout_constraintBottom_toBottomOf="parent"
-                tools:layout_editor_absoluteX="92dp"
+                app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="MissingConstraints" />
 
             <TextView
@@ -51,6 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="16dp"
+                android:inputType="numberDecimal"
                 android:text="TextView"
                 android:textSize="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
