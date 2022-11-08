@@ -32,7 +32,6 @@ public class EditCourtActivity extends BaseActivity {
 
     private boolean isEdit;
 
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
