@@ -1,72 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    android:layout_marginTop="16dp"
-    android:orientation="vertical"
-    tools:context=".ui.court.EditCourtActivity">
-
-    <com.google.android.material.textfield.TextInputLayout
+    android:layout_height="match_parent">
+    <LinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="15dp"
-        app:boxBackgroundColor="#00ffffff">
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        tools:context=".ui.court.EditCourtActivity">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="15dp"
+            app:boxBackgroundColor="#00ffffff">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_CourtsName"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:hint="@string/hint_pl_courtName"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="15dp"
+            app:boxBackgroundColor="#00ffffff">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_CourtsName"
+                android:id="@+id/et_CourtsAddress"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:hint="@string/hint_pl_address"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:hint="@string/hint_pl_courtName"
-            android:inputType="text" />
+            android:layout_height="wrap_content"
+            android:paddingBottom="15dp"
+            app:boxBackgroundColor="#00ffffff">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_CourtsPrice"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:hint="@string/hint_pl_price"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="15dp"
-        app:boxBackgroundColor="#00ffffff">
-    <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_CourtsAddress"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:hint="@string/hint_pl_address"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content"
+            android:paddingBottom="15dp"
+            app:boxBackgroundColor="#00ffffff">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_CourtsDescription"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:hint="@string/hint_pl_description"
+                android:inputType="textMultiLine" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="15dp"
-        app:boxBackgroundColor="#00ffffff">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_CourtsPrice"
+        <Button
+            android:id="@+id/button"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:hint="@string/hint_pl_price"
-            android:inputType="number" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content"
+            android:text="@string/btn_editPlayerActivity_create" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="15dp"
-        app:boxBackgroundColor="#00ffffff">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_CourtsDescription"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:hint="@string/hint_pl_description"
-            android:inputType="textMultiLine" />
-    </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_editPlayerActivity_create" />
-
-</LinearLayout>
+</ScrollView>
