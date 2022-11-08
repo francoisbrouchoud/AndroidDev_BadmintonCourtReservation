@@ -41,6 +41,7 @@ public class EditCourtActivity extends BaseActivity {
         etCourtAddress = findViewById(R.id.et_CourtsAddress);
         etCourtHourlyPrice = findViewById(R.id.et_CourtsPrice);
         etCourtDescription = findViewById(R.id.et_CourtsDescription);
+        button = findViewById(R.id.button);
 
         long courtId = getIntent().getLongExtra("courtId", 0);
         if(courtId == 0){
