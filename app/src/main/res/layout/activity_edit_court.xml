@@ -50,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:hint="@string/hint_pl_price"
-                android:inputType="number" />
+                android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
