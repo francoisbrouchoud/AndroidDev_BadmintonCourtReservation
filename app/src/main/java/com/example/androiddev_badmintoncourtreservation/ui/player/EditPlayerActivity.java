@@ -2,6 +2,7 @@ package com.example.androiddev_badmintoncourtreservation.ui.player;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -96,7 +97,6 @@ public class EditPlayerActivity extends BaseActivity {
         viewModel = new ViewModelProvider(this, factory).get(PlayerViewModel.class);
 
 
-
        if(isEdit){
             //We are editing an existing player
             viewModel.getPlayer().observe(this, playerEntity -> {
@@ -115,12 +115,33 @@ public class EditPlayerActivity extends BaseActivity {
         }
 
         button.setOnClickListener(view -> {
-            saveChanges(getPlayerFromFields());
-            onBackPressed();
-            toast.show();
+            PlayerEntity player = getPlayerFromFields();
+            if(checkFields(player)){
+                saveChanges(player);
+                onBackPressed();
+                toast.show();
+            }
         });
+    }
 
+    private boolean checkFields(PlayerEntity player) {
+        if(TextUtils.isEmpty(player.getFirstname())){
+            etPlayerFirstname.setError("required");
+            etPlayerFirstname.requestFocus();
+            return false;
+        }
+        if(TextUtils.isEmpty(player.getLastname())){
+            etPlayerLastname.setError("required");
+            etPlayerLastname.requestFocus();
+            return false;
+        }
+        if(TextUtils.isEmpty(player.getBirthdate())){
+            etPlayerBirthdate.setError("required");
+            etPlayerBirthdate.requestFocus();
+            return false;
+        }
 
+      return true;
     }
 
     private void saveChanges(PlayerEntity playerToSave){
