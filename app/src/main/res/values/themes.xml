@@ -15,6 +15,9 @@
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
+        <item name="actionOverflowButtonStyle">@style/AppBarColors</item>
+        <item name="appBarLayoutStyle">@style/AppBarColors</item>
     </style>
 
     <style name="Theme.AndroidDev_BadmintonCourtReservation_night" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
@@ -32,6 +35,10 @@
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+    
+    <style name="AppBarColors" parent="Widget.AppCompat.Light.ActionButton.Overflow">
+        <item name="tint">@color/white</item>
     </style>
 
 
