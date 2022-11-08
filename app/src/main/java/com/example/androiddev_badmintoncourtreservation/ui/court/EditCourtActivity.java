@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.androiddev_badmintoncourtreservation.R;
 import com.example.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
+import com.example.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
 import com.example.androiddev_badmintoncourtreservation.ui.BaseActivity;
 import com.example.androiddev_badmintoncourtreservation.util.OnAsyncEventListener;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.court.CourtViewModel;
@@ -75,9 +77,13 @@ public class EditCourtActivity extends BaseActivity {
         }
 
         button.setOnClickListener(view -> {
-            saveChanges(getCourtFromFields());
-            onBackPressed();
-            toast.show();
+            CourtEntity court = getCourtFromFields();
+            if (checkFields(court)) {
+                saveChanges(getCourtFromFields());
+                onBackPressed();
+                toast.show();
+            }
+
         });
     }
 
@@ -124,5 +130,26 @@ public class EditCourtActivity extends BaseActivity {
             courtFields.setHourlyPrice(Double.parseDouble(etCourtHourlyPrice.getText().toString()));
         courtFields.setDescription(etCourtDescription.getText().toString());
         return courtFields;
+    }
+
+
+    private boolean checkFields(CourtEntity court) {
+        if(TextUtils.isEmpty(court.getCourtsName())){
+            etCourtName.setError(getString(R.string.errorRequired_court_name));
+            etCourtName.requestFocus();
+            return false;
+        }
+        if(TextUtils.isEmpty(court.getAddress())){
+            etCourtAddress.setError(getString(R.string.errorRequired_court_address));
+            etCourtAddress.requestFocus();
+            return false;
+        }
+        if(TextUtils.isEmpty(court.getDescription())){
+            etCourtDescription.setError(getString(R.string.errorRequired_court_description));
+            etCourtDescription.requestFocus();
+            return false;
+        }
+
+        return true;
     }
 }
