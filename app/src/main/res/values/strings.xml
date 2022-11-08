@@ -10,6 +10,7 @@
     <string name="menu_courts">Courts</string>
     <string name="menu_players">Players</string>
     <string name="menu_reservations">Reservations</string>
+    <string name="pref_darkMode_title">Dark mode</string>
 
     <!-- Players / edit players -->
     <string name="playersActivity_homePage">Players</string>
@@ -53,8 +54,11 @@
     <string name="errorRequired_court_address">Court\'s address is required</string>
     <string name="errorRequired_court_description">Courts description is required</string>
 
+    <!--Court Reservation-->
+    <string name="hint_cr_date">Date</string>
+    <string name="cr_homePage">Court reservation</string>
 
-
-    <string name="pref_darkMode_title">Dark mode</string>
+    
+   
 
 </resources>
