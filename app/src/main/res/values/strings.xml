@@ -20,6 +20,11 @@
     <string name="hint_pl_address">Address</string>
     <string name="hint_pl_phoneNbr">Phone number</string>
 
+    <string name="hint_pl_courtName">Courts name</string>
+    <string name="hint_pl_Address">Courts address</string>
+    <string name="hint_pl_price">Courts hourly price</string>
+    <string name="hint_pl_description">Courts description</string>
+
     <string name="btn_editPlayerActivity_create">Confirm</string>
     <string name="btn_editPlayerActivity_edit">Apply</string>
 

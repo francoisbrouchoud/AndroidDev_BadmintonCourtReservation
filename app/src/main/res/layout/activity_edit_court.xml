@@ -4,7 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="16dp"
+    android:orientation="vertical"
     tools:context=".ui.court.EditCourtActivity">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="15dp">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_CourtsName"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:hint="@string/hint_pl_firstname"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/textTest"
