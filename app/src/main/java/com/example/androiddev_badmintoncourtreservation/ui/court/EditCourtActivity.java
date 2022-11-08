@@ -3,7 +3,9 @@ package com.example.androiddev_badmintoncourtreservation.ui.court;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.Editable;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -30,6 +32,7 @@ public class EditCourtActivity extends BaseActivity {
 
     private boolean isEdit;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +69,7 @@ public class EditCourtActivity extends BaseActivity {
                     //Set the values on the fields
                     etCourtName.setText(court.getCourtsName());
                     etCourtAddress.setText(court.getAddress());
-                    if(court.getHourlyPrice()!=0.0)
-                        etCourtHourlyPrice.setText(Double.toString(court.getHourlyPrice()));
+                    etCourtHourlyPrice.setText(Double.toString(court.getHourlyPrice()));
                     etCourtDescription.setText(court.getDescription());
                 }
             });
@@ -119,8 +121,7 @@ public class EditCourtActivity extends BaseActivity {
 
         courtFields.setCourtsName(etCourtName.getText().toString());
         courtFields.setAddress(etCourtAddress.getText().toString());
-        //courtFields.setHourlyPrice(Double.parseDouble(etCourtHourlyPrice.getText().toString() == null ? "5.0" : etCourtHourlyPrice.getText().toString() ));
-        if(etCourtHourlyPrice.getText().toString() != null)
+        if(!etCourtHourlyPrice.getText().toString().isEmpty())
             courtFields.setHourlyPrice(Double.parseDouble(etCourtHourlyPrice.getText().toString()));
         courtFields.setDescription(etCourtDescription.getText().toString());
         return courtFields;
