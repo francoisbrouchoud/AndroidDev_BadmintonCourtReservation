@@ -3,10 +3,11 @@ package com.example.androiddev_badmintoncourtreservation.database.entity;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "courtsEntity"/*,
+@Entity(tableName = "courts"/*,
         foreignKeys =
         @ForeignKey(
                 entity = ReservationEntity.class,
@@ -31,6 +32,7 @@ public class CourtEntity {
     private String imagePath;
     private double hourlyPrice;
 
+    @Ignore
     public CourtEntity() {
     }
 
