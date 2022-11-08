@@ -126,26 +126,24 @@ public class EditPlayerActivity extends BaseActivity {
 
     private boolean checkFields(PlayerEntity player) {
         if(TextUtils.isEmpty(player.getFirstname())){
-            etPlayerFirstname.setError("required");
+            etPlayerFirstname.setError(getString(R.string.errorRequired_player_firstname));
             etPlayerFirstname.requestFocus();
             return false;
         }
         if(TextUtils.isEmpty(player.getLastname())){
-            etPlayerLastname.setError("required");
+            etPlayerLastname.setError(getString(R.string.errorRequired_player_lastname));
             etPlayerLastname.requestFocus();
             return false;
         }
         if(TextUtils.isEmpty(player.getBirthdate())){
-            etPlayerBirthdate.setError("required");
+            etPlayerBirthdate.setError(getString(R.string.errorRequired_player_birthdate));
             etPlayerBirthdate.requestFocus();
             return false;
         }
-
       return true;
     }
 
     private void saveChanges(PlayerEntity playerToSave){
-
         if(isEdit){
             //Edit an existing player
             viewModel.updatePlayer(playerToSave, new OnAsyncEventListener() {

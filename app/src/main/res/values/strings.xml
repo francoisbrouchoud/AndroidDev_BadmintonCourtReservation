@@ -30,6 +30,9 @@
     <string name="alert_playersActivity_deleteMessage">Do you really want to delete %1$s?</string>
     <string name="alert_playersActivity_btnPositive">Yes</string>
     <string name="alert_playersActivity_btnNegative">No</string>
+    <string name="errorRequired_player_firstname">Firstname is required</string>
+    <string name="errorRequired_player_lastname">Lastname is required</string>
+    <string name="errorRequired_player_birthdate">Birthdate is required</string>
 
 
     <!--Courts / edit courts-->
