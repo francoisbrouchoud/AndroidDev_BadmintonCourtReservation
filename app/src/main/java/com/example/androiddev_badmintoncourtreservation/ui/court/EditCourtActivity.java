@@ -17,7 +17,6 @@ public class EditCourtActivity extends BaseActivity {
         getLayoutInflater().inflate(R.layout.activity_edit_court, frameLayout);
         navigationView.setCheckedItem(R.id.nav_none);
 
-        TextView textView = findViewById(R.id.textTest);
-        textView.setText("here we add/edit the courts");
+
     }
 }
