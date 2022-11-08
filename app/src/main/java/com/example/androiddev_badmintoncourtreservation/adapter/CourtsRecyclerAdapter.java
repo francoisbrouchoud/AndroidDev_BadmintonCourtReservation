@@ -48,10 +48,12 @@ public class CourtsRecyclerAdapter<T> extends RecyclerView.Adapter<CourtsRecycle
     @Override
     public CourtsRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //Inflate the layout and give à look to the rows
-        TextView tv = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.court_row, parent, false);
-        final ViewHolder vh = new ViewHolder(tv);
-        tv.setOnClickListener(view -> rvClickListerner.onItemClick(view,vh.getAdapterPosition()));
-        tv.setOnLongClickListener(view -> {
+        //TextView tv = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.court_row, parent, false);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.court_row, parent, false);
+        final ViewHolder vh = new ViewHolder(view);
+        view.setOnClickListener(v -> rvClickListerner.onItemClick(view,vh.getAdapterPosition()));
+        view.setOnLongClickListener(v -> {
             rvClickListerner.onItemLongClick(view, vh.getAdapterPosition());
             return true;
         });
