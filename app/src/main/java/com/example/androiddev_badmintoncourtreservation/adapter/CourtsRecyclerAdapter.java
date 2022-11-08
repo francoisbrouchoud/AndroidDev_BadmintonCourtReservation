@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androiddev_badmintoncourtreservation.R;
@@ -18,6 +19,7 @@ import com.example.androiddev_badmintoncourtreservation.util.RecyclerViewItemCli
 import org.w3c.dom.Text;
 
 import java.util.List;
+import java.util.Objects;
 
 public class CourtsRecyclerAdapter<T> extends RecyclerView.Adapter<CourtsRecyclerAdapter.ViewHolder> {
 
@@ -76,6 +78,48 @@ public class CourtsRecyclerAdapter<T> extends RecyclerView.Adapter<CourtsRecycle
             return data.size();
         else
             return 0;
+    }
+
+    public void setData(List<T> courts){
+        if(data == null){
+            data = courts;
+            notifyItemRangeInserted(0,courts.size());
+        }else{
+            DiffUtil.DiffResult result = DiffUtil.calculateDiff(new DiffUtil.Callback() {
+                @Override
+                public int getOldListSize() {
+                    return data.size();
+                }
+
+                @Override
+                public int getNewListSize() {
+                    return courts.size();
+                }
+
+                @Override
+                public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+                    if(data instanceof CourtEntity)
+                        return ((CourtEntity) data.get(oldItemPosition)).getId().equals(((CourtEntity) data.get(newItemPosition)).getId());
+                    return false;
+                }
+
+                @Override
+                public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+                    if(data instanceof CourtEntity){
+                        CourtEntity newCourt = (CourtEntity) courts.get(newItemPosition);
+                        CourtEntity oldCourt = (CourtEntity) data.get(newItemPosition);
+                        return newCourt.getId().equals(oldCourt.getId())
+                                && Objects.equals(newCourt.getCourtsName(), oldCourt.getCourtsName())
+                                && Objects.equals(newCourt.getAddress(), oldCourt.getAddress())
+                                && Objects.equals(newCourt.getDescription(), oldCourt.getDescription())
+                                && Objects.equals(newCourt.getHourlyPrice(), oldCourt.getHourlyPrice());
+                    }
+                    return false;
+                }
+            });
+            data = courts;
+            result.dispatchUpdatesTo(this);
+        }
     }
 
 }

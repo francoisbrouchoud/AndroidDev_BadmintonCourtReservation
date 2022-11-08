@@ -11,32 +11,42 @@
     <string name="menu_gallery">Joueurs</string>
     <string name="menu_slideshow">Réservations</string>
 
+    <!-- Players / edit players -->
     <string name="playersActivity_homePage">Players</string>
-
     <string name="hint_pl_firstname">Firstname</string>
     <string name="hint_pl_lastname">Lastname</string>
     <string name="hint_pl_birthdate">Birthdate</string>
     <string name="hint_pl_gender">Gender</string>
     <string name="hint_pl_address">Address</string>
     <string name="hint_pl_phoneNbr">Phone number</string>
-
-    <string name="hint_pl_courtName">Courts name</string>
-    <string name="hint_pl_price">Courts hourly price</string>
-    <string name="hint_pl_description">Courts description</string>
-
     <string name="btn_editPlayerActivity_create">Confirm</string>
     <string name="btn_editPlayerActivity_edit">Apply</string>
-
     <string name="title_editPlayerActivity_new">Create player</string>
     <string name="title_editPlayerActivity_edit">Edit player</string>
-
     <string name="toast_editPlayerActivity_new">Player created</string>
     <string name="toast_editPlayerActivity_edit">Player edited</string>
     <string name="toast_playersActivity_delete">Player deleted</string>
-
     <string name="alert_playersActivity_deleteTitle">Delete player</string>
     <string name="alert_playersActivity_deleteMessage">Do you really want to delete %1$s?</string>
     <string name="alert_playersActivity_btnPositive">Yes</string>
     <string name="alert_playersActivity_btnNegative">No</string>
+
+
+    <!--Courts / edit courts-->
+    <string name="courtsActivity_homePage">Courts</string>
+    <string name="hint_pl_courtName">Courts name</string>
+    <string name="hint_pl_price">Courts hourly price</string>
+    <string name="hint_pl_description">Courts description</string>
+
+
+    <string name="title_editCourtActivity_new">Create court</string>
+    <string name="title_editCourtActivity_edit">Edit court</string>
+
+    <string name="toast_editCourtActivity_new">Court created</string>
+    <string name="toast_editCourtActivity_edit">Court edited</string>
+    <string name="toast_editCourtActivity_delete">Court deleted</string>
+
+
+
 
 </resources>
