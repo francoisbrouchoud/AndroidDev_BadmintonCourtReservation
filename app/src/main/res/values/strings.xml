@@ -47,9 +47,11 @@
 
     <string name="toast_editCourtActivity_new">Court created</string>
     <string name="toast_editCourtActivity_edit">Court edited</string>
-    <string name="toast_editCourtActivity_delete">Court deleted</string>
+    <string name="toast_editCourtActivity_delete">Court deleted</string>$
 
-
+    <string name="errorRequired_court_name">Court\'s name is required</string>
+    <string name="errorRequired_court_address">Court\'s address is required</string>
+    <string name="errorRequired_court_description">Courts description is required</string>
 
 
 </resources>
