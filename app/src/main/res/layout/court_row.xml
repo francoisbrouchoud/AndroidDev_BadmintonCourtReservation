@@ -18,24 +18,25 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/tv_pl_courtsimage"
                 android:layout_width="79dp"
                 android:layout_height="76dp"
                 app:srcCompat="@drawable/ic_menu_gallery"
                 tools:ignore="MissingConstraints" />
 
             <TextView
-                android:id="@+id/CourName"
+                android:id="@+id/tv_pl_courtsname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
                 android:textSize="32dp"
                 tools:layout_editor_absoluteX="92dp"
                 tools:layout_editor_absoluteY="0dp"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="MissingConstraints" />
 
             <TextView
-                android:id="@+id/CourtAddress"
+                android:id="@+id/tv_pl_courtsaddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
@@ -45,7 +46,7 @@
                 tools:ignore="MissingConstraints" />
 
             <TextView
-                android:id="@+id/CourtHourlyPrice"
+                android:id="@+id/tv_pl_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
