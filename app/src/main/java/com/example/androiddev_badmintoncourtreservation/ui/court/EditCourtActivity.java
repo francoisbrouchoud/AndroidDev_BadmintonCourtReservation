@@ -66,8 +66,9 @@ public class EditCourtActivity extends BaseActivity {
                     //Set the values on the fields
                     etCourtName.setText(court.getCourtsName());
                     etCourtAddress.setText(court.getAddress());
-                    if(court.getHourlyPrice()!=0.0)
-                        etCourtHourlyPrice.setText(Double.toString(court.getHourlyPrice()));
+                    etCourtHourlyPrice.setText(Double.toString(5.5));
+                   // if(court.getHourlyPrice()!=0.0)
+                   //     etCourtHourlyPrice.setText(Double.toString(court.getHourlyPrice()));
                     etCourtDescription.setText(court.getDescription());
                 }
             });
@@ -120,8 +121,19 @@ public class EditCourtActivity extends BaseActivity {
         courtFields.setCourtsName(etCourtName.getText().toString());
         courtFields.setAddress(etCourtAddress.getText().toString());
         //courtFields.setHourlyPrice(Double.parseDouble(etCourtHourlyPrice.getText().toString() == null ? "5.0" : etCourtHourlyPrice.getText().toString() ));
-        if(etCourtHourlyPrice.getText().toString() != null)
+
+
+       String hourlyPrice = etCourtHourlyPrice.getText().toString();
+
+       if(hourlyPrice.isEmpty()){
+           hourlyPrice = "0.0";
+       }
+
+       courtFields.setHourlyPrice(Double.parseDouble(hourlyPrice));
+
+        /*if(etCourtHourlyPrice.getText().toString() != null)
             courtFields.setHourlyPrice(Double.parseDouble(etCourtHourlyPrice.getText().toString()));
+                     */
         courtFields.setDescription(etCourtDescription.getText().toString());
         return courtFields;
     }
