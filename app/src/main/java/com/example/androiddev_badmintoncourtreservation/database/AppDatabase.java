@@ -11,6 +11,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.androiddev_badmintoncourtreservation.database.dao.CourtDao;
 import com.example.androiddev_badmintoncourtreservation.database.dao.PlayerDao;
 import com.example.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
 import com.example.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
@@ -23,9 +24,10 @@ public abstract class AppDatabase extends RoomDatabase{
 
     private static final String TAG = "AppDatabase";
     private static AppDatabase instance;
-    private static final String DATABASE_NAME = "bank-database";
+    private static final String DATABASE_NAME = "BadmintonReservation_Database";
 
     public abstract PlayerDao playerDao();
+    public abstract CourtDao courtDao();
     private final MutableLiveData<Boolean> mIsDatabaseCreated = new MutableLiveData<>();
 
     public static AppDatabase getInstance(final Context context) {
@@ -62,7 +64,7 @@ public abstract class AppDatabase extends RoomDatabase{
             database.runInTransaction(() -> {
                 Log.i(TAG, "Wipe database.");
                 database.playerDao().deleteAll();
-                //database.courtDao().deleteAll();
+                database.courtDao().deleteAll();
                 //database.reservationDao().deleteAll();
 
                 DatabaseInitializer.populateDatabase(database);
