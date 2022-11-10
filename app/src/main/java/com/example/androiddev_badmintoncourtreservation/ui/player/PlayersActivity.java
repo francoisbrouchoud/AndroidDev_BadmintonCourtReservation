@@ -89,7 +89,7 @@ public class PlayersActivity extends BaseActivity {
         );
 
         PlayerListViewModel.Factory factory = new PlayerListViewModel.Factory(getApplication());
-        listViewModel =  new ViewModelProvider(this, factory).get(PlayerListViewModel.class);
+        listViewModel =  new ViewModelProvider(this, (ViewModelProvider.Factory) factory).get(PlayerListViewModel.class);
         listViewModel.getPlayers().observe(this, playerEntities -> {
             if(playerEntities != null){
                 players = playerEntities;

@@ -60,7 +60,7 @@ public class EditCourtActivity extends BaseActivity {
         }
 
         CourtViewModel.Factory factory = new CourtViewModel.Factory(getApplication(), courtId);
-        viewModel = new ViewModelProvider(this, factory).get(CourtViewModel.class);
+        viewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) factory).get(CourtViewModel.class);
 
         if(isEdit){
             viewModel.getCourt().observe(this, courtEntity -> {

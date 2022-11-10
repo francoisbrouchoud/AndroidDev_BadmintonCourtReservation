@@ -16,6 +16,7 @@ import com.example.androiddev_badmintoncourtreservation.R;
 import com.example.androiddev_badmintoncourtreservation.adapter.CourtsRecyclerAdapter;
 import com.example.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
 import com.example.androiddev_badmintoncourtreservation.ui.BaseActivity;
+import com.example.androiddev_badmintoncourtreservation.ui.reservation.CourtReservationActivity;
 import com.example.androiddev_badmintoncourtreservation.ui.reservation.ReservationsActivity;
 import com.example.androiddev_badmintoncourtreservation.util.RecyclerViewItemClickListener;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.court.CourtListViewModel;
@@ -48,7 +49,7 @@ public class CourtsActivity extends BaseActivity {
             @Override
             public void onItemClick(View v, int position) {
                 //Access the ReservationsActivity
-                Intent intent = new Intent(CourtsActivity.this, ReservationsActivity.class);
+                Intent intent = new Intent(CourtsActivity.this, CourtReservationActivity.class);
                 intent.setFlags(
                         Intent.FLAG_ACTIVITY_NO_ANIMATION |
                                 Intent.FLAG_ACTIVITY_NO_HISTORY
@@ -86,7 +87,7 @@ public class CourtsActivity extends BaseActivity {
         );
 
         CourtListViewModel.Factory factory = new CourtListViewModel.Factory(getApplication());
-        listViewModel = new ViewModelProvider(this, factory).get(CourtListViewModel.class);
+        listViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) factory).get(CourtListViewModel.class);
         listViewModel.getCourts().observe(this, courtEntities -> {
             if(courtEntities != null){
                 courts = courtEntities;
