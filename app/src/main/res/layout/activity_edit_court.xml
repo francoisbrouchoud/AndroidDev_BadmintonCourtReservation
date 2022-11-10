@@ -24,7 +24,6 @@
                 android:layout_height="52dp"
                 android:hint="@string/hint_pl_courtName"
                 android:inputType="text" />
-
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout

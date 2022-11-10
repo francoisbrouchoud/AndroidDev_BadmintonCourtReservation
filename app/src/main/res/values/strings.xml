@@ -56,7 +56,12 @@
 
     <!--Court Reservation-->
     <string name="hint_cr_date">Date</string>
-    <string name="cr_homePage">Court reservation</string>
+    <string name="cr_homePage">New court reservation</string>
+    <string name="hint_tv_time">Time</string>
+    <string name="hint_tv_player">Player</string>
+    <string name="title_tv_courtName">Court name</string>
+    <string name="title_tv_courtPrice">Court price</string>
+    <string name="title_cr">Court reservation</string>
 
     
    
