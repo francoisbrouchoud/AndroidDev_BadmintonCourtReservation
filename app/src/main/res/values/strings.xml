@@ -41,6 +41,8 @@
     <string name="hint_pl_courtName">Courts name</string>
     <string name="hint_pl_price">Courts hourly price</string>
     <string name="hint_pl_description">Courts description</string>
+    <string name="editCourt_action_delete">Delete court</string>
+    <string name="alert_editCourtActivity_deleteMessage">Do your really want to delete this court?</string>
 
 
     <string name="title_editCourtActivity_new">Create court</string>

@@ -64,4 +64,8 @@ public class CourtViewModel extends AndroidViewModel {
     public void updateCourt(CourtEntity court, OnAsyncEventListener callback){
         repository.update(court, callback, application);
     }
+
+    public void deleteCourt(CourtEntity court, OnAsyncEventListener callback){
+        repository.delete(court, callback, application);
+    }
 }

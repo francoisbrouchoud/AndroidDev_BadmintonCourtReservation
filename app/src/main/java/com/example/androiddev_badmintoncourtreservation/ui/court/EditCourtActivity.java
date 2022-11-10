@@ -1,5 +1,7 @@
 package com.example.androiddev_badmintoncourtreservation.ui.court;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -7,6 +9,8 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,6 +24,8 @@ import com.example.androiddev_badmintoncourtreservation.util.OnAsyncEventListene
 import com.example.androiddev_badmintoncourtreservation.viewmodel.court.CourtViewModel;
 
 public class EditCourtActivity extends BaseActivity {
+
+    private static final int DELETE_COURT = 1;
 
     private CourtEntity court;
     private CourtViewModel viewModel;
@@ -85,6 +91,57 @@ public class EditCourtActivity extends BaseActivity {
             }
 
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+
+        if(isEdit){
+            menu.add(0, DELETE_COURT, Menu.NONE, getString(R.string.editCourt_action_delete))
+                    .setIcon(R.drawable.ic_delete_white_24dp)
+                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if(item.getItemId() == DELETE_COURT){
+            final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle(R.string.editCourt_action_delete);
+            alertDialog.setCancelable(false);
+            alertDialog.setMessage(getString(R.string.alert_editCourtActivity_deleteMessage));
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.alert_playersActivity_btnPositive), ((dialog, which) -> {
+                viewModel.deleteCourt(court, new OnAsyncEventListener() {
+                    @Override
+                    public void onSuccess() {
+                        //onBackPressed();
+                    }
+
+                    @Override
+                    public void onFailure(Exception e) {
+
+                    }
+
+                });
+                toast = Toast.makeText(this, R.string.toast_editCourtActivity_delete, Toast.LENGTH_LONG);
+                onBackPressed();
+            }));
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,getString(R.string.alert_playersActivity_btnNegative), ((dialog, which) -> alertDialog.dismiss()));
+            alertDialog.show();
+
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        toast.show();
     }
 
     private void saveChanges(CourtEntity courtToSave){
