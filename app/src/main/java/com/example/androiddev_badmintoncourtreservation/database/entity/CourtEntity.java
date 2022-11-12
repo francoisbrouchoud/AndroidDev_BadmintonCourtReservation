@@ -7,17 +7,11 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "courts",
-        foreignKeys =
-        @ForeignKey(
-                entity = ReservationEntity.class,
-                parentColumns = "courtId",
-                childColumns = "id",
-                onDelete = ForeignKey.CASCADE
-        ),
         indices = {
                 @Index(
                         value = {"id"}
-                )}
+                )
+        }
 )
 
 public class CourtEntity {

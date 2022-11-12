@@ -1,5 +1,6 @@
 package com.example.androiddev_badmintoncourtreservation.database.entity;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -8,15 +9,40 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "reservations",
-        primaryKeys = {"courtId", "playerId", "timeSlot", "reservationDate"})
+        foreignKeys = {
+                @ForeignKey(
+                        entity = PlayerEntity.class,
+                        parentColumns = "id",
+                        childColumns = "playerId",
+                        onDelete = ForeignKey.CASCADE
+                ),
+                @ForeignKey(
+                        entity = CourtEntity.class,
+                        parentColumns = "id",
+                        childColumns = "courtId",
+                        onDelete = ForeignKey.CASCADE
+                )
+        },
+
+        primaryKeys = {"courtId", "playerId", "timeSlot", "reservationDate"},
+        indices = {
+            @Index(
+                    value = "playerId", unique = true
+            ),
+            @Index(
+                    value = "courtId", unique = true
+            )
+        }
+)
 
 public class ReservationEntity {
-    @ColumnInfo(name = "courtId")
+    @ColumnInfo(name = "courtId") @NonNull
     private Long courtId;
-    @ColumnInfo(name = "playerId")
+    @ColumnInfo(name = "playerId") @NonNull
     private Long playerId;
-
+    @NonNull
     private String timeSlot;
+    @NonNull
     private String reservationDate;
 
     @Ignore
