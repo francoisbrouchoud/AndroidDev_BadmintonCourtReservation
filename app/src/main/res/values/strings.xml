@@ -64,7 +64,13 @@
     <string name="title_tv_courtName">Court name</string>
     <string name="title_tv_courtPrice">Court price</string>
     <string name="title_cr">Court reservation</string>
+    <string name="errorRequired_reservation_date">Reservation date is required</string>
+    <string name="errorRequired_reservation_time">Reservation time is required</string>
+    <string name="error_reservation_exists">There is already a reservation for this court at this time</string>
+    <string name="toast_reservation_new">Reservation saved</string>
 
+
+    <string name="hint_sp_time">Select time</string>
     
    
 

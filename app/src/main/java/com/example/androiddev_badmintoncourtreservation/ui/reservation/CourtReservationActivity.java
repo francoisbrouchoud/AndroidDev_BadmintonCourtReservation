@@ -2,6 +2,7 @@ package com.example.androiddev_badmintoncourtreservation.ui.reservation;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,6 +13,7 @@ import android.widget.ListAdapter;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
@@ -20,16 +22,21 @@ import com.example.androiddev_badmintoncourtreservation.R;
 import com.example.androiddev_badmintoncourtreservation.adapter.PlayersListAdapter;
 import com.example.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
 import com.example.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
+import com.example.androiddev_badmintoncourtreservation.database.entity.ReservationEntity;
 import com.example.androiddev_badmintoncourtreservation.database.repository.PlayerRepository;
 import com.example.androiddev_badmintoncourtreservation.ui.BaseActivity;
 import com.example.androiddev_badmintoncourtreservation.ui.player.EditPlayerActivity;
+import com.example.androiddev_badmintoncourtreservation.util.OnAsyncEventListener;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.court.CourtViewModel;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.player.PlayerListViewModel;
+import com.example.androiddev_badmintoncourtreservation.viewmodel.reservation.ReservationListViewModel;
+import com.example.androiddev_badmintoncourtreservation.viewmodel.reservation.ReservationViewModel;
 
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -40,6 +47,11 @@ public class CourtReservationActivity extends BaseActivity {
     private PlayersListAdapter<PlayerEntity> adapterPlayers;
     private PlayerListViewModel playerListViewModel;
     private List<PlayerEntity> players;
+    private PlayerEntity player;
+
+    private ReservationListViewModel reservationListViewModel;
+    private ReservationViewModel reservationViewModel;
+    private List<ReservationEntity> reservations;
 
     private TextView tvCourtName;
     private TextView tvCourtPrice;
@@ -50,18 +62,14 @@ public class CourtReservationActivity extends BaseActivity {
     private Spinner spReservationPlayer;
 
     private Button button;
-    List<Long> ids;
+    private Toast toast;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_court_reservation, frameLayout);
         navigationView.setCheckedItem(R.id.nav_none);
-
         setTitle(R.string.cr_homePage);
-
-
-
 
         //Get the views
         tvCourtName = findViewById(R.id.tv_courtReservation_courtName);
@@ -86,6 +94,9 @@ public class CourtReservationActivity extends BaseActivity {
                 tvCourtPrice.setText(Double.toString(court.getHourlyPrice()));
             }
         });
+
+        ReservationViewModel.Factory factoryReservation = new ReservationViewModel.Factory(getApplication(),0);
+        reservationViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) factoryReservation).get(ReservationViewModel.class);
 
         tvTime.setText(getText(R.string.hint_tv_time));
         tvPlayer.setText(getText(R.string.hint_tv_player));
@@ -116,10 +127,80 @@ public class CourtReservationActivity extends BaseActivity {
             }
         });
 
+        toast = Toast.makeText(this, R.string.toast_reservation_new, Toast.LENGTH_LONG);
+
 
         button.setOnClickListener(view -> {
-
+            ReservationEntity reservation = getReservationFromFields();
+            if(checkFields(reservation)){
+                saveChanges(reservation);
+                onBackPressed();
+                toast.show();
+            }
         });
+    }
+
+    private boolean checkFields(ReservationEntity reservation){
+        //Check if the fields are not empty
+        if(TextUtils.isEmpty(reservation.getReservationDate())){
+            etReservationDate.setError(getString(R.string.errorRequired_reservation_date));
+            etReservationDate.requestFocus();
+            return false;
+        }
+        if(reservation.getTimeSlot() == getString(R.string.hint_sp_time)){
+            tvTime.setError(getString(R.string.errorRequired_reservation_time));
+            spReservationTime.requestFocus();
+            return false;
+        }
+        if(checkReservationForTimeslot(reservation)){
+            tvTime.setError(getString(R.string.error_reservation_exists));
+            spReservationTime.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
+    private void saveChanges(ReservationEntity reservationToSave){
+        reservationViewModel.createReservation(reservationToSave, new OnAsyncEventListener() {
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        });
+    }
+
+    private ReservationEntity getReservationFromFields(){
+        ReservationEntity reservationFields = new ReservationEntity();
+        //Get the player from the selection of the spinner
+        player = players.get(spReservationPlayer.getSelectedItemPosition());
+        //Set the values
+        reservationFields.setCourtId(court.getId());
+        reservationFields.setPlayerId(player.getId());
+        reservationFields.setTimeSlot(spReservationTime.getSelectedItem().toString());
+        reservationFields.setReservationDate(etReservationDate.getText().toString());
+        return reservationFields;
+    }
+
+    private boolean checkReservationForTimeslot(ReservationEntity reservation){
+        ReservationListViewModel.Factory factory = new ReservationListViewModel.Factory(getApplication());
+        reservationListViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) factory).get(ReservationListViewModel.class);
+        reservationListViewModel.getReservations().observe(this, reservationEntities -> {
+            if(reservationEntities != null){
+                reservations = reservationEntities;
+            }
+        });
+        //Check if there is already a reservation at the same date and time for the court
+        for(ReservationEntity r : reservations){
+            if(Objects.equals(r.getCourtId(), reservation.getCourtId()) && Objects.equals(r.getReservationDate(), reservation.getReservationDate()) && Objects.equals(r.getTimeSlot(), reservation.getTimeSlot())){
+                return true;
+            }
+        }
+        return false;
     }
 
     private void setupPlayerSpinner() {
@@ -138,6 +219,7 @@ public class CourtReservationActivity extends BaseActivity {
         playerListViewModel.getPlayers().observe(this, playerEntities -> {
             if(playerEntities != null){
                 updatePlayerSpinner(playerEntities);
+                players = playerEntities;
             }
         });
     }

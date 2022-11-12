@@ -31,8 +31,12 @@ public class ReservationRepository {
         return instance;
     }
 
-    public LiveData<List<ReservationEntity>> getReservation(Application application){
+    public LiveData<List<ReservationEntity>> getReservations(Application application){
         return ((BaseApp) application).getDatabase().reservationDao().getAll();
+    }
+
+    public LiveData<ReservationEntity> getReservation(final Long id, Application application){
+        return ((BaseApp) application).getDatabase().reservationDao().getById(id);
     }
 
     public void insert(final ReservationEntity reservation, OnAsyncEventListener callback,

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="16dp"
@@ -82,13 +82,14 @@
             android:layout_height="wrap_content"
             android:paddingBottom="15dp"
             app:boxBackgroundColor="#00FFFFFF">
+
             <TextView
                 android:id="@+id/tv_courtReservation_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/hint_tv_time"
-                android:textStyle="bold"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                android:textStyle="bold" />
             <Spinner
                 android:id="@+id/sp_cr_time"
                 android:layout_width="match_parent"
