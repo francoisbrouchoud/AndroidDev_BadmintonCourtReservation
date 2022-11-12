@@ -5,10 +5,9 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import com.example.androiddev_badmintoncourtreservation.BaseApp;
-import com.example.androiddev_badmintoncourtreservation.database.async.player.CreatePlayer;
-import com.example.androiddev_badmintoncourtreservation.database.async.player.DeletePlayer;
-import com.example.androiddev_badmintoncourtreservation.database.async.player.UpdatePlayer;
-import com.example.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
+import com.example.androiddev_badmintoncourtreservation.database.async.reservation.CreateReservation;
+import com.example.androiddev_badmintoncourtreservation.database.async.reservation.DeleteReservation;
+import com.example.androiddev_badmintoncourtreservation.database.async.reservation.UpdateReservation;
 import com.example.androiddev_badmintoncourtreservation.database.entity.ReservationEntity;
 import com.example.androiddev_badmintoncourtreservation.util.OnAsyncEventListener;
 
@@ -20,7 +19,7 @@ public class ReservationRepository {
 
     public ReservationRepository() {
     }
-/*
+
     public static ReservationRepository getInstance(){
         if(instance == null){
             synchronized (ReservationRepository.class){
@@ -31,23 +30,23 @@ public class ReservationRepository {
         }
         return instance;
     }
-/*
+
     public LiveData<List<ReservationEntity>> getReservation(Application application){
-        return ((BaseApp) application).getDatabase().ReservationDao().getAll();
-    }
-*/
-    public void insert(final PlayerEntity player, OnAsyncEventListener callback,
-                       Application application) {
-        new CreatePlayer(application, callback).execute(player);
+        return ((BaseApp) application).getDatabase().reservationDao().getAll();
     }
 
-    public void update(final PlayerEntity player, OnAsyncEventListener callback,
+    public void insert(final ReservationEntity reservation, OnAsyncEventListener callback,
                        Application application) {
-        new UpdatePlayer(application, callback).execute(player);
+        new CreateReservation(application, callback).execute(reservation);
     }
 
-    public void delete(final PlayerEntity player, OnAsyncEventListener callback,
+    public void update(final ReservationEntity reservation, OnAsyncEventListener callback,
                        Application application) {
-        new DeletePlayer(application, callback).execute(player);
+        new UpdateReservation(application, callback).execute(reservation);
+    }
+
+    public void delete(final ReservationEntity reservation, OnAsyncEventListener callback,
+                       Application application) {
+        new DeleteReservation(application, callback).execute(reservation);
     }
 }

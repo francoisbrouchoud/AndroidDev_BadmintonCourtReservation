@@ -26,9 +26,9 @@ public class BaseApp extends Application {
     public CourtRepository getCourtRepository() {
         return CourtRepository.getInstance();
     }
-/*
+
     public ReservationRepository getReservationRepository() {
         return ReservationRepository.getInstance();
     }
-*/
+
 }
