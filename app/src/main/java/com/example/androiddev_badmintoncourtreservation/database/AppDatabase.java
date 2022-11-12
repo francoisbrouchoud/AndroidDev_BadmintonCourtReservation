@@ -65,6 +65,7 @@ public abstract class AppDatabase extends RoomDatabase{
                 Log.i(TAG, "Wipe database.");
                 database.playerDao().deleteAll();
                 database.courtDao().deleteAll();
+
                 //database.reservationDao().deleteAll();
 
                 DatabaseInitializer.populateDatabase(database);
