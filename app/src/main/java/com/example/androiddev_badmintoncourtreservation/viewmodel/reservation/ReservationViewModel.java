@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.androiddev_badmintoncourtreservation.BaseApp;
@@ -44,6 +45,12 @@ public class ReservationViewModel extends AndroidViewModel {
             this.application = application;
             this.reservationId = reservationId;
             repository = ((BaseApp) application).getReservationRepository();
+        }
+
+        @NonNull
+        @Override
+        public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+            return (T) new ReservationViewModel(application, reservationId, repository);
         }
     }
 

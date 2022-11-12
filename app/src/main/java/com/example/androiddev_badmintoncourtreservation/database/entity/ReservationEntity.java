@@ -25,10 +25,10 @@ import androidx.room.PrimaryKey;
         },
         indices = {
             @Index(
-                    value = "playerId", unique = true
+                    value = "playerId"
             ),
             @Index(
-                    value = "courtId", unique = true
+                    value = "courtId"
             )
         }
 )

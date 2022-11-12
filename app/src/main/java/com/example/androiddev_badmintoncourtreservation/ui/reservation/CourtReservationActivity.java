@@ -95,8 +95,7 @@ public class CourtReservationActivity extends BaseActivity {
             }
         });
 
-        ReservationViewModel.Factory factoryReservation = new ReservationViewModel.Factory(getApplication(),0);
-        reservationViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) factoryReservation).get(ReservationViewModel.class);
+
 
         tvTime.setText(getText(R.string.hint_tv_time));
         tvPlayer.setText(getText(R.string.hint_tv_player));
@@ -129,6 +128,16 @@ public class CourtReservationActivity extends BaseActivity {
 
         toast = Toast.makeText(this, R.string.toast_reservation_new, Toast.LENGTH_LONG);
 
+        ReservationViewModel.Factory factoryReservation = new ReservationViewModel.Factory(getApplication(),0);
+        reservationViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) factoryReservation).get(ReservationViewModel.class);
+
+        ReservationListViewModel.Factory factory = new ReservationListViewModel.Factory(getApplication());
+        reservationListViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) factory).get(ReservationListViewModel.class);
+        reservationListViewModel.getReservations().observe(this, reservationEntities -> {
+            if(reservationEntities != null){
+                reservations = reservationEntities;
+            }
+        });
 
         button.setOnClickListener(view -> {
             ReservationEntity reservation = getReservationFromFields();
@@ -137,12 +146,13 @@ public class CourtReservationActivity extends BaseActivity {
                 onBackPressed();
                 toast.show();
             }
+            //saveChanges(reservation);
         });
     }
 
     private boolean checkFields(ReservationEntity reservation){
         //Check if the fields are not empty
-        if(TextUtils.isEmpty(reservation.getReservationDate())){
+        /*if(TextUtils.isEmpty(reservation.getReservationDate())){
             etReservationDate.setError(getString(R.string.errorRequired_reservation_date));
             etReservationDate.requestFocus();
             return false;
@@ -151,12 +161,13 @@ public class CourtReservationActivity extends BaseActivity {
             tvTime.setError(getString(R.string.errorRequired_reservation_time));
             spReservationTime.requestFocus();
             return false;
-        }
+        }*/
         if(checkReservationForTimeslot(reservation)){
             tvTime.setError(getString(R.string.error_reservation_exists));
             spReservationTime.requestFocus();
             return false;
         }
+        //Check if the date is in the past -> return true
         return true;
     }
 
@@ -187,13 +198,7 @@ public class CourtReservationActivity extends BaseActivity {
     }
 
     private boolean checkReservationForTimeslot(ReservationEntity reservation){
-        ReservationListViewModel.Factory factory = new ReservationListViewModel.Factory(getApplication());
-        reservationListViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) factory).get(ReservationListViewModel.class);
-        reservationListViewModel.getReservations().observe(this, reservationEntities -> {
-            if(reservationEntities != null){
-                reservations = reservationEntities;
-            }
-        });
+
         //Check if there is already a reservation at the same date and time for the court
         for(ReservationEntity r : reservations){
             if(Objects.equals(r.getCourtId(), reservation.getCourtId()) && Objects.equals(r.getReservationDate(), reservation.getReservationDate()) && Objects.equals(r.getTimeSlot(), reservation.getTimeSlot())){
