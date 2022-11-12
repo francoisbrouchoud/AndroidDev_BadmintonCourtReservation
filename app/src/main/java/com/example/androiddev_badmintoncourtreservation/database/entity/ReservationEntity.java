@@ -7,59 +7,27 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-import java.util.Date;
-
-@Entity(tableName = "resevations"/*,
-        foreignKeys = {
-        @ForeignKey(
-                entity = CourtEntity.class,
-                parentColumns = "id",
-                childColumns = "courtId",
-                onDelete = ForeignKey.CASCADE
-        ),
-        @ForeignKey(
-                entity = PlayerEntity.class,
-                parentColumns = "id",
-                childColumns = "playerId",
-                onDelete = ForeignKey.CASCADE
-        )},
-        indices = {
-                @Index(
-                        value = {"courtId"}
-                ),
-                @Index(
-                        value = {"playerId"}
-                ),
-        }
-        */
-)
+@Entity(tableName = "resevations",
+        primaryKeys = {"courtId", "playerId", "timeSlot", "reservationDate"})
 
 public class ReservationEntity {
-    @PrimaryKey(autoGenerate = true)
-    private Long id2;
     @ColumnInfo(name = "courtId")
     private Long courtId;
     @ColumnInfo(name = "playerId")
     private Long playerId;
 
+    private String timeSlot;
     private String reservationDate;
 
     @Ignore
     public ReservationEntity() {
     }
 
-    public ReservationEntity(Long courtId, Long playerId, String reservationDate) {
+    public ReservationEntity(Long courtId, Long playerId, String timeSlot, String reservationDate) {
         this.courtId = courtId;
         this.playerId = playerId;
+        this.timeSlot = timeSlot;
         this.reservationDate = reservationDate;
-    }
-
-    public Long getId2() {
-        return id2;
-    }
-
-    public void setId2(Long id) {
-        this.id2 = id2;
     }
 
     public Long getCourtId() {
@@ -86,10 +54,16 @@ public class ReservationEntity {
         this.reservationDate = reservationDate;
     }
 
+    public String getTimeSlot() {
+        return timeSlot;
+    }
+
+    public void setTimeSlot(String timeSlot) {
+        this.timeSlot = timeSlot;
+    }
+
     @Override
     public String toString() {
         return reservationDate.toString() + " " + courtId + " " + playerId;
     }
-
-
 }
