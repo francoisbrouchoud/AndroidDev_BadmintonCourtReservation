@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
 import com.example.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
+import com.example.androiddev_badmintoncourtreservation.database.entity.ReservationEntity;
 
 import java.util.Date;
 
@@ -24,7 +25,12 @@ public class DatabaseInitializer {
 
     private static void addCourt(final AppDatabase db, final String courtsName, String description, String address, String place, String imagePath, double hourlyPrice){
         CourtEntity court = new CourtEntity(courtsName, description, address, place, imagePath, hourlyPrice);
+        db.courtDao().insert(court);
+    }
 
+    private static void addReservation(final AppDatabase db, final Long courtId, final Long playerId, String timeSlot, String reservationDate){
+        ReservationEntity reservation = new ReservationEntity(courtId, playerId, timeSlot, reservationDate);
+        db.reservationDao().insert(reservation);
     }
 
     private static void populateWithTestData(AppDatabase db) {
@@ -57,6 +63,7 @@ public class DatabaseInitializer {
             e.printStackTrace();
         }
 
+        addReservation(db, 1L, 1L, "16-18", "12.11.2022");
     }
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
