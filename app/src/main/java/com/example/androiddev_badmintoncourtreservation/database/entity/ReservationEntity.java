@@ -7,7 +7,7 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "resevations",
+@Entity(tableName = "reservations",
         primaryKeys = {"courtId", "playerId", "timeSlot", "reservationDate"})
 
 public class ReservationEntity {
