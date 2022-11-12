@@ -23,8 +23,6 @@ import androidx.room.PrimaryKey;
                         onDelete = ForeignKey.CASCADE
                 )
         },
-
-        primaryKeys = {"courtId", "playerId", "timeSlot", "reservationDate"},
         indices = {
             @Index(
                     value = "playerId", unique = true
@@ -36,6 +34,8 @@ import androidx.room.PrimaryKey;
 )
 
 public class ReservationEntity {
+    @PrimaryKey(autoGenerate = true)
+    private Long id;
     @ColumnInfo(name = "courtId") @NonNull
     private Long courtId;
     @ColumnInfo(name = "playerId") @NonNull
@@ -54,6 +54,14 @@ public class ReservationEntity {
         this.playerId = playerId;
         this.timeSlot = timeSlot;
         this.reservationDate = reservationDate;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getCourtId() {
