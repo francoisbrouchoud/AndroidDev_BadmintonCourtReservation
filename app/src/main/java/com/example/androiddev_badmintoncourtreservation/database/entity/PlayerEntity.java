@@ -9,9 +9,7 @@ import androidx.room.PrimaryKey;
 
 import com.example.androiddev_badmintoncourtreservation.database.AppDatabase;
 
-import java.util.Date;
-
-@Entity(tableName = "players" /*,
+@Entity(tableName = "players" ,
        foreignKeys =
         @ForeignKey(
                 entity = ReservationEntity.class,
@@ -23,9 +21,7 @@ import java.util.Date;
                 @Index(
                         value = {"id"}
                 )}
-        */
 )
-
 
 public class PlayerEntity {
     @PrimaryKey
