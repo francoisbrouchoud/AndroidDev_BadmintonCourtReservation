@@ -17,7 +17,7 @@ import com.example.androiddev_badmintoncourtreservation.database.AppDatabase;
 )
 
 public class PlayerEntity {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private Long id;
     private String firstname;
     private String lastname;
