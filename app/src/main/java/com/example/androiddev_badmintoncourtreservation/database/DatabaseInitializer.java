@@ -51,6 +51,11 @@ public class DatabaseInitializer {
         addCourt(db, "Badminton de Chippis", "claqué au sol", "L'Usine 41", "Chippis", "pasbeau.png", 10);
 
 
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 
