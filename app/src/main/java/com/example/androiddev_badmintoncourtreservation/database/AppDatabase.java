@@ -13,6 +13,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.androiddev_badmintoncourtreservation.database.dao.CourtDao;
 import com.example.androiddev_badmintoncourtreservation.database.dao.PlayerDao;
+import com.example.androiddev_badmintoncourtreservation.database.dao.ReservationDao;
 import com.example.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
 import com.example.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
 import com.example.androiddev_badmintoncourtreservation.database.entity.ReservationEntity;
@@ -28,6 +29,7 @@ public abstract class AppDatabase extends RoomDatabase{
 
     public abstract PlayerDao playerDao();
     public abstract CourtDao courtDao();
+    public abstract ReservationDao reservationDao();
     private final MutableLiveData<Boolean> mIsDatabaseCreated = new MutableLiveData<>();
 
     public static AppDatabase getInstance(final Context context) {
@@ -65,8 +67,7 @@ public abstract class AppDatabase extends RoomDatabase{
                 Log.i(TAG, "Wipe database.");
                 database.playerDao().deleteAll();
                 database.courtDao().deleteAll();
-
-                //database.reservationDao().deleteAll();
+                database.reservationDao().deleteAll();
 
                 DatabaseInitializer.populateDatabase(database);
             });
