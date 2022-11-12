@@ -9,14 +9,7 @@ import androidx.room.PrimaryKey;
 
 import com.example.androiddev_badmintoncourtreservation.database.AppDatabase;
 
-@Entity(tableName = "players" ,
-       foreignKeys =
-        @ForeignKey(
-                entity = ReservationEntity.class,
-                parentColumns = "playerId",
-                childColumns = "id",
-                onDelete = ForeignKey.CASCADE
-        ),
+@Entity(tableName = "players",
         indices = {
                 @Index(
                         value = {"id"}
