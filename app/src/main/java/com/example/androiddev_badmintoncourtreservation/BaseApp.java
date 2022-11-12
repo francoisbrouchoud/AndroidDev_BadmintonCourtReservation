@@ -5,6 +5,7 @@ import android.app.Application;
 import com.example.androiddev_badmintoncourtreservation.database.AppDatabase;
 import com.example.androiddev_badmintoncourtreservation.database.repository.CourtRepository;
 import com.example.androiddev_badmintoncourtreservation.database.repository.PlayerRepository;
+import com.example.androiddev_badmintoncourtreservation.database.repository.ReservationRepository;
 
 
 public class BaseApp extends Application {
@@ -25,5 +26,9 @@ public class BaseApp extends Application {
     public CourtRepository getCourtRepository() {
         return CourtRepository.getInstance();
     }
-
+/*
+    public ReservationRepository getReservationRepository() {
+        return ReservationRepository.getInstance();
+    }
+*/
 }
