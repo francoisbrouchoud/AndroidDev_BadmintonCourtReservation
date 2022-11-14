@@ -57,6 +57,7 @@ public class CourtReservationActivity extends BaseActivity {
     private PlayerListViewModel playerListViewModel;
     private List<PlayerEntity> players;
     private PlayerEntity player;
+    private ReservationEntity reservation;
 
     private ReservationListViewModel reservationListViewModel;
     private ReservationViewModel reservationViewModel;
@@ -73,12 +74,14 @@ public class CourtReservationActivity extends BaseActivity {
     private Button button;
     private Toast toast;
 
+    private boolean isEdit;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_court_reservation, frameLayout);
         navigationView.setCheckedItem(R.id.nav_none);
-        setTitle(R.string.cr_homePage);
+        //setTitle(R.string.cr_homePage);
 
         //Get the views
         tvCourtName = findViewById(R.id.tv_courtReservation_courtName);
@@ -135,18 +138,37 @@ public class CourtReservationActivity extends BaseActivity {
             }
         });
 
+        long reservationId = getIntent().getLongExtra("reservationId", 0);
+        if(reservationId == 0){
+            setTitle("New court reservation");
+            isEdit = false;
+        }else{
+            setTitle("Edit reservation");
+            button.setText(R.string.btn_editPlayerActivity_edit);
+            isEdit = true;
+        }
+
         toast = Toast.makeText(this, R.string.toast_reservation_new, Toast.LENGTH_LONG);
 
-        ReservationViewModel.Factory factoryReservation = new ReservationViewModel.Factory(getApplication(),0);
+        ReservationViewModel.Factory factoryReservation = new ReservationViewModel.Factory(getApplication(),reservationId);
         reservationViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) factoryReservation).get(ReservationViewModel.class);
+
+
 
         ReservationListViewModel.Factory factory = new ReservationListViewModel.Factory(getApplication());
         reservationListViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) factory).get(ReservationListViewModel.class);
-        reservationListViewModel.getReservations().observe(this, reservationEntities -> {
-            if(reservationEntities != null){
-                reservations = reservationEntities;
-            }
-        });
+
+        if(isEdit){
+            reservationListViewModel.getReservations().observe(this, reservationEntities -> {
+                if(reservationEntities != null){
+                    reservations = reservationEntities;
+
+                    etReservationDate.setText(reservation.getReservationDate());
+
+                }
+            });
+        }
+
 
         button.setOnClickListener(view -> {
             ReservationEntity reservation = getReservationFromFields();
