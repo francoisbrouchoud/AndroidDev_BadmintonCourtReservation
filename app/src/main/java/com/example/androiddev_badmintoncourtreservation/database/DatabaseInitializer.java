@@ -28,10 +28,13 @@ public class DatabaseInitializer {
         db.courtDao().insert(court);
     }
 
+    /*
     private static void addReservation(final AppDatabase db, final Long courtId, final Long playerId, String timeSlot, String reservationDate){
         ReservationEntity reservation = new ReservationEntity(courtId, playerId, timeSlot, reservationDate);
         db.reservationDao().insert(reservation);
     }
+
+     */
 
     private static void populateWithTestData(AppDatabase db) {
         db.playerDao().deleteAll();
@@ -63,7 +66,7 @@ public class DatabaseInitializer {
             e.printStackTrace();
         }
 
-        addReservation(db, 1L, 1L, "16-18", "12.11.2022");
+       // addReservation(db, 1L, 1L, "16-18", "12.11.2022");
     }
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {

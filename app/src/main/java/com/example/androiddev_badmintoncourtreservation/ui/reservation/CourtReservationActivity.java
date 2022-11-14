@@ -223,6 +223,9 @@ public class CourtReservationActivity extends BaseActivity {
         reservationFields.setPlayerId(player.getId());
         reservationFields.setTimeSlot(spReservationTime.getSelectedItem().toString());
         reservationFields.setReservationDate(etReservationDate.getText().toString());
+        reservationFields.setResFirstname(player.getFirstname());
+        reservationFields.setResLastname(player.getLastname());
+        reservationFields.setResCourtname(court.getCourtsName());
         return reservationFields;
     }
 

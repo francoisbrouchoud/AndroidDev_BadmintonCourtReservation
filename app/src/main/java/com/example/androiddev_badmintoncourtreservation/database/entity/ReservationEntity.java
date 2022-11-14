@@ -44,16 +44,22 @@ public class ReservationEntity {
     private String timeSlot;
     @NonNull
     private String reservationDate;
+    private String resFirstname;
+    private String resLastname;
+    private String resCourtname;
 
     @Ignore
     public ReservationEntity() {
     }
 
-    public ReservationEntity(Long courtId, Long playerId, String timeSlot, String reservationDate) {
+    public ReservationEntity(Long courtId, Long playerId, String timeSlot, String reservationDate, String resFirstname, String resLastname, String resCourtname) {
         this.courtId = courtId;
         this.playerId = playerId;
         this.timeSlot = timeSlot;
         this.reservationDate = reservationDate;
+        this.resFirstname = resFirstname;
+        this.resLastname = resLastname;
+        this.resCourtname = resCourtname;
     }
 
     public Long getId() {
@@ -94,6 +100,30 @@ public class ReservationEntity {
 
     public void setTimeSlot(String timeSlot) {
         this.timeSlot = timeSlot;
+    }
+
+    public String getResFirstname() {
+        return resFirstname;
+    }
+
+    public void setResFirstname(String resFirstname) {
+        this.resFirstname = resFirstname;
+    }
+
+    public String getResLastname() {
+        return resLastname;
+    }
+
+    public void setResLastname(String resLastname) {
+        this.resLastname = resLastname;
+    }
+
+    public String getResCourtname() {
+        return resCourtname;
+    }
+
+    public void setResCourtname(String resCourtname) {
+        this.resCourtname = resCourtname;
     }
 
     @Override

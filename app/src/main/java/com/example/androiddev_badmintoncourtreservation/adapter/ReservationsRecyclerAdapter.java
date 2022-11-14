@@ -68,9 +68,9 @@ public class ReservationsRecyclerAdapter<T> extends RecyclerView.Adapter<Reserva
         T item = data.get(position);
 
         if(item.getClass().equals(ReservationEntity.class))
-            //holder.tvCourtName.setText(court.getCourtsName());
+            holder.tvCourtName.setText(((ReservationEntity) item).getResCourtname());
         if(item.getClass().equals(ReservationEntity.class))
-            //holder.tvPlayerName.setText(player.getFirstname() + " " + player.getLastname());
+            holder.tvPlayerName.setText(((ReservationEntity) item).getResFirstname() + " " +((ReservationEntity) item).getResLastname());
         if(item.getClass().equals(ReservationEntity.class))
             holder.tvDate.setText(((ReservationEntity) item).getReservationDate());
         if(item.getClass().equals(ReservationEntity.class))
