@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.androiddev_badmintoncourtreservation.BaseApp;
-import com.example.androiddev_badmintoncourtreservation.adapter.ReservationsRecyclerAdapter;
 import com.example.androiddev_badmintoncourtreservation.database.entity.ReservationEntity;
 import com.example.androiddev_badmintoncourtreservation.database.repository.ReservationRepository;
 import com.example.androiddev_badmintoncourtreservation.util.OnAsyncEventListener;

@@ -66,12 +66,16 @@
     <string name="title_cr">Court reservation</string>
     <string name="errorRequired_reservation_date">Reservation date is required</string>
     <string name="errorRequired_reservation_time">Reservation time is required</string>
-    <string name="error_reservation_exists">There is already a reservation for this court at this time</string>
+    <string name="dialog_reservation_exists">There is already a reservation for this court at this time."\n"Please choose another time or date.</string>
+    <string name="dialog_reservation_exists_title">Oops!</string>
     <string name="toast_reservation_new">Reservation saved</string>
-
-
     <string name="hint_sp_time">Select time</string>
-    
-   
+
+
+    <!--Reservations -->
+    <string name="reservation_homePage">Reservations</string>
+    <string name="alert_reservationActivity_deleteTitle">Delete reservation</string>
+    <string name="alert_reservationActivity_deleteMessage">Do you really want to delete this reservation?</string>
+    <string name="toast_reservationActivity_delete">Reservation deleted</string>
 
 </resources>

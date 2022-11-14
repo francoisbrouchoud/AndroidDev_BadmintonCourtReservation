@@ -3,6 +3,7 @@ package com.example.androiddev_badmintoncourtreservation.ui.reservation;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.androiddev_badmintoncourtreservation.R;
@@ -146,13 +148,12 @@ public class CourtReservationActivity extends BaseActivity {
                 onBackPressed();
                 toast.show();
             }
-            //saveChanges(reservation);
         });
     }
 
     private boolean checkFields(ReservationEntity reservation){
         //Check if the fields are not empty
-        /*if(TextUtils.isEmpty(reservation.getReservationDate())){
+        if(TextUtils.isEmpty(reservation.getReservationDate())){
             etReservationDate.setError(getString(R.string.errorRequired_reservation_date));
             etReservationDate.requestFocus();
             return false;
@@ -161,14 +162,28 @@ public class CourtReservationActivity extends BaseActivity {
             tvTime.setError(getString(R.string.errorRequired_reservation_time));
             spReservationTime.requestFocus();
             return false;
-        }*/
+        }
         if(checkReservationForTimeslot(reservation)){
-            tvTime.setError(getString(R.string.error_reservation_exists));
-            spReservationTime.requestFocus();
+            reservationConflictDialog();
             return false;
         }
         //Check if the date is in the past -> return true
         return true;
+    }
+
+    private void reservationConflictDialog(){
+        LayoutInflater inflater = LayoutInflater.from(this);
+        final View view = inflater.inflate(R.layout.row_delete_item, null);
+
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle(R.string.dialog_reservation_exists_title);
+        alertDialog.setCancelable(false);
+        final TextView tvDeleteMessage = view.findViewById(R.id.tv_delete_item);
+        tvDeleteMessage.setText(R.string.dialog_reservation_exists);
+
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Close", (dialog, which) -> alertDialog.dismiss());
+        alertDialog.setView(view);
+        alertDialog.show();
     }
 
     private void saveChanges(ReservationEntity reservationToSave){
