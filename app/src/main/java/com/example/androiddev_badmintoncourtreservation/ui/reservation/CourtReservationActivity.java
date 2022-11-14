@@ -35,8 +35,15 @@ import com.example.androiddev_badmintoncourtreservation.viewmodel.reservation.Re
 import com.example.androiddev_badmintoncourtreservation.viewmodel.reservation.ReservationViewModel;
 
 import java.sql.Array;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.SortedMap;
@@ -163,6 +170,13 @@ public class CourtReservationActivity extends BaseActivity {
             spReservationTime.requestFocus();
             return false;
         }
+
+        if(checkLaterDate(reservation.getReservationDate(), reservation.getTimeSlot())){
+            tvTime.setError(getString(R.string.errorRequired_reservation_time));
+            spReservationTime.requestFocus();
+            return false;
+        }
+
         if(checkReservationForTimeslot(reservation)){
             reservationConflictDialog();
             return false;
@@ -221,6 +235,30 @@ public class CourtReservationActivity extends BaseActivity {
             }
         }
         return false;
+    }
+
+    private boolean checkLaterDate(String reservationDate, String timeSlot) {
+        try {
+            LocalDate today = LocalDate.now();
+            String beginTimeSlot = timeSlot.substring(0, 2);
+            int beginHour = Integer.parseInt(beginTimeSlot);
+
+            Date reservationInputDate = new SimpleDateFormat("dd.MM.yyyy").parse(reservationDate);
+            Date timeNow = Date.from(today.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+            //Check date
+            if(reservationInputDate.before(timeNow)){
+                return true;
+            }
+            //Check timeslot if same day
+            if (reservationInputDate.equals(timeNow) && beginHour <= LocalDateTime.now(ZoneId.of("Europe/Zurich")).getHour()) {
+                return true;
+            }
+            return false;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return true;
+        }
     }
 
     private void setupPlayerSpinner() {
