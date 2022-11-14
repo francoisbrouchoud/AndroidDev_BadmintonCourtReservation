@@ -115,9 +115,7 @@ public class PlayersRecycleAdapter<T> extends RecyclerView.Adapter<PlayersRecycl
                                 && Objects.equals(newPlayer.getBirthdate(), oldPlayer.getBirthdate())
                                 && Objects.equals(newPlayer.getGender(), oldPlayer.getGender())
                                 && Objects.equals(newPlayer.getPhone(), oldPlayer.getPhone())
-                                && Objects.equals(newPlayer.getPlace(), oldPlayer.getPlace())
-                                && Objects.equals(newPlayer.getAddress(), oldPlayer.getAddress())
-                                && Objects.equals(newPlayer.getLevel(), oldPlayer.getLevel());
+                                && Objects.equals(newPlayer.getAddress(), oldPlayer.getAddress());
                     }
                     return false;
                 }

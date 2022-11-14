@@ -25,22 +25,18 @@ public class PlayerEntity {
     private String gender;
     private String phone;
     private String address;
-    private String place;
-    private int level;
 
     @Ignore
     public PlayerEntity() {
     }
 
-    public PlayerEntity(String firstname, String lastname, String birthdate, String gender, String phone, String address, String place, int level) {
+    public PlayerEntity(String firstname, String lastname, String birthdate, String gender, String phone, String address) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.birthdate = birthdate;
         this.gender = gender;
         this.phone = phone;
         this.address = address;
-        this.place = place;
-        this.level = level;
     }
 
     public Long getId() {
@@ -96,22 +92,6 @@ public class PlayerEntity {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
     }
 
     @Override

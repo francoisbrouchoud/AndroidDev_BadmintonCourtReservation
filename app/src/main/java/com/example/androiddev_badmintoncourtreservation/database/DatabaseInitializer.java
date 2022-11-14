@@ -18,13 +18,13 @@ public class DatabaseInitializer {
         task.execute();
     }
 
-    private static void addPlayer(final AppDatabase db, final String firstname, final String lastname, final String birthdate, final String gender, final String phone, final String address, final String place, final int level){
-        PlayerEntity player = new PlayerEntity(firstname, lastname, birthdate, gender, phone, address, place, level);
+    private static void addPlayer(final AppDatabase db, final String firstname, final String lastname, final String birthdate, final String gender, final String phone, final String address){
+        PlayerEntity player = new PlayerEntity(firstname, lastname, birthdate, gender, phone, address);
         db.playerDao().insert(player);
     }
 
-    private static void addCourt(final AppDatabase db, final String courtsName, String description, String address, String place, String imagePath, double hourlyPrice){
-        CourtEntity court = new CourtEntity(courtsName, description, address, place, imagePath, hourlyPrice);
+    private static void addCourt(final AppDatabase db, final String courtsName, String description, String address, double hourlyPrice){
+        CourtEntity court = new CourtEntity(courtsName, description, address, hourlyPrice);
         db.courtDao().insert(court);
     }
 
@@ -40,13 +40,13 @@ public class DatabaseInitializer {
         db.playerDao().deleteAll();
 
         addPlayer(db,
-                "Roger", "Federer", "01.01.1980","m", "0790123456", "sampleAddress", "Basel", 10
+                "Roger", "Federer", "01.01.1980","m", "0790123456", "sampleAddress"
         );
         addPlayer(db,
-                "Raf", "Nadal", "01.01.1970","m", "0790523456", "sampleAddress2", "Madrid", 9
+                "Raf", "Nadal", "01.01.1970","m", "0790523456", "sampleAddress2"
         );
         addPlayer(db,
-                "Toto", "Test", "01.01.1960","m", "0790544446", "sampleAddress3", "Here", 89
+                "Toto", "Test", "01.01.1960","m", "0790544446", "sampleAddress3"
         );
 
         //Avant d'ajouter d'autres données d'autres tables
@@ -56,8 +56,8 @@ public class DatabaseInitializer {
             e.printStackTrace();
         }
 
-        addCourt(db, "Badminton des Iles", "Terrain avec fort éclairage", "Les Iles", "1950 Sion", "imageSion.png", 20);
-        addCourt(db, "Badminton de Chippis", "claqué au sol", "L'Usine 41", "Chippis", "pasbeau.png", 10);
+        addCourt(db, "Badminton des Iles", "Terrain avec fort éclairage", "Les Iles",  20);
+        addCourt(db, "Badminton de Chippis", "claqué au sol", "L'Usine 41",  10);
 
 
         try {
