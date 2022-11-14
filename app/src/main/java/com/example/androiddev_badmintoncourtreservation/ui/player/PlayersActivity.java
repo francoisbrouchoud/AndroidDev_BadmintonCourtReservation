@@ -34,6 +34,8 @@ import java.util.List;
 
 public class PlayersActivity extends BaseActivity {
 
+    private static final String TAG = "PlayersActivity";
+
     private PlayersRecycleAdapter<PlayerEntity> adapter;
     private RecyclerView recyclerView;
     private FloatingActionButton fab;
@@ -56,6 +58,8 @@ public class PlayersActivity extends BaseActivity {
             @Override
             public void onItemClick(View v, int position) {
                 //Edit the player
+                Log.d(TAG, "clicked on position: " + position);
+                Log.d(TAG, "clicked on player: " + players.get(position).getFirstname() + " " + players.get(position).getFirstname());
                 Intent intent = new Intent(PlayersActivity.this, EditPlayerActivity.class);
                 intent.setFlags(
                         Intent.FLAG_ACTIVITY_NO_ANIMATION |
@@ -68,6 +72,8 @@ public class PlayersActivity extends BaseActivity {
             @Override
             public void onItemLongClick(View v, int position) {
                 //Delete the player
+                Log.d(TAG, "long clicked on position: " + position);
+                Log.d(TAG, "long clicked on player: " + players.get(position).getFirstname() + " " + players.get(position).getFirstname());
                 deletePlayerDialog(position);
             }
         });
@@ -127,12 +133,12 @@ public class PlayersActivity extends BaseActivity {
             listViewModel.deletePlayer(player, new OnAsyncEventListener() {
                 @Override
                 public void onSuccess() {
-                    //log success
+                    Log.d(TAG, "delete player: success");
                 }
 
                 @Override
                 public void onFailure(Exception e) {
-                    //log failure
+                    Log.d(TAG, "delete player: failure", e);
                 }
             });
             toast.show();

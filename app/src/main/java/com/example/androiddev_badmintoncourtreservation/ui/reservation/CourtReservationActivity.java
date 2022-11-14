@@ -3,6 +3,7 @@ package com.example.androiddev_badmintoncourtreservation.ui.reservation;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -50,6 +51,8 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 public class CourtReservationActivity extends BaseActivity {
+
+    private static final String TAG = "CourtReservationActivity";
 
     private CourtViewModel courtViewModel;
     private CourtEntity court;
@@ -204,12 +207,12 @@ public class CourtReservationActivity extends BaseActivity {
         reservationViewModel.createReservation(reservationToSave, new OnAsyncEventListener() {
             @Override
             public void onSuccess() {
-
+                Log.d(TAG, "create reservation: success");
             }
 
             @Override
             public void onFailure(Exception e) {
-
+                Log.d(TAG, "create reservation: failure", e);
             }
         });
     }

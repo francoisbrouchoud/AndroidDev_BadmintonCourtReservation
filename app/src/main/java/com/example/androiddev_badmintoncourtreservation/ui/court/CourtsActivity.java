@@ -1,7 +1,9 @@
 package com.example.androiddev_badmintoncourtreservation.ui.court;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -27,6 +29,8 @@ import java.util.List;
 
 public class CourtsActivity extends BaseActivity {
 
+    private static final String TAG = "CourtsActivity";
+
     private CourtsRecyclerAdapter<CourtEntity> adapter;
     private RecyclerView recyclerView;
     private FloatingActionButton fab;
@@ -49,6 +53,8 @@ public class CourtsActivity extends BaseActivity {
             @Override
             public void onItemClick(View v, int position) {
                 //Access the ReservationsActivity
+                Log.d(TAG, "clicked on position: " + position);
+                Log.d(TAG, "clicked on court: " + courts.get(position).getCourtsName());
                 Intent intent = new Intent(CourtsActivity.this, CourtReservationActivity.class);
                 intent.setFlags(
                         Intent.FLAG_ACTIVITY_NO_ANIMATION |
@@ -61,6 +67,8 @@ public class CourtsActivity extends BaseActivity {
             @Override
             public void onItemLongClick(View v, int position) {
                 //Access the EditCourtActivity
+                Log.d(TAG, "long clicked on position: " + position);
+                Log.d(TAG, "long clicked on court: " + courts.get(position).getCourtsName());
                 Intent intent = new Intent(CourtsActivity.this, EditCourtActivity.class);
                 intent.setFlags(
                         Intent.FLAG_ACTIVITY_NO_ANIMATION |

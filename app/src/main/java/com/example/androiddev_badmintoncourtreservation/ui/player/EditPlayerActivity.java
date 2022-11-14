@@ -3,6 +3,7 @@ package com.example.androiddev_badmintoncourtreservation.ui.player;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,6 +26,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 
 public class EditPlayerActivity extends BaseActivity {
+
+    private static final String TAG = "EditPlayerActivity";
 
     private PlayerEntity player;
     private PlayerViewModel viewModel;
@@ -149,12 +152,12 @@ public class EditPlayerActivity extends BaseActivity {
             viewModel.updatePlayer(playerToSave, new OnAsyncEventListener() {
                 @Override
                 public void onSuccess() {
-                    //Log success
+                    Log.d(TAG, "update player: success");
                 }
 
                 @Override
                 public void onFailure(Exception e) {
-                    //Log failure
+                    Log.d(TAG, "update player: failure", e);
                 }
             });
         }else{
@@ -162,12 +165,12 @@ public class EditPlayerActivity extends BaseActivity {
             viewModel.createPlayer(playerToSave, new OnAsyncEventListener() {
                 @Override
                 public void onSuccess() {
-
+                    Log.d(TAG, "create player: success");
                 }
 
                 @Override
                 public void onFailure(Exception e) {
-
+                    Log.d(TAG, "create player: failure", e);
                 }
             });
         }
