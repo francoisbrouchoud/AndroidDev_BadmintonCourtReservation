@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -29,6 +30,8 @@ import com.example.androiddev_badmintoncourtreservation.viewmodel.reservation.Re
 import java.util.List;
 
 public class ReservationsActivity extends BaseActivity {
+
+    private static final String TAG = "ReservationsActivity";
 
     private ReservationsRecyclerAdapter<ReservationEntity> adapter;
     private RecyclerView recyclerView;
@@ -54,6 +57,8 @@ public class ReservationsActivity extends BaseActivity {
             @Override
             public void onItemClick(View v, int position) {
                 //Edit the reservation
+                Log.d(TAG, "clicked on position: " + position);
+                Log.d(TAG, "clicked on reservation: " + reservations.get(position).getId());
                 Intent intent = new Intent(ReservationsActivity.this, CourtReservationActivity.class);
                 intent.setFlags(
                         Intent.FLAG_ACTIVITY_NO_ANIMATION |
@@ -65,6 +70,8 @@ public class ReservationsActivity extends BaseActivity {
 
             @Override
             public void onItemLongClick(View v, int position) {
+                Log.d(TAG, "long clicked on position: " + position);
+                Log.d(TAG, "long clicked on reservation: " + reservations.get(position).getId());
                 deleteReservationDialog(position);
             }
         });
@@ -100,12 +107,12 @@ public class ReservationsActivity extends BaseActivity {
             listViewModel.deleteReservation(reservation, new OnAsyncEventListener() {
                 @Override
                 public void onSuccess() {
-                    //log success
+                    Log.d(TAG, "delete reservation: success");
                 }
 
                 @Override
                 public void onFailure(Exception e) {
-                    //log failure
+                    Log.d(TAG, "delete reservation: failure", e);
                 }
             });
             toast.show();

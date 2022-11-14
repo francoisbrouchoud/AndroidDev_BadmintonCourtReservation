@@ -20,20 +20,16 @@ public class CourtEntity {
     private String courtsName;
     private String description;
     private String address;
-    private String place;
-    private String imagePath;
     private double hourlyPrice;
 
     @Ignore
     public CourtEntity() {
     }
 
-    public CourtEntity(String courtsName, String description, String address, String place, String imagePath, double hourlyPrice) {
+    public CourtEntity(String courtsName, String description, String address, double hourlyPrice) {
         this.courtsName = courtsName;
         this.description = description;
         this.address = address;
-        this.place = place;
-        this.imagePath = imagePath;
         this.hourlyPrice = hourlyPrice;
     }
 
@@ -67,22 +63,6 @@ public class CourtEntity {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
-    }
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
     }
 
     public double getHourlyPrice() {

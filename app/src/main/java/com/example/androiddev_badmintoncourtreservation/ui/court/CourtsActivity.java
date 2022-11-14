@@ -1,7 +1,9 @@
 package com.example.androiddev_badmintoncourtreservation.ui.court;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -27,6 +29,8 @@ import java.util.List;
 
 public class CourtsActivity extends BaseActivity {
 
+    private static final String TAG = "CourtsActivity";
+
     private CourtsRecyclerAdapter<CourtEntity> adapter;
     private RecyclerView recyclerView;
     private FloatingActionButton fab;
@@ -49,6 +53,8 @@ public class CourtsActivity extends BaseActivity {
             @Override
             public void onItemClick(View v, int position) {
                 //Access the ReservationsActivity
+                Log.d(TAG, "clicked on position: " + position);
+                Log.d(TAG, "clicked on court: " + courts.get(position).getCourtsName());
                 Intent intent = new Intent(CourtsActivity.this, CourtReservationActivity.class);
                 intent.setFlags(
                         Intent.FLAG_ACTIVITY_NO_ANIMATION |
@@ -61,6 +67,8 @@ public class CourtsActivity extends BaseActivity {
             @Override
             public void onItemLongClick(View v, int position) {
                 //Access the EditCourtActivity
+                Log.d(TAG, "long clicked on position: " + position);
+                Log.d(TAG, "long clicked on court: " + courts.get(position).getCourtsName());
                 Intent intent = new Intent(CourtsActivity.this, EditCourtActivity.class);
                 intent.setFlags(
                         Intent.FLAG_ACTIVITY_NO_ANIMATION |
@@ -112,10 +120,10 @@ public class CourtsActivity extends BaseActivity {
     }
 
     private void setUpModelData(){
-        CourtEntity court1 = new CourtEntity("Name of the court", "Description", "Address", "Sion", "image.png", 555);
-        CourtEntity court2 = new CourtEntity("Name of the court2", "Description2", "Address", "Sion", "image.png",555);
-        CourtEntity court3 = new CourtEntity("Name of the court3", "Description3", "Address", "Sion", "image.png", 222);
-        CourtEntity court4 = new CourtEntity("Name of the court4", "Description4", "Address", "Sion", "image.png",111);
+        CourtEntity court1 = new CourtEntity("Name of the court", "Description", "Address",  555);
+        CourtEntity court2 = new CourtEntity("Name of the court2", "Description2", "Address",555);
+        CourtEntity court3 = new CourtEntity("Name of the court3", "Description3", "Address",  222);
+        CourtEntity court4 = new CourtEntity("Name of the court4", "Description4", "Address", 111);
         courts.add(court1);
         courts.add(court2);
         courts.add(court3);

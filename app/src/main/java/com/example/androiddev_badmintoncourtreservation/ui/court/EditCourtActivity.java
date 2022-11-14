@@ -9,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -25,6 +26,7 @@ import com.example.androiddev_badmintoncourtreservation.viewmodel.court.CourtVie
 
 public class EditCourtActivity extends BaseActivity {
 
+    private static final String TAG = "EditCourtActivity";
     private static final int DELETE_COURT = 1;
 
     private CourtEntity court;
@@ -118,12 +120,12 @@ public class EditCourtActivity extends BaseActivity {
                 viewModel.deleteCourt(court, new OnAsyncEventListener() {
                     @Override
                     public void onSuccess() {
-                        //onBackPressed();
+                        Log.d(TAG, "delete court: success");
                     }
 
                     @Override
                     public void onFailure(Exception e) {
-
+                        Log.d(TAG, "delete court: failure", e);
                     }
 
                 });
@@ -150,12 +152,12 @@ public class EditCourtActivity extends BaseActivity {
             viewModel.updateCourt(courtToSave, new OnAsyncEventListener(){
                 @Override
                 public void onSuccess() {
-                    //Log success
+                    Log.d(TAG, "update court: success");
                 }
 
                 @Override
                 public void onFailure(Exception e) {
-                    //Log failure
+                    Log.d(TAG, "update court: failure", e);
                 }
             });
         }else{
@@ -163,12 +165,12 @@ public class EditCourtActivity extends BaseActivity {
             viewModel.createCourt(courtToSave, new OnAsyncEventListener(){
                 @Override
                 public void onSuccess() {
-                    //Log success
+                    Log.d(TAG, "create court: success");
                 }
 
                 @Override
                 public void onFailure(Exception e) {
-                    //Log failure
+                    Log.d(TAG, "create court: failure", e);
                 }
             });
         }

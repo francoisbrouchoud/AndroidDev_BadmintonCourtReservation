@@ -37,15 +37,21 @@ public class SettingsActivity extends AppCompatActivity {
         if(actionBar != null)
             actionBar.setDisplayHomeAsUpEnabled(true);
 
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPreferences.registerOnSharedPreferenceChangeListener((sharedPreferences, key) -> {
+            if (sharedPreferences.getBoolean("pref_darkMode", false)){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                setTheme(R.style.Theme_AndroidDev_BadmintonCourtReservation_night);
+            }
+            else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                setTheme(R.style.Theme_AndroidDev_BadmintonCourtReservation);
+            }
+        });
+
         if (savedInstanceState == null)
             getSupportFragmentManager().beginTransaction().replace(R.id.settings, new DarkModeSettingFragment()).commit();
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        if (sharedPreferences.getBoolean("pref_darkMode", false))
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        else
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
 
 
@@ -59,8 +65,9 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
 
-
     }
+
+
 
     public static class DarkModeSettingFragment extends PreferenceFragmentCompat{
         @Override
