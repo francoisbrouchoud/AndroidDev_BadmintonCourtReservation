@@ -1,51 +1,39 @@
 package com.example.androiddev_badmintoncourtreservation.ui.reservation;
 
-import android.app.Application;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.androiddev_badmintoncourtreservation.R;
 import com.example.androiddev_badmintoncourtreservation.adapter.PlayersListAdapter;
-import com.example.androiddev_badmintoncourtreservation.database.dao.CourtDao;
 import com.example.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
 import com.example.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
 import com.example.androiddev_badmintoncourtreservation.database.entity.ReservationEntity;
-import com.example.androiddev_badmintoncourtreservation.database.repository.CourtRepository;
-import com.example.androiddev_badmintoncourtreservation.database.repository.PlayerRepository;
 import com.example.androiddev_badmintoncourtreservation.ui.BaseActivity;
-import com.example.androiddev_badmintoncourtreservation.ui.court.CourtsActivity;
-import com.example.androiddev_badmintoncourtreservation.ui.player.EditPlayerActivity;
 import com.example.androiddev_badmintoncourtreservation.util.OnAsyncEventListener;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.court.CourtViewModel;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.player.PlayerListViewModel;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.reservation.ReservationListViewModel;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.reservation.ReservationViewModel;
 
-import java.sql.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,8 +41,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.SortedMap;
-import java.util.TreeMap;
 
 public class CourtReservationActivity extends BaseActivity {
 
@@ -104,6 +90,7 @@ public class CourtReservationActivity extends BaseActivity {
         spReservationTime = findViewById(R.id.sp_cr_time);
 
         button = findViewById(R.id.bt_cr_confirm);
+        setupViewModel();
 
         //Get the court from the intent
         long courtId = getIntent().getLongExtra("courtId", 0);
@@ -127,7 +114,10 @@ public class CourtReservationActivity extends BaseActivity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.times, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         spReservationTime.setAdapter(adapter);
 
-        setupViewModel();
+
+
+
+
         setupPlayerSpinner();
 
         etReservationDate.setOnClickListener(new View.OnClickListener() {
@@ -182,9 +172,26 @@ public class CourtReservationActivity extends BaseActivity {
                         spReservationTime.setSelection(getIdxFromSpTimeSlot(reservationEntity.getTimeSlot()));
                         tvCourtPrice.setVisibility(View.INVISIBLE);
                         tvPriceTitle.setVisibility(View.INVISIBLE);
-                        spReservationPlayer.setSelection(getIdxFromPlayer(spReservationPlayer, reservation.getResFirstname() + " " + reservation.getResLastname()));
+
+                        /*
+                        System.out.println(reservation.getResFirstname() + " " + reservation.getResLastname());
+                        System.out.println(((ArrayAdapter<String>)spReservationPlayer.getAdapter()).getPosition("Alex Mart3"));
+
+
+
+                        ArrayAdapter<String> list = (ArrayAdapter<String>) spReservationPlayer.getAdapter();
+                        System.out.println(" test " +list.getCount());
+
+                        for (int i = 0; i < list.getCount(); i++) {
+                            System.out.println(list.getPosition(String.valueOf(i)));
+                        }*/
+
+
+                        int position = findElt(reservation.getResFirstname(), reservation.getResLastname());
+                       System.out.println(position);
+                       spReservationPlayer.setSelection((position));
                     }
-            }
+                }
             );
         }
 
@@ -198,7 +205,17 @@ public class CourtReservationActivity extends BaseActivity {
         });
     }
 
+    private int findElt(String firstname, String lastname) {
+        int position = 0;
+        for (PlayerEntity p: players) {
+            position++;
+            if(p.getFirstname().equals(firstname) && p.getLastname().equals(lastname)){
+                return position;
+            }
 
+        }
+        return 0;
+    }
 
     private boolean checkFields(ReservationEntity reservation){
         //Check if the fields are not empty
