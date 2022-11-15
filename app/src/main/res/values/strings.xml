@@ -67,6 +67,7 @@
     <string name="errorRequired_reservation_date">Reservation date is required</string>
     <string name="errorRequired_reservation_time">Reservation time is required</string>
     <string name="dialog_reservation_exists">There is already a reservation for this court at this time."\n"Please choose another time or date.</string>
+    <string name="dialog_reservation_past">Time or date is in the past."\n"Please choose another time or date.</string>
     <string name="dialog_reservation_exists_title">Oops!</string>
     <string name="toast_reservation_new">Reservation saved</string>
     <string name="hint_sp_time">Select time</string>

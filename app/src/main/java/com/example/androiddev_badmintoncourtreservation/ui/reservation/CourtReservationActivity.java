@@ -1,51 +1,39 @@
 package com.example.androiddev_badmintoncourtreservation.ui.reservation;
 
-import android.app.Application;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.androiddev_badmintoncourtreservation.R;
 import com.example.androiddev_badmintoncourtreservation.adapter.PlayersListAdapter;
-import com.example.androiddev_badmintoncourtreservation.database.dao.CourtDao;
 import com.example.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
 import com.example.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
 import com.example.androiddev_badmintoncourtreservation.database.entity.ReservationEntity;
-import com.example.androiddev_badmintoncourtreservation.database.repository.CourtRepository;
-import com.example.androiddev_badmintoncourtreservation.database.repository.PlayerRepository;
 import com.example.androiddev_badmintoncourtreservation.ui.BaseActivity;
-import com.example.androiddev_badmintoncourtreservation.ui.court.CourtsActivity;
-import com.example.androiddev_badmintoncourtreservation.ui.player.EditPlayerActivity;
 import com.example.androiddev_badmintoncourtreservation.util.OnAsyncEventListener;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.court.CourtViewModel;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.player.PlayerListViewModel;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.reservation.ReservationListViewModel;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.reservation.ReservationViewModel;
 
-import java.sql.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,8 +41,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.SortedMap;
-import java.util.TreeMap;
 
 public class CourtReservationActivity extends BaseActivity {
 
@@ -182,6 +168,7 @@ public class CourtReservationActivity extends BaseActivity {
                         spReservationTime.setSelection(getIdxFromSpTimeSlot(reservationEntity.getTimeSlot()));
                         tvCourtPrice.setVisibility(View.INVISIBLE);
                         tvPriceTitle.setVisibility(View.INVISIBLE);
+                        int test = getIdxFromPlayer(spReservationPlayer, reservation.getResFirstname() + " " + reservation.getResLastname());
                         spReservationPlayer.setSelection(getIdxFromPlayer(spReservationPlayer, reservation.getResFirstname() + " " + reservation.getResLastname()));
                     }
             }
@@ -214,30 +201,28 @@ public class CourtReservationActivity extends BaseActivity {
         }
 
         if(checkLaterDate(reservation.getReservationDate(), reservation.getTimeSlot())){
-            tvTime.setError(getString(R.string.errorRequired_reservation_time));
-            spReservationTime.requestFocus();
+            reservationErrorDialog(R.string.dialog_reservation_past);
             return false;
         }
 
         if(isEdit){
             if(checkDateAndTimeChange(reservation)){
                 if(checkReservationForTimeslot(reservation)){
-                    reservationConflictDialog();
+                    reservationErrorDialog(R.string.dialog_reservation_exists);
                     return false;
                 }
             }
         }
         else{
             if(checkReservationForTimeslot(reservation)){
-                reservationConflictDialog();
+                reservationErrorDialog(R.string.dialog_reservation_exists);
                 return false;
             }
         }
-        //Check if the date is in the past -> return true
         return true;
     }
 
-    private void reservationConflictDialog(){
+    private void reservationErrorDialog(int id){
         LayoutInflater inflater = LayoutInflater.from(this);
         final View view = inflater.inflate(R.layout.row_delete_item, null);
 
@@ -245,7 +230,7 @@ public class CourtReservationActivity extends BaseActivity {
         alertDialog.setTitle(R.string.dialog_reservation_exists_title);
         alertDialog.setCancelable(false);
         final TextView tvDeleteMessage = view.findViewById(R.id.tv_delete_item);
-        tvDeleteMessage.setText(R.string.dialog_reservation_exists);
+        tvDeleteMessage.setText(id);
 
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Close", (dialog, which) -> alertDialog.dismiss());
         alertDialog.setView(view);
