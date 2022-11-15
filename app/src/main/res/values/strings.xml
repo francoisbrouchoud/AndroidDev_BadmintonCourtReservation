@@ -85,5 +85,7 @@
     <string name="text_about">This application was developed as part of the mobile development course (644-1) project at the HES-SO Valais-Wallis. </string>
     <string name="title_contact">Contacts</string>
     <string name="contact_text">Here are the addresses of the developers: \n - luca.delbuono@students.hevs.ch, \n - francois.brouchoud@hevs.ch</string>
+    <string name="feedback_submit_button">Submit feedback</string>
+
 
 </resources>
