@@ -152,7 +152,6 @@ public class CourtReservationActivity extends BaseActivity {
 
         long reservationId = getIntent().getLongExtra("reservationId", 0);
         if(reservationId == 0){
-            System.out.println("create");
             setTitle("New court reservation");
             isEdit = false;
         }else{
@@ -183,8 +182,7 @@ public class CourtReservationActivity extends BaseActivity {
                         spReservationTime.setSelection(getIdxFromSpTimeSlot(reservationEntity.getTimeSlot()));
                         tvCourtPrice.setVisibility(View.INVISIBLE);
                         tvPriceTitle.setVisibility(View.INVISIBLE);
-                        //spReservationPlayer.setSelection(getIdxFromPlayer(spReservationPlayer, reservation.getResFirstname() + " " +reservation.getResLastname()));
-                        spReservationPlayer.setSelection(1);
+                        spReservationPlayer.setSelection(getIdxFromPlayer(spReservationPlayer, reservation.getResFirstname() + " " + reservation.getResLastname()));
                     }
             }
             );
@@ -221,9 +219,19 @@ public class CourtReservationActivity extends BaseActivity {
             return false;
         }
 
-        if(checkReservationForTimeslot(reservation)){
-            reservationConflictDialog();
-            return false;
+        if(isEdit){
+            if(checkDateAndTimeChange(reservation)){
+                if(checkReservationForTimeslot(reservation)){
+                    reservationConflictDialog();
+                    return false;
+                }
+            }
+        }
+        else{
+            if(checkReservationForTimeslot(reservation)){
+                reservationConflictDialog();
+                return false;
+            }
         }
         //Check if the date is in the past -> return true
         return true;
@@ -279,12 +287,12 @@ public class CourtReservationActivity extends BaseActivity {
         if(reservation == null) {
             reservationFields = new ReservationEntity();
             //Get the player from the selection of the spinner
+
             reservationFields.setCourtId(court.getId());
             reservationFields.setResCourtname(court.getCourtsName());
         }
         else{
             reservationFields = reservation;
-            System.out.println("ici");
         }
 
 
@@ -308,6 +316,23 @@ public class CourtReservationActivity extends BaseActivity {
             }
         }
         return false;
+    }
+
+    private boolean checkDateAndTimeChange(ReservationEntity r){
+        ReservationEntity reservationDb = getReservationFromDb(r.getId());
+        if(reservationDb.getReservationDate().equals(r.getReservationDate()) && reservationDb.getTimeSlot().equals(r.getTimeSlot())){
+            return false;
+        }
+        return true;
+    }
+
+    private ReservationEntity getReservationFromDb(Long id){
+        for (ReservationEntity r : reservations){
+            if(r.getId()==id){
+                return r;
+            }
+        }
+        return null;
     }
 
     private boolean checkLaterDate(String reservationDate, String timeSlot) {
@@ -365,7 +390,7 @@ public class CourtReservationActivity extends BaseActivity {
                 return i;
             }
         }
-        return 0;
+        return -1;
     }
 
 }

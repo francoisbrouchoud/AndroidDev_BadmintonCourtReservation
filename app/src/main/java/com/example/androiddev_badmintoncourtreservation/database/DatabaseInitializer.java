@@ -38,7 +38,7 @@ public class DatabaseInitializer {
 
     private static void populateWithTestData(AppDatabase db) {
         db.playerDao().deleteAll();
-
+/*
         addPlayer(db,
                 "Roger", "Federer", "01.01.1980","m", "0790123456", "sampleAddress"
         );
@@ -48,7 +48,11 @@ public class DatabaseInitializer {
         addPlayer(db,
                 "Toto", "Test", "01.01.1960","m", "0790544446", "sampleAddress3"
         );
-
+*/
+        addPlayer(db,
+                "Luca", "Del Buono", "28.12.2000", "m", "0791234567", "1950 Sion");
+        addPlayer(db,
+                "François", "Brouchoud", "07.08.1998", "m", "0791234567", "1890 St-Maurice");
         //Avant d'ajouter d'autres données d'autres tables
         try {
             Thread.sleep(1000);
@@ -56,8 +60,9 @@ public class DatabaseInitializer {
             e.printStackTrace();
         }
 
-        addCourt(db, "Badminton des Iles", "Terrain avec fort éclairage", "Les Iles",  20);
-        addCourt(db, "Badminton de Chippis", "claqué au sol", "L'Usine 41",  10);
+        addCourt(db, "Centre de Sports Les Iles", "Terrain avec fort éclairage", "Tennis Les Iles, Sion",  24);
+        addCourt(db, "Badminton Pont-Chalais", "Prix imbattables", "Rue de Pont-Chalais 30, Sierre",  14);
+        addCourt(db, "Centre de Tennis La Moubra", "Salle bien refroidie", "Route de la Moubra 73, Crans-Montana",  15);
 
 
         try {
