@@ -116,15 +116,37 @@ public class CourtReservationActivity extends BaseActivity {
         setupViewModel();
         setupPlayerSpinner();
 
+        long reservationId = getIntent().getLongExtra("reservationId", 0);
+        if(reservationId == 0){
+            setTitle("New court reservation");
+            isEdit = false;
+        }else{
+            setTitle("Edit reservation");
+            button.setText(R.string.btn_editPlayerActivity_edit);
+            isEdit = true;
+        }
+
         etReservationDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 final Calendar c = Calendar.getInstance();
 
-                int year = c.get(Calendar.YEAR);
-                int month = c.get(Calendar.MONTH);
-                int day = c.get(Calendar.DAY_OF_MONTH);
+                int year;
+                int month;
+                int day;
+
+                if(isEdit){
+                    //Set the value of the date, month and year corresponding to the reservation's date
+                    String rDate = reservation.getReservationDate();
+                    day = Integer.parseInt(rDate.substring(0,2));
+                    month = Integer.parseInt(rDate.substring(3,5))-1;
+                    year = Integer.parseInt(rDate.substring(6,10));
+                }else{
+                    day = c.get(Calendar.DAY_OF_MONTH);
+                    month = c.get(Calendar.MONTH);
+                    year = c.get(Calendar.YEAR);
+                }
 
                 DatePickerDialog datePickerDialog = new DatePickerDialog(CourtReservationActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
@@ -135,16 +157,6 @@ public class CourtReservationActivity extends BaseActivity {
                 datePickerDialog.show();
             }
         });
-
-        long reservationId = getIntent().getLongExtra("reservationId", 0);
-        if(reservationId == 0){
-            setTitle("New court reservation");
-            isEdit = false;
-        }else{
-            setTitle("Edit reservation");
-            button.setText(R.string.btn_editPlayerActivity_edit);
-            isEdit = true;
-        }
 
         toast = Toast.makeText(this, R.string.toast_reservation_new, Toast.LENGTH_LONG);
 

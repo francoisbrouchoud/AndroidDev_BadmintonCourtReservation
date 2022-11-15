@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.strictmode.SetRetainInstanceUsageViolation;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.androiddev_badmintoncourtreservation.R;
@@ -64,26 +65,6 @@ public class EditPlayerActivity extends BaseActivity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.genders, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         spPlayerGender.setAdapter(adapter);
 
-        etPlayerBirthdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                final Calendar c = Calendar.getInstance();
-
-                int year = c.get(Calendar.YEAR);
-                int month = c.get(Calendar.MONTH);
-                int day = c.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog datePickerDialog = new DatePickerDialog(EditPlayerActivity.this, new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                etPlayerBirthdate.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year);
-                            }
-                        }, year, month, day);
-                datePickerDialog.show();
-            }
-        });
-
         long playerId = getIntent().getLongExtra("playerId", 0);
         if(playerId == 0){
             setTitle(getString(R.string.title_editPlayerActivity_new));
@@ -95,6 +76,38 @@ public class EditPlayerActivity extends BaseActivity {
             toast = Toast.makeText(this, R.string.toast_editPlayerActivity_edit, Toast.LENGTH_LONG);
             isEdit = true;
         }
+
+        etPlayerBirthdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final Calendar c = Calendar.getInstance();
+
+                int year;
+                int month;
+                int day;
+
+                if(isEdit){
+                    //Set the value of the date, month and year corresponding to the player's birthdate
+                    String bDate = player.getBirthdate();
+                    day = Integer.parseInt(bDate.substring(0,2));
+                    month = Integer.parseInt(bDate.substring(3,5))-1;
+                    year = Integer.parseInt(bDate.substring(6,10));
+                }else{
+                    day = c.get(Calendar.DAY_OF_MONTH);
+                    month = c.get(Calendar.MONTH);
+                    year = c.get(Calendar.YEAR);
+                }
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(EditPlayerActivity.this, new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                etPlayerBirthdate.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year);
+                            }
+                        }, year, month, day);
+                datePickerDialog.show();
+            }
+        });
 
         PlayerViewModel.Factory factory = new PlayerViewModel.Factory(getApplication(), playerId);
         viewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) factory).get(PlayerViewModel.class);
