@@ -19,6 +19,7 @@ import androidx.preference.PreferenceManager;
 
 import com.example.androiddev_badmintoncourtreservation.R;
 import com.example.androiddev_badmintoncourtreservation.ui.court.CourtsActivity;
+import com.example.androiddev_badmintoncourtreservation.ui.management.AboutActivity;
 import com.example.androiddev_badmintoncourtreservation.ui.management.SettingsActivity;
 import com.example.androiddev_badmintoncourtreservation.ui.player.PlayersActivity;
 import com.example.androiddev_badmintoncourtreservation.ui.reservation.ReservationsActivity;

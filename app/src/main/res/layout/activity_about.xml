@@ -48,6 +48,13 @@
             android:autoLink = "email"
             android:text="@string/contact_text" />
 
+        <ImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="100dp"/>
+
+
     </LinearLayout>
 
 </ScrollView>
