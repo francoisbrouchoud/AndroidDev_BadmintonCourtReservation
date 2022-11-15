@@ -182,8 +182,7 @@ public class CourtReservationActivity extends BaseActivity {
                         spReservationTime.setSelection(getIdxFromSpTimeSlot(reservationEntity.getTimeSlot()));
                         tvCourtPrice.setVisibility(View.INVISIBLE);
                         tvPriceTitle.setVisibility(View.INVISIBLE);
-                        //spReservationPlayer.setSelection(getIdxFromPlayer(spReservationPlayer, reservation.getResFirstname() + " " +reservation.getResLastname()));
-                        spReservationPlayer.setSelection(1);
+                        spReservationPlayer.setSelection(getIdxFromPlayer(spReservationPlayer, reservation.getResFirstname() + " " + reservation.getResLastname()));
                     }
             }
             );
@@ -288,6 +287,7 @@ public class CourtReservationActivity extends BaseActivity {
         if(reservation == null) {
             reservationFields = new ReservationEntity();
             //Get the player from the selection of the spinner
+
             reservationFields.setCourtId(court.getId());
             reservationFields.setResCourtname(court.getCourtsName());
         }
@@ -390,7 +390,7 @@ public class CourtReservationActivity extends BaseActivity {
                 return i;
             }
         }
-        return 0;
+        return -1;
     }
 
 }
