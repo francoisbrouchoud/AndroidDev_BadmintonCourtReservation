@@ -47,18 +47,33 @@ public class PlayerViewModel extends AndroidViewModel {
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+            //Create a new view model of the player
             return (T) new PlayerViewModel(application,playerId,repository);
         }
     }
 
+    /**
+     * Get the observable player.
+     * @return LiveData of the player.
+     */
     public LiveData<PlayerEntity> getPlayer(){
         return observablePlayer;
     }
 
+    /**
+     * Create a new player.
+     * @param player to create.
+     * @param callback
+     */
     public void createPlayer(PlayerEntity player, OnAsyncEventListener callback){
         repository.insert(player, callback, application);
     }
 
+    /**
+     * Update an existing player.
+     * @param player to update.
+     * @param callback
+     */
     public void updatePlayer(PlayerEntity player, OnAsyncEventListener callback){
         repository.update(player, callback, application);
     }

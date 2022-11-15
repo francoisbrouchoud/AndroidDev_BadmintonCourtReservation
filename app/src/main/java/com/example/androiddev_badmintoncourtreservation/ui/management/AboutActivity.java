@@ -19,6 +19,7 @@ public class AboutActivity extends AppCompatActivity {
 
         logo = findViewById(R.id.ivLogo);
 
+        //Check the mode (dark, white) to change the logo
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         if (sharedPreferences.getBoolean("pref_darkMode", false))
             logo.setImageResource(R.drawable.hesso_neg);

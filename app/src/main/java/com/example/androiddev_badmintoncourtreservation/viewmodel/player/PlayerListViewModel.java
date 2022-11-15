@@ -46,14 +46,24 @@ public class PlayerListViewModel extends AndroidViewModel {
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+            //Create a new view model for the player list
             return (T) new PlayerListViewModel(application, repository);
         }
     }
 
+    /**
+     * Get the observable players.
+     * @return LiveData of the players.
+     */
     public LiveData<List<PlayerEntity>> getPlayers(){
         return observablePlayers;
     }
 
+    /**
+     * Delete a player.
+     * @param player to delete.
+     * @param callback
+     */
     public void deletePlayer(PlayerEntity player, OnAsyncEventListener callback){
         repository.delete(player, callback, application);
     }

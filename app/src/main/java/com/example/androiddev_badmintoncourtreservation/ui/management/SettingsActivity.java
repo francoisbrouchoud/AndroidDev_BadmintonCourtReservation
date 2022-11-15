@@ -28,7 +28,10 @@ public class SettingsActivity extends AppCompatActivity {
         if(actionBar != null)
             actionBar.setDisplayHomeAsUpEnabled(true);
 
+        //Get the default shared preferences
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        //Set a change listener on the shared preferences to change the theme on the current page
         sharedPreferences.registerOnSharedPreferenceChangeListener((sharedPreferences, key) -> {
             if (sharedPreferences.getBoolean("pref_darkMode", false)){
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);

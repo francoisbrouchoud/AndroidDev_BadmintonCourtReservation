@@ -46,20 +46,40 @@ public class CourtViewModel extends AndroidViewModel {
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass){
+            //Create a new view model of the courts
             return (T) new CourtViewModel(application, courtId, repository);
         }
     }
 
+    /**
+     * Get the observable court.
+     * @return LiveData of the court.
+     */
     public LiveData<CourtEntity> getCourt() { return observableCourt;}
 
+    /**
+     * Create a new court.
+     * @param court to create.
+     * @param callback
+     */
     public void createCourt(CourtEntity court, OnAsyncEventListener callback){
         repository.insert(court, callback, application);
     }
 
+    /**
+     * Update an existing court.
+     * @param court to update.
+     * @param callback
+     */
     public void updateCourt(CourtEntity court, OnAsyncEventListener callback){
         repository.update(court, callback, application);
     }
 
+    /**
+     * Delete a court.
+     * @param court to delete.
+     * @param callback
+     */
     public void deleteCourt(CourtEntity court, OnAsyncEventListener callback){
         repository.delete(court, callback, application);
     }

@@ -80,6 +80,10 @@ public class ReservationsActivity extends BaseActivity {
         recyclerView.setAdapter(adapter);
     }
 
+    /**
+     * Create a dialog view to ask the user to confirm the reservation deletion.
+     * @param position of the item on which the user has clicked.
+     */
     private void deleteReservationDialog(int position) {
         final ReservationEntity reservation = reservations.get(position);
         LayoutInflater inflater = LayoutInflater.from(this);

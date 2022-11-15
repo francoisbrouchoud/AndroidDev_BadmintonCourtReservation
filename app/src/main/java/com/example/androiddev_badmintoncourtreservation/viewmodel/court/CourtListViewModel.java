@@ -42,13 +42,19 @@ public class CourtListViewModel extends AndroidViewModel {
             this.application = application;
             repository = ((BaseApp) application).getCourtRepository();
         }
+
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+            //Create a new view model for the court list
             return (T) new CourtListViewModel(application, repository);
         }
     }
 
+    /**
+     * Get the observable courts.
+     * @return LiveData of the courts.
+     */
     public LiveData<List<CourtEntity>> getCourts(){
         return observableCourts;
     }

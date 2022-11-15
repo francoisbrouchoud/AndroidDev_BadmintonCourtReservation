@@ -62,6 +62,7 @@ public class EditPlayerActivity extends BaseActivity {
 
         long playerId = getIntent().getLongExtra("playerId", 0);
         if(playerId == 0){
+            //If the playerId is 0 we assume that we are creating a new one
             setTitle(getString(R.string.title_editPlayerActivity_new));
             toast = Toast.makeText(this, R.string.toast_editPlayerActivity_new, Toast.LENGTH_LONG);
             isEdit = false;
@@ -72,6 +73,7 @@ public class EditPlayerActivity extends BaseActivity {
             isEdit = true;
         }
 
+        //Click listener on the editText to display a calendar
         etPlayerBirthdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,11 +91,13 @@ public class EditPlayerActivity extends BaseActivity {
                     month = Integer.parseInt(bDate.substring(3,5))-1;
                     year = Integer.parseInt(bDate.substring(6,10));
                 }else{
+                    //Set the values of the current day
                     day = c.get(Calendar.DAY_OF_MONTH);
                     month = c.get(Calendar.MONTH);
                     year = c.get(Calendar.YEAR);
                 }
 
+                //Create the datePickerDialog
                 DatePickerDialog datePickerDialog = new DatePickerDialog(EditPlayerActivity.this, new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -134,17 +138,25 @@ public class EditPlayerActivity extends BaseActivity {
         });
     }
 
+    /**
+     * Check the UI fields according to 3 criteria.
+     * @param player to check
+     * @return false if a criteria is not satisfied, true if all criteria are satisfied.
+     */
     private boolean checkFields(PlayerEntity player) {
+        //Ensure that the firstname is not empty
         if(TextUtils.isEmpty(player.getFirstname())){
             etPlayerFirstname.setError(getString(R.string.errorRequired_player_firstname));
             etPlayerFirstname.requestFocus();
             return false;
         }
+        //Ensure that the lastname is not empty
         if(TextUtils.isEmpty(player.getLastname())){
             etPlayerLastname.setError(getString(R.string.errorRequired_player_lastname));
             etPlayerLastname.requestFocus();
             return false;
         }
+        //Ensure that the birthdate is not empty
         if(TextUtils.isEmpty(player.getBirthdate())){
             etPlayerBirthdate.setError(getString(R.string.errorRequired_player_birthdate));
             etPlayerBirthdate.requestFocus();
@@ -153,6 +165,10 @@ public class EditPlayerActivity extends BaseActivity {
       return true;
     }
 
+    /**
+     * Save the changes in the database. If we are editing, we update the player otherwise we create a new one.
+     * @param playerToSave in the DB.
+     */
     private void saveChanges(PlayerEntity playerToSave){
         if(isEdit){
             //Edit an existing player
@@ -183,6 +199,10 @@ public class EditPlayerActivity extends BaseActivity {
         }
     }
 
+    /**
+     * Get the player from the UI fields.
+     * @return The player from the UI fields.
+     */
     private PlayerEntity getPlayerFromFields(){
         PlayerEntity playerFields;
         if(player == null)
@@ -199,6 +219,11 @@ public class EditPlayerActivity extends BaseActivity {
         return playerFields;
     }
 
+    /**
+     * Get the index of the spinner's gender.
+     * @param gender String we want to know the id.
+     * @return the id.
+     */
     private int getIdxFromSpGender(String gender){
         return Arrays.asList(getResources().getStringArray(R.array.genders)).indexOf(gender);
     }

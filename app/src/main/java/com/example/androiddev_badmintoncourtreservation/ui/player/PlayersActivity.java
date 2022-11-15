@@ -108,6 +108,10 @@ public class PlayersActivity extends BaseActivity {
         return super.onNavigationItemSelected(item);
     }
 
+    /**
+     * Create a dialog view to ask the user to confirm the player deletion.
+     * @param position of the item on which the user has clicked.
+     */
     private void deletePlayerDialog(final int position){
         final PlayerEntity player = players.get(position);
         LayoutInflater inflater = LayoutInflater.from(this);

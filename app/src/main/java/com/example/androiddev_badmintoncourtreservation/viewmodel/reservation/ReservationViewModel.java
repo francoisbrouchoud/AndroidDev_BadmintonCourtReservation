@@ -46,18 +46,33 @@ public class ReservationViewModel extends AndroidViewModel {
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+            //Create a new view model of the reservation
             return (T) new ReservationViewModel(application, reservationId, repository);
         }
     }
 
+    /**
+     * Get the observable reservation.
+     * @return LiveData of the reservation.
+     */
     public LiveData<ReservationEntity> getReservation(){
         return observableReservation;
     }
 
+    /**
+     * Create a new reservation.
+     * @param reservation to create.
+     * @param callback
+     */
     public void createReservation(ReservationEntity reservation, OnAsyncEventListener callback){
         repository.insert(reservation, callback, application);
     }
 
+    /**
+     * Update an existing reservation.
+     * @param reservation to update.
+     * @param callback
+     */
     public void updateReservation(ReservationEntity reservation, OnAsyncEventListener callback){
         repository.update(reservation, callback, application);
     }

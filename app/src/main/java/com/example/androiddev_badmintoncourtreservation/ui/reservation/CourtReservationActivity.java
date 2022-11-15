@@ -116,6 +116,7 @@ public class CourtReservationActivity extends BaseActivity {
             isEdit = true;
         }
 
+        //Click listener on the editText to display a calendar
         etReservationDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,11 +134,13 @@ public class CourtReservationActivity extends BaseActivity {
                     month = Integer.parseInt(rDate.substring(3,5))-1;
                     year = Integer.parseInt(rDate.substring(6,10));
                 }else{
+                    //Set the values of the current day
                     day = c.get(Calendar.DAY_OF_MONTH);
                     month = c.get(Calendar.MONTH);
                     year = c.get(Calendar.YEAR);
                 }
 
+                //Create the datePickerDialog
                 DatePickerDialog datePickerDialog = new DatePickerDialog(CourtReservationActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -210,6 +213,11 @@ public class CourtReservationActivity extends BaseActivity {
         return 0;
     }
 
+    /**
+     * Check the UI fields according to 5 criteria.
+     * @param reservation to check
+     * @return false if a criteria is not satisfied, true if all criteria are satisfied.
+     */
     private boolean checkFields(ReservationEntity reservation){
         //Check if the fields are not empty
         if(TextUtils.isEmpty(reservation.getReservationDate())){
@@ -217,12 +225,13 @@ public class CourtReservationActivity extends BaseActivity {
             etReservationDate.requestFocus();
             return false;
         }
+        //Ensure that the time slot is not empty
         if(reservation.getTimeSlot() == getString(R.string.hint_sp_time)){
             tvTime.setError(getString(R.string.errorRequired_reservation_time));
             spReservationTime.requestFocus();
             return false;
         }
-
+        //Ensure that the time and date are not in the past
         if(checkLaterDate(reservation.getReservationDate(), reservation.getTimeSlot())){
             reservationErrorDialog(R.string.dialog_reservation_past);
             return false;
@@ -230,6 +239,7 @@ public class CourtReservationActivity extends BaseActivity {
 
         if(isEdit){
             if(checkDateAndTimeChange(reservation)){
+                //If we are editing an existing reservation, we check that there is no reservations for the same court, the same date and the same time
                 if(checkReservationForTimeslot(reservation)){
                     reservationErrorDialog(R.string.dialog_reservation_exists);
                     return false;
@@ -238,6 +248,7 @@ public class CourtReservationActivity extends BaseActivity {
         }
         else{
             if(checkReservationForTimeslot(reservation)){
+                //Even if we are creating a new reservation, we check that there is no reservations for the same court, the same date and the same time
                 reservationErrorDialog(R.string.dialog_reservation_exists);
                 return false;
             }
@@ -245,6 +256,10 @@ public class CourtReservationActivity extends BaseActivity {
         return true;
     }
 
+    /**
+     * Create a generic error dialog that displays a custom text.
+     * @param id of the string resource to display
+     */
     private void reservationErrorDialog(int id){
         LayoutInflater inflater = LayoutInflater.from(this);
         final View view = inflater.inflate(R.layout.row_delete_item, null);
@@ -260,9 +275,13 @@ public class CourtReservationActivity extends BaseActivity {
         alertDialog.show();
     }
 
+    /**
+     * Save the changes in the database. If we are editing, we update the reservation otherwise we create a new one.
+     * @param reservationToSave in the DB.
+     */
     private void saveChanges(ReservationEntity reservationToSave){
-
         if(isEdit){
+            //Update an existing reservation
             reservationViewModel.updateReservation(reservationToSave, new OnAsyncEventListener() {
                 @Override
                 public void onSuccess() {
@@ -276,6 +295,7 @@ public class CourtReservationActivity extends BaseActivity {
             });
         }
         else{
+            //Create a new reservation
             reservationViewModel.createReservation(reservationToSave, new OnAsyncEventListener() {
                 @Override
                 public void onSuccess() {
@@ -290,6 +310,10 @@ public class CourtReservationActivity extends BaseActivity {
         }
     }
 
+    /**
+     * Get the reservation from the UI fields.
+     * @return The reservation from the UI fields.
+     */
     private ReservationEntity getReservationFromFields(){
         ReservationEntity reservationFields;
         if(reservation == null) {
@@ -315,9 +339,12 @@ public class CourtReservationActivity extends BaseActivity {
         return reservationFields;
     }
 
+    /**
+     * Check if there is already a reservation at the same date and time for the court of the reservation.
+     * @param reservation to check time and date.
+     * @return true if there already is a reservation for the same court at the same time and date. False otherwise.
+     */
     private boolean checkReservationForTimeslot(ReservationEntity reservation){
-
-        //Check if there is already a reservation at the same date and time for the court
         for(ReservationEntity r : reservations){
             if(Objects.equals(r.getCourtId(), reservation.getCourtId()) && Objects.equals(r.getReservationDate(), reservation.getReservationDate()) && Objects.equals(r.getTimeSlot(), reservation.getTimeSlot())){
                 return true;
@@ -326,6 +353,11 @@ public class CourtReservationActivity extends BaseActivity {
         return false;
     }
 
+    /**
+     * Check if the time or date have changed.
+     * @param r reservation to check.
+     * @return false if time and date haven't changed. True if they have.
+     */
     private boolean checkDateAndTimeChange(ReservationEntity r){
         ReservationEntity reservationDb = getReservationFromDb(r.getId());
         if(reservationDb.getReservationDate().equals(r.getReservationDate()) && reservationDb.getTimeSlot().equals(r.getTimeSlot())){
@@ -334,6 +366,11 @@ public class CourtReservationActivity extends BaseActivity {
         return true;
     }
 
+    /**
+     * Get the reservation from the DB.
+     * @param id of the reservation to retrieve.
+     * @return the reservation from the DB.
+     */
     private ReservationEntity getReservationFromDb(Long id){
         for (ReservationEntity r : reservations){
             if(r.getId()==id){
@@ -343,6 +380,12 @@ public class CourtReservationActivity extends BaseActivity {
         return null;
     }
 
+    /**
+     * Check if the date and time slot are in the past.
+     * @param reservationDate to check.
+     * @param timeSlot to check.
+     * @return true if they are before. False if they are in the futur.
+     */
     private boolean checkLaterDate(String reservationDate, String timeSlot) {
         try {
             LocalDate today = LocalDate.now();
@@ -367,16 +410,26 @@ public class CourtReservationActivity extends BaseActivity {
         }
     }
 
+    /**
+     * Setup the players spinner form the adapter.
+     */
     private void setupPlayerSpinner() {
         spReservationPlayer = findViewById(R.id.sp_cr_player);
         adapterPlayers = new PlayersListAdapter<>(this, R.layout.player_spinner_row, new ArrayList<>());
         spReservationPlayer.setAdapter(adapterPlayers);
     }
 
+    /**
+     * Update the data of the adapter.
+     * @param players list with the new values.
+     */
     private void updatePlayerSpinner(List<PlayerEntity> players){
         adapterPlayers.updateData(new ArrayList<>(players));
     }
 
+    /**
+     * Retrieve the players from the DB using a view-model called by the factory.
+     */
     private void setupViewModel(){
         PlayerListViewModel.Factory factory = new PlayerListViewModel.Factory(getApplication());
         playerListViewModel =  new ViewModelProvider(this, (ViewModelProvider.Factory) factory).get(PlayerListViewModel.class);
@@ -388,6 +441,11 @@ public class CourtReservationActivity extends BaseActivity {
         });
     }
 
+    /**
+     * Get the index of the time-slot spinner.
+     * @param timeSlot to retrieve the index.
+     * @return index of the time slot in the spinner.
+     */
     private int getIdxFromSpTimeSlot(String timeSlot) {
         return Arrays.asList(getResources().getStringArray(R.array.times)).indexOf(timeSlot);
     }

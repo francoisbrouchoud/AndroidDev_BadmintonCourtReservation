@@ -45,14 +45,24 @@ public class ReservationListViewModel extends AndroidViewModel {
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+            //Create a new view model for the reservation list
             return (T) new ReservationListViewModel(application, repository);
         }
     }
 
+    /**
+     * Get the observable reservations.
+     * @return LiveData of the reservations.
+     */
     public LiveData<List<ReservationEntity>> getReservations(){
         return observableReservations;
     }
 
+    /**
+     * Delete a reservation.
+     * @param reservation to delete.
+     * @param callback
+     */
     public void deleteReservation(ReservationEntity reservation, OnAsyncEventListener callback){
         repository.delete(reservation, callback, application);
     }

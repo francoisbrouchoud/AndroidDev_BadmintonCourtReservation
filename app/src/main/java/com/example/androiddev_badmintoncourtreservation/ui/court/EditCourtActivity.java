@@ -51,6 +51,7 @@ public class EditCourtActivity extends BaseActivity {
 
         long courtId = getIntent().getLongExtra("courtId", 0);
         if(courtId == 0){
+            //If the courtId is 0 we assume that we are creating a new one
             setTitle(getString(R.string.title_editCourtActivity_new));
             toast = Toast.makeText(this, R.string.toast_editCourtActivity_new, Toast.LENGTH_LONG);
             isEdit = false;
@@ -133,6 +134,10 @@ public class EditCourtActivity extends BaseActivity {
         toast.show();
     }
 
+    /**
+     * Save the changes in the database. If we are editing, we update the court otherwise we create a new one.
+     * @param courtToSave in the DB.
+     */
     private void saveChanges(CourtEntity courtToSave){
         if (isEdit){
             //Edit an existing court
@@ -163,11 +168,16 @@ public class EditCourtActivity extends BaseActivity {
         }
     }
 
+    /**
+     * Get the courts from the UI fields.
+     * @return The court from the UI fields
+     */
     private CourtEntity getCourtFromFields(){
         CourtEntity courtFields;
         if(court == null)
             courtFields = new CourtEntity();
         else
+            //If not null, we retrieve the elements not shown on the UI such as the ID
             courtFields = court;
 
         courtFields.setCourtsName(etCourtName.getText().toString());
@@ -178,17 +188,25 @@ public class EditCourtActivity extends BaseActivity {
         return courtFields;
     }
 
+    /**
+     * Check the UI fields according to 3 criteria.
+     * @param court to check
+     * @return false if a criteria is not satisfied, true if all criteria are satisfied.
+     */
     private boolean checkFields(CourtEntity court) {
+        //Ensure that the courts name is not empty
         if(TextUtils.isEmpty(court.getCourtsName())){
             etCourtName.setError(getString(R.string.errorRequired_court_name));
             etCourtName.requestFocus();
             return false;
         }
+        //Ensure that the courts address is not empty
         if(TextUtils.isEmpty(court.getAddress())){
             etCourtAddress.setError(getString(R.string.errorRequired_court_address));
             etCourtAddress.requestFocus();
             return false;
         }
+        //Ensure that the courts description is not empty
         if(TextUtils.isEmpty(court.getDescription())){
             etCourtDescription.setError(getString(R.string.errorRequired_court_description));
             etCourtDescription.requestFocus();
