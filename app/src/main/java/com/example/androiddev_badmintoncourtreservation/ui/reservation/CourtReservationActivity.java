@@ -22,6 +22,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.room.Index;
 
 import com.example.androiddev_badmintoncourtreservation.R;
 import com.example.androiddev_badmintoncourtreservation.adapter.PlayersListAdapter;
@@ -119,16 +120,11 @@ public class CourtReservationActivity extends BaseActivity {
             }
         });
 
-
-
         tvTime.setText(getText(R.string.hint_tv_time));
         tvPlayer.setText(getText(R.string.hint_tv_player));
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.times, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         spReservationTime.setAdapter(adapter);
-
-        setupViewModel();
-        setupPlayerSpinner();
 
         long reservationId = getIntent().getLongExtra("reservationId", 0);
         if(reservationId == 0){
@@ -172,28 +168,21 @@ public class CourtReservationActivity extends BaseActivity {
             }
         });
 
-        long reservationId = getIntent().getLongExtra("reservationId", 0);
-        if(reservationId == 0){
-            setTitle("New court reservation");
-            isEdit = false;
-        }else{
-            setTitle("Edit reservation");
-            button.setText(R.string.btn_editPlayerActivity_edit);
-            isEdit = true;
-        }
-
         toast = Toast.makeText(this, R.string.toast_reservation_new, Toast.LENGTH_LONG);
 
         ReservationViewModel.Factory factoryReservation = new ReservationViewModel.Factory(getApplication(),reservationId);
         reservationViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) factoryReservation).get(ReservationViewModel.class);
 
-        ReservationListViewModel.Factory factory = new ReservationListViewModel.Factory(getApplication());
-        reservationListViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) factory).get(ReservationListViewModel.class);
+        ReservationListViewModel.Factory factoryReservationList = new ReservationListViewModel.Factory(getApplication());
+        reservationListViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) factoryReservationList).get(ReservationListViewModel.class);
         reservationListViewModel.getReservations().observe(this, reservationEntities -> {
             if(reservationEntities != null){
                 reservations = reservationEntities;
             }
         });
+
+        setupViewModel();
+        setupPlayerSpinner();
 
         if(isEdit){
             reservationViewModel.getReservation().observe(this, reservationEntity ->{
@@ -205,23 +194,9 @@ public class CourtReservationActivity extends BaseActivity {
                         tvCourtPrice.setVisibility(View.INVISIBLE);
                         tvPriceTitle.setVisibility(View.INVISIBLE);
 
-                        /*
-                        System.out.println(reservation.getResFirstname() + " " + reservation.getResLastname());
-                        System.out.println(((ArrayAdapter<String>)spReservationPlayer.getAdapter()).getPosition("Alex Mart3"));
-
-
-
-                        ArrayAdapter<String> list = (ArrayAdapter<String>) spReservationPlayer.getAdapter();
-                        System.out.println(" test " +list.getCount());
-
-                        for (int i = 0; i < list.getCount(); i++) {
-                            System.out.println(list.getPosition(String.valueOf(i)));
-                        }*/
-
-
-                        int position = findElt(reservation.getResFirstname(), reservation.getResLastname());
-                       System.out.println(position);
-                       spReservationPlayer.setSelection((position));
+                        int pos = findElt(reservation.getResFirstname(), reservation.getResLastname());
+                        System.out.println(position);
+                        spReservationPlayer.setSelection((pos));
                     }
             }
             );
@@ -239,13 +214,19 @@ public class CourtReservationActivity extends BaseActivity {
 
     private int findElt(String firstname, String lastname) {
         int position = 0;
-        for (PlayerEntity p: players) {
-            position++;
-            if(p.getFirstname().equals(firstname) && p.getLastname().equals(lastname)){
-                return position;
-            }
 
-        }
+        //if(players!=null){
+            for (PlayerEntity p: players) {
+
+                if(p.getFirstname().equals(firstname) && p.getLastname().equals(lastname)){
+                    return position;
+                }
+                position++;
+
+            }
+        //}
+
+
         return 0;
     }
 
