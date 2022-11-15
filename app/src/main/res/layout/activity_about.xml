@@ -48,6 +48,26 @@
             android:autoLink = "email"
             android:text="@string/contact_text" />
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_feedback_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Enter feedback to send to developers"
+            app:hintEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_feedback_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/submit_comment_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/feedback_submit_button" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <ImageView
             android:id="@+id/ivLogo"
             android:layout_width="match_parent"
