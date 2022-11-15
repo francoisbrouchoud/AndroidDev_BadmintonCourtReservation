@@ -1,12 +1,10 @@
 package com.example.androiddev_badmintoncourtreservation;
 
 import android.app.Application;
-
 import com.example.androiddev_badmintoncourtreservation.database.AppDatabase;
 import com.example.androiddev_badmintoncourtreservation.database.repository.CourtRepository;
 import com.example.androiddev_badmintoncourtreservation.database.repository.PlayerRepository;
 import com.example.androiddev_badmintoncourtreservation.database.repository.ReservationRepository;
-
 
 public class BaseApp extends Application {
 

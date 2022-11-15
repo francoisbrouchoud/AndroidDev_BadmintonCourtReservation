@@ -2,16 +2,11 @@ package com.example.androiddev_badmintoncourtreservation.ui.player;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-
-
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.androiddev_badmintoncourtreservation.R;
 import com.example.androiddev_badmintoncourtreservation.adapter.PlayersRecycleAdapter;
 import com.example.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
@@ -29,7 +23,6 @@ import com.example.androiddev_badmintoncourtreservation.util.OnAsyncEventListene
 import com.example.androiddev_badmintoncourtreservation.util.RecyclerViewItemClickListener;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.player.PlayerListViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.List;
 
 public class PlayersActivity extends BaseActivity {
@@ -37,11 +30,11 @@ public class PlayersActivity extends BaseActivity {
     private static final String TAG = "PlayersActivity";
 
     private PlayersRecycleAdapter<PlayerEntity> adapter;
-    private RecyclerView recyclerView;
-    private FloatingActionButton fab;
-
     private PlayerListViewModel listViewModel;
     private List<PlayerEntity> players;
+
+    private RecyclerView recyclerView;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +75,6 @@ public class PlayersActivity extends BaseActivity {
                 LinearLayoutManager.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
 
-
         fab = findViewById(R.id.floatingActionButtonPlayers);
         fab.setOnClickListener(view -> {
                     Intent intent = new Intent(PlayersActivity.this, EditPlayerActivity.class);
@@ -112,7 +104,6 @@ public class PlayersActivity extends BaseActivity {
             drawerLayout.closeDrawer(GravityCompat.START);
             return false;
         }
-
         finish();
         return super.onNavigationItemSelected(item);
     }

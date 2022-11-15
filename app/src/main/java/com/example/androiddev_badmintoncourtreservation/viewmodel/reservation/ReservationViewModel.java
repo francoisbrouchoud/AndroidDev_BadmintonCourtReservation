@@ -1,19 +1,16 @@
 package com.example.androiddev_badmintoncourtreservation.viewmodel.reservation;
 
 import android.app.Application;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.example.androiddev_badmintoncourtreservation.BaseApp;
 import com.example.androiddev_badmintoncourtreservation.database.entity.ReservationEntity;
 import com.example.androiddev_badmintoncourtreservation.database.repository.ReservationRepository;
 import com.example.androiddev_badmintoncourtreservation.util.OnAsyncEventListener;
-
 
 public class ReservationViewModel extends AndroidViewModel {
 
@@ -46,7 +43,6 @@ public class ReservationViewModel extends AndroidViewModel {
             this.reservationId = reservationId;
             repository = ((BaseApp) application).getReservationRepository();
         }
-
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
@@ -64,9 +60,5 @@ public class ReservationViewModel extends AndroidViewModel {
 
     public void updateReservation(ReservationEntity reservation, OnAsyncEventListener callback){
         repository.update(reservation, callback, application);
-    }
-
-    public void deleteReservation(ReservationEntity reservation, OnAsyncEventListener callback){
-        repository.delete(reservation, callback, application);
     }
 }

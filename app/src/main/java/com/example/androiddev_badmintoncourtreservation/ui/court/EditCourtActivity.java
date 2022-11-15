@@ -2,24 +2,17 @@ package com.example.androiddev_badmintoncourtreservation.ui.court;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.androiddev_badmintoncourtreservation.R;
 import com.example.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
-import com.example.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
 import com.example.androiddev_badmintoncourtreservation.ui.BaseActivity;
 import com.example.androiddev_badmintoncourtreservation.util.OnAsyncEventListener;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.court.CourtViewModel;
@@ -27,6 +20,7 @@ import com.example.androiddev_badmintoncourtreservation.viewmodel.court.CourtVie
 public class EditCourtActivity extends BaseActivity {
 
     private static final String TAG = "EditCourtActivity";
+
     private static final int DELETE_COURT = 1;
 
     private CourtEntity court;
@@ -91,26 +85,22 @@ public class EditCourtActivity extends BaseActivity {
                 onBackPressed();
                 toast.show();
             }
-
         });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-
         if(isEdit){
             menu.add(0, DELETE_COURT, Menu.NONE, getString(R.string.editCourt_action_delete))
                     .setIcon(R.drawable.ic_delete_white_24dp)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         }
-
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
         if(item.getItemId() == DELETE_COURT){
             final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
             alertDialog.setTitle(R.string.editCourt_action_delete);
@@ -127,15 +117,12 @@ public class EditCourtActivity extends BaseActivity {
                     public void onFailure(Exception e) {
                         Log.d(TAG, "delete court: failure", e);
                     }
-
                 });
                 toast = Toast.makeText(this, R.string.toast_editCourtActivity_delete, Toast.LENGTH_LONG);
                 onBackPressed();
             }));
             alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,getString(R.string.alert_playersActivity_btnNegative), ((dialog, which) -> alertDialog.dismiss()));
             alertDialog.show();
-
-
         }
         return super.onOptionsItemSelected(item);
     }
@@ -191,7 +178,6 @@ public class EditCourtActivity extends BaseActivity {
         return courtFields;
     }
 
-
     private boolean checkFields(CourtEntity court) {
         if(TextUtils.isEmpty(court.getCourtsName())){
             etCourtName.setError(getString(R.string.errorRequired_court_name));
@@ -208,7 +194,6 @@ public class EditCourtActivity extends BaseActivity {
             etCourtDescription.requestFocus();
             return false;
         }
-
         return true;
     }
 }

@@ -1,52 +1,36 @@
 package com.example.androiddev_badmintoncourtreservation.ui.reservation;
 
-import android.app.Application;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.room.Index;
-
 import com.example.androiddev_badmintoncourtreservation.R;
 import com.example.androiddev_badmintoncourtreservation.adapter.PlayersListAdapter;
-import com.example.androiddev_badmintoncourtreservation.database.dao.CourtDao;
 import com.example.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
 import com.example.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
 import com.example.androiddev_badmintoncourtreservation.database.entity.ReservationEntity;
-import com.example.androiddev_badmintoncourtreservation.database.repository.CourtRepository;
-import com.example.androiddev_badmintoncourtreservation.database.repository.PlayerRepository;
 import com.example.androiddev_badmintoncourtreservation.ui.BaseActivity;
-import com.example.androiddev_badmintoncourtreservation.ui.court.CourtsActivity;
-import com.example.androiddev_badmintoncourtreservation.ui.player.EditPlayerActivity;
 import com.example.androiddev_badmintoncourtreservation.util.OnAsyncEventListener;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.court.CourtViewModel;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.player.PlayerListViewModel;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.reservation.ReservationListViewModel;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.reservation.ReservationViewModel;
-
-import java.sql.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,8 +38,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.SortedMap;
-import java.util.TreeMap;
 
 public class CourtReservationActivity extends BaseActivity {
 
@@ -63,12 +45,13 @@ public class CourtReservationActivity extends BaseActivity {
 
     private CourtViewModel courtViewModel;
     private CourtEntity court;
+
     private PlayersListAdapter<PlayerEntity> adapterPlayers;
     private PlayerListViewModel playerListViewModel;
     private List<PlayerEntity> players;
     private PlayerEntity player;
-    private ReservationEntity reservation;
 
+    private ReservationEntity reservation;
     private ReservationListViewModel reservationListViewModel;
     private ReservationViewModel reservationViewModel;
     private List<ReservationEntity> reservations;
@@ -81,7 +64,6 @@ public class CourtReservationActivity extends BaseActivity {
     private EditText etReservationDate;
     private Spinner spReservationTime;
     private Spinner spReservationPlayer;
-
     private Button button;
     private Toast toast;
 
@@ -92,18 +74,16 @@ public class CourtReservationActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_court_reservation, frameLayout);
         navigationView.setCheckedItem(R.id.nav_none);
-        //setTitle(R.string.cr_homePage);
+        setTitle(R.string.cr_homePage);
 
         //Get the views
         tvCourtName = findViewById(R.id.tv_courtReservation_courtName);
         tvCourtPrice = findViewById(R.id.tv_courtReservation_courtPrice);
         tvPriceTitle = findViewById(R.id.tv_courtReservation_courtPrice_title);
-
         tvTime = findViewById(R.id.tv_courtReservation_time);
         tvPlayer = findViewById(R.id.tv_courtReservation_player);
         etReservationDate = findViewById(R.id.et_cr_date);
         spReservationTime = findViewById(R.id.sp_cr_time);
-
         button = findViewById(R.id.bt_cr_confirm);
 
         //Get the court from the intent

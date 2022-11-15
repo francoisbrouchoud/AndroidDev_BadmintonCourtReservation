@@ -8,12 +8,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.example.androiddev_badmintoncourtreservation.BaseApp;
 import com.example.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
 import com.example.androiddev_badmintoncourtreservation.database.repository.PlayerRepository;
 import com.example.androiddev_badmintoncourtreservation.util.OnAsyncEventListener;
-
 import java.util.List;
 
 public class PlayerListViewModel extends AndroidViewModel {
@@ -45,7 +43,6 @@ public class PlayerListViewModel extends AndroidViewModel {
             this.application = application;
             repository = ((BaseApp) application).getPlayerRepository();
         }
-
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {

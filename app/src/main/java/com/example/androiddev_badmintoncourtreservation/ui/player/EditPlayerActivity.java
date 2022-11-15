@@ -12,17 +12,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.fragment.app.strictmode.SetRetainInstanceUsageViolation;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.example.androiddev_badmintoncourtreservation.R;
 import com.example.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
 import com.example.androiddev_badmintoncourtreservation.ui.BaseActivity;
 import com.example.androiddev_badmintoncourtreservation.util.OnAsyncEventListener;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.player.PlayerViewModel;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 
@@ -112,8 +107,7 @@ public class EditPlayerActivity extends BaseActivity {
         PlayerViewModel.Factory factory = new PlayerViewModel.Factory(getApplication(), playerId);
         viewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) factory).get(PlayerViewModel.class);
 
-
-       if(isEdit){
+        if(isEdit){
             //We are editing an existing player
             viewModel.getPlayer().observe(this, playerEntity -> {
                 if(playerEntity != null){

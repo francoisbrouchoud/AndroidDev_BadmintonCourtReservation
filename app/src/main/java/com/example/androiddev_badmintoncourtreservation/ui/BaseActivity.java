@@ -1,12 +1,10 @@
 package com.example.androiddev_badmintoncourtreservation.ui;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -16,10 +14,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.preference.PreferenceManager;
-
 import com.example.androiddev_badmintoncourtreservation.R;
 import com.example.androiddev_badmintoncourtreservation.ui.court.CourtsActivity;
-import com.example.androiddev_badmintoncourtreservation.ui.management.AboutActivity;
 import com.example.androiddev_badmintoncourtreservation.ui.management.SettingsActivity;
 import com.example.androiddev_badmintoncourtreservation.ui.player.PlayersActivity;
 import com.example.androiddev_badmintoncourtreservation.ui.reservation.ReservationsActivity;
@@ -123,6 +119,5 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
-
 
 }

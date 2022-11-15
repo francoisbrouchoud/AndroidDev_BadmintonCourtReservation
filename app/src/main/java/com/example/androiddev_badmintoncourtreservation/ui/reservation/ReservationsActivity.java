@@ -1,21 +1,17 @@
 package com.example.androiddev_badmintoncourtreservation.ui.reservation;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.androiddev_badmintoncourtreservation.R;
 import com.example.androiddev_badmintoncourtreservation.adapter.ReservationsRecyclerAdapter;
 import com.example.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
@@ -23,10 +19,7 @@ import com.example.androiddev_badmintoncourtreservation.database.entity.Reservat
 import com.example.androiddev_badmintoncourtreservation.ui.BaseActivity;
 import com.example.androiddev_badmintoncourtreservation.util.OnAsyncEventListener;
 import com.example.androiddev_badmintoncourtreservation.util.RecyclerViewItemClickListener;
-import com.example.androiddev_badmintoncourtreservation.viewmodel.court.CourtListViewModel;
-import com.example.androiddev_badmintoncourtreservation.viewmodel.player.PlayerListViewModel;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.reservation.ReservationListViewModel;
-
 import java.util.List;
 
 public class ReservationsActivity extends BaseActivity {
@@ -34,13 +27,9 @@ public class ReservationsActivity extends BaseActivity {
     private static final String TAG = "ReservationsActivity";
 
     private ReservationsRecyclerAdapter<ReservationEntity> adapter;
-    private RecyclerView recyclerView;
-
     private ReservationListViewModel listViewModel;
     private List<ReservationEntity> reservations;
-
-    private List<PlayerEntity> players;
-
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,14 +1,12 @@
 package com.example.androiddev_badmintoncourtreservation.viewmodel.player;
 
 import android.app.Application;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.example.androiddev_badmintoncourtreservation.BaseApp;
 import com.example.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
 import com.example.androiddev_badmintoncourtreservation.database.repository.PlayerRepository;
@@ -46,7 +44,6 @@ public class PlayerViewModel extends AndroidViewModel {
             this.playerId = playerId;
             repository = ((BaseApp) application).getPlayerRepository();
         }
-
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
