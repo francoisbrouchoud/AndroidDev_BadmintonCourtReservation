@@ -87,7 +87,7 @@ public class ReservationsActivity extends BaseActivity {
      * @param position of the item on which the user has clicked.
      */
     private void deleteReservationDialog(int position) {
-        final ReservationEntity reservation = reservations.get(position);
+        final ReservationEntity reservation = reservationsPlayerCourt.get(position).reservation;
         LayoutInflater inflater = LayoutInflater.from(this);
         final View view = inflater.inflate(R.layout.row_delete_item, null);
 
