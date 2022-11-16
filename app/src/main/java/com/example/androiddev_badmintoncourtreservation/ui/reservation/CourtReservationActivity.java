@@ -305,7 +305,7 @@ public class CourtReservationActivity extends BaseActivity {
             //Get the player from the selection of the spinner
 
             reservationFields.setCourtId(court.getId());
-            reservationFields.setResCourtname(court.getCourtsName());
+
         }
         else{
             reservationFields = reservation;
@@ -316,8 +316,7 @@ public class CourtReservationActivity extends BaseActivity {
         //Set the values
         reservationFields.setTimeSlot(spReservationTime.getSelectedItem().toString());
         reservationFields.setReservationDate(etReservationDate.getText().toString());
-        reservationFields.setResFirstname(player.getFirstname());
-        reservationFields.setResLastname(player.getLastname());
+
 
         return reservationFields;
     }
