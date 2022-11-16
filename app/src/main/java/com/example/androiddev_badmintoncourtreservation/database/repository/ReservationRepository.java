@@ -9,6 +9,7 @@ import com.example.androiddev_badmintoncourtreservation.database.async.reservati
 import com.example.androiddev_badmintoncourtreservation.database.async.reservation.DeleteReservation;
 import com.example.androiddev_badmintoncourtreservation.database.async.reservation.UpdateReservation;
 import com.example.androiddev_badmintoncourtreservation.database.entity.ReservationEntity;
+import com.example.androiddev_badmintoncourtreservation.database.pojo.ReservationWithCourt;
 import com.example.androiddev_badmintoncourtreservation.util.OnAsyncEventListener;
 
 import java.util.List;
@@ -38,6 +39,15 @@ public class ReservationRepository {
     public LiveData<ReservationEntity> getReservation(final Long id, Application application){
         return ((BaseApp) application).getDatabase().reservationDao().getById(id);
     }
+
+    public LiveData<List<ReservationWithCourt>> getReservationsWithCourt(Application application) {
+        return ((BaseApp) application).getDatabase().reservationDao().getAllReservationWithCourt();
+    }
+
+    public LiveData<ReservationWithCourt> getReservationWithCourt(final Long id, Application application){
+        return ((BaseApp) application).getDatabase().reservationDao().getReservationWithCourtById(id);
+    }
+
 
     public void insert(final ReservationEntity reservation, OnAsyncEventListener callback,
                        Application application) {

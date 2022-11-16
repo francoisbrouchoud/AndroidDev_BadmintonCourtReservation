@@ -16,6 +16,7 @@ import com.example.androiddev_badmintoncourtreservation.R;
 import com.example.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
 import com.example.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
 import com.example.androiddev_badmintoncourtreservation.database.entity.ReservationEntity;
+import com.example.androiddev_badmintoncourtreservation.database.pojo.ReservationWithCourt;
 import com.example.androiddev_badmintoncourtreservation.util.RecyclerViewItemClickListener;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.player.PlayerViewModel;
 
@@ -66,7 +67,7 @@ public class ReservationsRecyclerAdapter<T> extends RecyclerView.Adapter<Reserva
     @Override
     public void onBindViewHolder(@NonNull ReservationsRecyclerAdapter.ViewHolder holder, int position) {
         T item = data.get(position);
-
+/*
         if(item.getClass().equals(ReservationEntity.class))
             holder.tvCourtName.setText(((ReservationEntity) item).getResCourtname());
         if(item.getClass().equals(ReservationEntity.class))
@@ -75,6 +76,16 @@ public class ReservationsRecyclerAdapter<T> extends RecyclerView.Adapter<Reserva
             holder.tvDate.setText(((ReservationEntity) item).getReservationDate());
         if(item.getClass().equals(ReservationEntity.class))
             holder.tvTime.setText(((ReservationEntity) item).getTimeSlot());
+*/
+
+        if(item.getClass().equals(ReservationWithCourt.class))
+            holder.tvCourtName.setText(((ReservationWithCourt) item).court.getCourtsName());
+        if(item.getClass().equals(ReservationWithCourt.class))
+            holder.tvPlayerName.setText(((ReservationWithCourt) item).reservation.getResFirstname() + " " +((ReservationWithCourt) item).reservation.getResLastname());
+        if(item.getClass().equals(ReservationWithCourt.class))
+            holder.tvDate.setText(((ReservationWithCourt) item).reservation.getReservationDate());
+        if(item.getClass().equals(ReservationWithCourt.class))
+            holder.tvTime.setText(((ReservationWithCourt) item).reservation.getTimeSlot());
     }
 
     @Override
@@ -85,10 +96,14 @@ public class ReservationsRecyclerAdapter<T> extends RecyclerView.Adapter<Reserva
             return 0;
     }
 
-    public void setData(List<T> reservations){
+    /*List<T> reservations*/
+    public void setData(List<T> reservationsWithCourt){
         if(data == null){
-            data = reservations;
-            notifyItemRangeInserted(0, reservations.size());
+
+            //data = reservations;
+            data = reservationsWithCourt;
+           // notifyItemRangeInserted(0, reservations.size());
+            notifyItemRangeInserted(0, reservationsWithCourt.size());
         }else{
             DiffUtil.DiffResult result = DiffUtil.calculateDiff(new DiffUtil.Callback() {
                 @Override
@@ -98,16 +113,25 @@ public class ReservationsRecyclerAdapter<T> extends RecyclerView.Adapter<Reserva
 
                 @Override
                 public int getNewListSize() {
-                    return reservations.size();
+                    //return reservations.size();
+                    return reservationsWithCourt.size();
                 }
 
                 @Override
                 public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-                    if(data instanceof ReservationEntity)
+                    /*if(data instanceof ReservationEntity)
                         return ((ReservationEntity) data.get(oldItemPosition)).getId().equals(((ReservationEntity)data.get(newItemPosition)).getId());
-                    return false;
-                }
+                    return false;*/
 
+                    if(data instanceof ReservationWithCourt)
+                        return ((ReservationWithCourt) data.get(oldItemPosition)).reservation.getId().equals(((ReservationWithCourt)data.get(newItemPosition)).reservation.getId());
+                    return false;
+
+
+
+
+                }
+/*
                 @Override
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
                     if(data instanceof ReservationEntity){
@@ -123,6 +147,24 @@ public class ReservationsRecyclerAdapter<T> extends RecyclerView.Adapter<Reserva
                 }
             });
             data = reservations;
+
+ */
+
+                @Override
+                public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+                    if(data instanceof ReservationWithCourt){
+                        ReservationWithCourt newReservation = (ReservationWithCourt) reservationsWithCourt.get(newItemPosition);
+                        ReservationWithCourt oldReservation = (ReservationWithCourt) data.get(newItemPosition);
+                        return newReservation.reservation.getId().equals(oldReservation.reservation.getId())
+                                && Objects.equals(newReservation.court.getId(),oldReservation.court.getId())
+                                && Objects.equals(newReservation.reservation.getPlayerId(),oldReservation.reservation.getPlayerId())
+                                && Objects.equals(newReservation.reservation.getTimeSlot(),oldReservation.reservation.getTimeSlot())
+                                && Objects.equals(newReservation.reservation.getReservationDate(),oldReservation.reservation.getReservationDate());
+                    }
+                    return false;
+                }
+            });
+            data = reservationsWithCourt;
             result.dispatchUpdatesTo(this);
         }
     }

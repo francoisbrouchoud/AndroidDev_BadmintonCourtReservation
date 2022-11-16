@@ -157,7 +157,7 @@ public class CourtReservationActivity extends BaseActivity {
         ReservationViewModel.Factory factoryReservation = new ReservationViewModel.Factory(getApplication(),reservationId);
         reservationViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) factoryReservation).get(ReservationViewModel.class);
 
-        ReservationListViewModel.Factory factoryReservationList = new ReservationListViewModel.Factory(getApplication());
+        ReservationListViewModel.Factory factoryReservationList = new ReservationListViewModel.Factory(getApplication(), reservation.getCourtId());
         reservationListViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) factoryReservationList).get(ReservationListViewModel.class);
         reservationListViewModel.getReservations().observe(this, reservationEntities -> {
             if(reservationEntities != null){

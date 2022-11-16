@@ -16,6 +16,7 @@ import com.example.androiddev_badmintoncourtreservation.R;
 import com.example.androiddev_badmintoncourtreservation.adapter.ReservationsRecyclerAdapter;
 import com.example.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
 import com.example.androiddev_badmintoncourtreservation.database.entity.ReservationEntity;
+import com.example.androiddev_badmintoncourtreservation.database.pojo.ReservationWithCourt;
 import com.example.androiddev_badmintoncourtreservation.ui.BaseActivity;
 import com.example.androiddev_badmintoncourtreservation.util.OnAsyncEventListener;
 import com.example.androiddev_badmintoncourtreservation.util.RecyclerViewItemClickListener;
@@ -29,6 +30,7 @@ public class ReservationsActivity extends BaseActivity {
     private ReservationsRecyclerAdapter<ReservationEntity> adapter;
     private ReservationListViewModel listViewModel;
     private List<ReservationEntity> reservations;
+    private List<ReservationWithCourt> reservationCourts;
     private RecyclerView recyclerView;
 
     @Override
@@ -69,14 +71,24 @@ public class ReservationsActivity extends BaseActivity {
                 LinearLayoutManager.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
 
-        ReservationListViewModel.Factory factoryReservations = new ReservationListViewModel.Factory(getApplication());
+        ReservationListViewModel.Factory factoryReservations = new ReservationListViewModel.Factory(getApplication(), 2L);
         listViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) factoryReservations).get(ReservationListViewModel.class);
+        /*
         listViewModel.getReservations().observe(this, reservationEntities -> {
             if(reservationEntities != null){
                 reservations = reservationEntities;
                 adapter.setData(reservations);
             }
         });
+        */
+        listViewModel.getReservationsWithCourt().observe(this, reservationWithCourts -> {
+            if(reservationWithCourts != null){
+                reservationCourts = reservationWithCourts;
+                //adapter.setData(reservations);
+                adapter.setData(reservationCourts);
+            }
+        });
+
         recyclerView.setAdapter(adapter);
     }
 
