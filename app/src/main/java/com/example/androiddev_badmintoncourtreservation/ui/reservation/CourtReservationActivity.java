@@ -23,6 +23,7 @@ import com.example.androiddev_badmintoncourtreservation.adapter.PlayersListAdapt
 import com.example.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
 import com.example.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
 import com.example.androiddev_badmintoncourtreservation.database.entity.ReservationEntity;
+import com.example.androiddev_badmintoncourtreservation.database.pojo.ReservationWithPlayer;
 import com.example.androiddev_badmintoncourtreservation.ui.BaseActivity;
 import com.example.androiddev_badmintoncourtreservation.util.OnAsyncEventListener;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.court.CourtViewModel;
@@ -54,6 +55,7 @@ public class CourtReservationActivity extends BaseActivity {
     private PlayerEntity player;
 
     private ReservationEntity reservation;
+    private ReservationWithPlayer reservationWithPlayers;
     private ReservationListViewModel reservationListViewModel;
     private ReservationViewModel reservationViewModel;
     private List<ReservationEntity> reservations;
@@ -168,21 +170,21 @@ public class CourtReservationActivity extends BaseActivity {
         setupViewModel();
         setupPlayerSpinner();
 
-
         if(isEdit){
-            reservationViewModel.getReservation().observe(this, reservationEntity ->{
-                if(reservationEntity != null){
-                    reservation = reservationEntity;
-                    tvCourtName.setText(reservation.getResCourtname());
-                    etReservationDate.setText(reservation.getReservationDate());
-                    spReservationTime.setSelection(getIdxFromSpTimeSlot(reservation.getTimeSlot()));
-                    tvCourtPrice.setVisibility(View.INVISIBLE);
-                    tvPriceTitle.setVisibility(View.INVISIBLE);
-                    int positionPlsp = getIdxFromPlayer(spReservationPlayer, reservation.getResFirstname() + " " + reservation.getResLastname());
-                    spReservationPlayer.setSelection(positionPlsp);
+            reservationViewModel.getReservationWithPlayers().observe(this, reservationPlayers -> {
+                        if (reservationPlayers != null) {
+                            reservationWithPlayers = reservationPlayers;
+                            reservation = reservationPlayers.reservation;
+                            tvCourtName.setText(reservationWithPlayers.reservation.getResCourtname());
+                            etReservationDate.setText(reservationWithPlayers.reservation.getReservationDate());
+                            spReservationTime.setSelection(getIdxFromSpTimeSlot(reservationWithPlayers.reservation.getTimeSlot()));
+                            tvCourtPrice.setVisibility(View.INVISIBLE);
+                            tvPriceTitle.setVisibility(View.INVISIBLE);
+                            int positionPlsp = getIdxFromPlayer(reservationWithPlayers.player);
+                            spReservationPlayer.setSelection(positionPlsp);
 
-                }
-            }
+                        }
+                    }
             );
         }
 
@@ -194,17 +196,6 @@ public class CourtReservationActivity extends BaseActivity {
                 toast.show();
             }
         });
-    }
-
-    private int findElt(String firstname, String lastname, List<PlayerEntity> pls) {
-        int position = 0;
-        for (PlayerEntity p: pls) {
-            if(p.getFirstname().equals(firstname) && p.getLastname().equals(lastname)){
-                return position;
-            }
-            position++;
-        }
-        return 0;
     }
 
     /**
@@ -444,15 +435,15 @@ public class CourtReservationActivity extends BaseActivity {
         return Arrays.asList(getResources().getStringArray(R.array.times)).indexOf(timeSlot);
     }
 
-    private int getIdxFromPlayer(Spinner spinner, String myString){
-        int length = adapterPlayers.getItemCount();
-        int spLength = spinner.getCount();
-        for (int i=0;i< adapterPlayers.getItemCount();i++){
-            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
-                return i;
+    private int getIdxFromPlayer(PlayerEntity player) {
+        if (players != null) {
+            for (int i = 0; i < players.size(); i++) {
+                if (players.get(i).equals(player)) {
+                    return i;
+                }
             }
         }
-        return -1;
+        return 0;
     }
 
 }
