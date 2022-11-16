@@ -72,4 +72,8 @@ public class PlayersListAdapter<T> extends ArrayAdapter<T> {
         mData.addAll(data);
         notifyDataSetChanged();
     }
+
+    public int getItemCount(){
+        return mData.size();
+    }
 }
