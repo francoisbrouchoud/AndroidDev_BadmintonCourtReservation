@@ -98,7 +98,7 @@ public class PlayerEntity {
     public boolean equals(Object obj) {
         if (obj == null) return false;
         if (obj == this) return true;
-        if (!(obj instanceof CourtEntity)) return false;
+        if (!(obj instanceof PlayerEntity)) return false;
         PlayerEntity o = (PlayerEntity) obj;
         return o.getId().equals(this.getId());
     }
