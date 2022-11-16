@@ -171,11 +171,11 @@ public class CourtReservationActivity extends BaseActivity {
         setupPlayerSpinner();
 
         if(isEdit){
-            reservationViewModel.getReservationWithPlayers().observe(this, reservationPlayers -> {
+            reservationViewModel.getReservationWithPlayerCourt().observe(this, reservationPlayers -> {
                         if (reservationPlayers != null) {
                             reservationWithPlayers = reservationPlayers;
                             reservation = reservationPlayers.reservation;
-                            tvCourtName.setText(reservationWithPlayers.reservation.getResCourtname());
+                            tvCourtName.setText(reservationWithPlayers.court.getCourtsName());
                             etReservationDate.setText(reservationWithPlayers.reservation.getReservationDate());
                             spReservationTime.setSelection(getIdxFromSpTimeSlot(reservationWithPlayers.reservation.getTimeSlot()));
                             tvCourtPrice.setText(Double.toString(reservationPlayers.court.getHourlyPrice()));

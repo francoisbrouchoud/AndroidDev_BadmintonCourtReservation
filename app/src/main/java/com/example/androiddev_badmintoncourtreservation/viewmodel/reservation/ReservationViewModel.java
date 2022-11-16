@@ -74,7 +74,7 @@ public class ReservationViewModel extends AndroidViewModel {
     }
 
 
-    public LiveData<ReservationWithPlayerAndCourt> getReservationWithPlayers(){
+    public LiveData<ReservationWithPlayerAndCourt> getReservationWithPlayerCourt(){
         return observableReservationPlayerCourt;
     }
 
