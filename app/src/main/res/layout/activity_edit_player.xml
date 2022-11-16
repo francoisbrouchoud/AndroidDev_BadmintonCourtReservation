@@ -17,7 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="15dp"
-            app:boxBackgroundColor="#00FFFFFF">
+            app:boxBackgroundColor="#00FFFFFF"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_PlayerFirstname"
                 android:layout_width="match_parent"
@@ -30,7 +31,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="15dp"
-            app:boxBackgroundColor="#00FFFFFF">
+            app:boxBackgroundColor="#00FFFFFF"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_PlayerLastname"
                 android:layout_width="match_parent"
@@ -43,7 +45,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="15dp"
-            app:boxBackgroundColor="#00FFFFFF">
+            app:boxBackgroundColor="#00FFFFFF"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_PlayerBirthdate"
                 android:layout_width="match_parent"
@@ -60,7 +63,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="15dp"
-            app:boxBackgroundColor="#00FFFFFF">
+            app:boxBackgroundColor="#00FFFFFF"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_PlayerPhoneNumber"
                 android:layout_width="match_parent"
@@ -91,7 +95,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="15dp"
-            app:boxBackgroundColor="#00FFFFFF">
+            app:boxBackgroundColor="#00FFFFFF"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_PlayerAddress"
                 android:layout_width="match_parent"

@@ -13,9 +13,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.ViewModelProvider;
+
 import com.example.androiddev_badmintoncourtreservation.R;
 import com.example.androiddev_badmintoncourtreservation.adapter.PlayersListAdapter;
 import com.example.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
@@ -66,6 +68,8 @@ public class CourtReservationActivity extends BaseActivity {
     private Spinner spReservationPlayer;
     private Button button;
     private Toast toast;
+
+    int test;
 
     private boolean isEdit;
 
@@ -120,9 +124,7 @@ public class CourtReservationActivity extends BaseActivity {
         etReservationDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 final Calendar c = Calendar.getInstance();
-
                 int year;
                 int month;
                 int day;
@@ -139,7 +141,6 @@ public class CourtReservationActivity extends BaseActivity {
                     month = c.get(Calendar.MONTH);
                     year = c.get(Calendar.YEAR);
                 }
-
                 //Create the datePickerDialog
                 DatePickerDialog datePickerDialog = new DatePickerDialog(CourtReservationActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
@@ -167,20 +168,20 @@ public class CourtReservationActivity extends BaseActivity {
         setupViewModel();
         setupPlayerSpinner();
 
+
         if(isEdit){
             reservationViewModel.getReservation().observe(this, reservationEntity ->{
-                    if(reservationEntity != null){
-                        reservation = reservationEntity;
-                        tvCourtName.setText(reservation.getResCourtname());
-                        etReservationDate.setText(reservation.getReservationDate());
-                        spReservationTime.setSelection(getIdxFromSpTimeSlot(reservationEntity.getTimeSlot()));
-                        tvCourtPrice.setVisibility(View.INVISIBLE);
-                        tvPriceTitle.setVisibility(View.INVISIBLE);
+                if(reservationEntity != null){
+                    reservation = reservationEntity;
+                    tvCourtName.setText(reservation.getResCourtname());
+                    etReservationDate.setText(reservation.getReservationDate());
+                    spReservationTime.setSelection(getIdxFromSpTimeSlot(reservation.getTimeSlot()));
+                    tvCourtPrice.setVisibility(View.INVISIBLE);
+                    tvPriceTitle.setVisibility(View.INVISIBLE);
+                    int positionPlsp = getIdxFromPlayer(spReservationPlayer, reservation.getResFirstname() + " " + reservation.getResLastname());
+                    spReservationPlayer.setSelection(positionPlsp);
 
-                        int pos = findElt(reservation.getResFirstname(), reservation.getResLastname());
-                        System.out.println(position);
-                        spReservationPlayer.setSelection((pos));
-                    }
+                }
             }
             );
         }
@@ -195,21 +196,14 @@ public class CourtReservationActivity extends BaseActivity {
         });
     }
 
-    private int findElt(String firstname, String lastname) {
+    private int findElt(String firstname, String lastname, List<PlayerEntity> pls) {
         int position = 0;
-
-        //if(players!=null){
-            for (PlayerEntity p: players) {
-
-                if(p.getFirstname().equals(firstname) && p.getLastname().equals(lastname)){
-                    return position;
-                }
-                position++;
-
+        for (PlayerEntity p: pls) {
+            if(p.getFirstname().equals(firstname) && p.getLastname().equals(lastname)){
+                return position;
             }
-        //}
-
-
+            position++;
+        }
         return 0;
     }
 
@@ -327,7 +321,6 @@ public class CourtReservationActivity extends BaseActivity {
             reservationFields = reservation;
         }
 
-
         player = players.get(spReservationPlayer.getSelectedItemPosition());
         reservationFields.setPlayerId(player.getId());
         //Set the values
@@ -439,6 +432,7 @@ public class CourtReservationActivity extends BaseActivity {
                 players = playerEntities;
             }
         });
+
     }
 
     /**
@@ -451,7 +445,9 @@ public class CourtReservationActivity extends BaseActivity {
     }
 
     private int getIdxFromPlayer(Spinner spinner, String myString){
-        for (int i=0;i<spinner.getCount();i++){
+        int length = adapterPlayers.getItemCount();
+        int spLength = spinner.getCount();
+        for (int i=0;i< adapterPlayers.getItemCount();i++){
             if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
                 return i;
             }
