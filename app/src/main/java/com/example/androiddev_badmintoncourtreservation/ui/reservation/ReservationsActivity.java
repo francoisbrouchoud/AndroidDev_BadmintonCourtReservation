@@ -16,6 +16,7 @@ import com.example.androiddev_badmintoncourtreservation.R;
 import com.example.androiddev_badmintoncourtreservation.adapter.ReservationsRecyclerAdapter;
 import com.example.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
 import com.example.androiddev_badmintoncourtreservation.database.entity.ReservationEntity;
+import com.example.androiddev_badmintoncourtreservation.database.pojo.ReservationWithPlayerAndCourt;
 import com.example.androiddev_badmintoncourtreservation.ui.BaseActivity;
 import com.example.androiddev_badmintoncourtreservation.util.OnAsyncEventListener;
 import com.example.androiddev_badmintoncourtreservation.util.RecyclerViewItemClickListener;
@@ -26,9 +27,10 @@ public class ReservationsActivity extends BaseActivity {
 
     private static final String TAG = "ReservationsActivity";
 
-    private ReservationsRecyclerAdapter<ReservationEntity> adapter;
+    private ReservationsRecyclerAdapter<ReservationWithPlayerAndCourt> adapter;
     private ReservationListViewModel listViewModel;
     private List<ReservationEntity> reservations;
+    private List<ReservationWithPlayerAndCourt> reservationsPlayerCourt;
     private RecyclerView recyclerView;
 
     @Override
@@ -47,20 +49,20 @@ public class ReservationsActivity extends BaseActivity {
             public void onItemClick(View v, int position) {
                 //Edit the reservation
                 Log.d(TAG, "clicked on position: " + position);
-                Log.d(TAG, "clicked on reservation: " + reservations.get(position).getId());
+                Log.d(TAG, "clicked on reservation: " + reservationsPlayerCourt.get(position).reservation.getId());
                 Intent intent = new Intent(ReservationsActivity.this, CourtReservationActivity.class);
                 intent.setFlags(
                         Intent.FLAG_ACTIVITY_NO_ANIMATION |
                                 Intent.FLAG_ACTIVITY_NO_HISTORY
                 );
-                intent.putExtra("reservationId", reservations.get(position).getId());
+                intent.putExtra("reservationId", reservationsPlayerCourt.get(position).reservation.getId());
                 startActivity(intent);
             }
 
             @Override
             public void onItemLongClick(View v, int position) {
                 Log.d(TAG, "long clicked on position: " + position);
-                Log.d(TAG, "long clicked on reservation: " + reservations.get(position).getId());
+                Log.d(TAG, "long clicked on reservation: " + reservationsPlayerCourt.get(position).reservation.getId());
                 deleteReservationDialog(position);
             }
         });
@@ -71,10 +73,10 @@ public class ReservationsActivity extends BaseActivity {
 
         ReservationListViewModel.Factory factoryReservations = new ReservationListViewModel.Factory(getApplication());
         listViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) factoryReservations).get(ReservationListViewModel.class);
-        listViewModel.getReservations().observe(this, reservationEntities -> {
+        listViewModel.getReservationsWithPlayerCourt().observe(this, reservationEntities -> {
             if(reservationEntities != null){
-                reservations = reservationEntities;
-                adapter.setData(reservations);
+                reservationsPlayerCourt = reservationEntities;
+                adapter.setData(reservationsPlayerCourt);
             }
         });
         recyclerView.setAdapter(adapter);

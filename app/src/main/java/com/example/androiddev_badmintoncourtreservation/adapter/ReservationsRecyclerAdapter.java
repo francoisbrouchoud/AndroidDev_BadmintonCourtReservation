@@ -16,6 +16,8 @@ import com.example.androiddev_badmintoncourtreservation.R;
 import com.example.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
 import com.example.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
 import com.example.androiddev_badmintoncourtreservation.database.entity.ReservationEntity;
+import com.example.androiddev_badmintoncourtreservation.database.pojo.ReservationWithPlayerAndCourt;
+import com.example.androiddev_badmintoncourtreservation.database.repository.ReservationRepository;
 import com.example.androiddev_badmintoncourtreservation.util.RecyclerViewItemClickListener;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.player.PlayerViewModel;
 
@@ -67,14 +69,14 @@ public class ReservationsRecyclerAdapter<T> extends RecyclerView.Adapter<Reserva
     public void onBindViewHolder(@NonNull ReservationsRecyclerAdapter.ViewHolder holder, int position) {
         T item = data.get(position);
 
-        if(item.getClass().equals(ReservationEntity.class))
-            holder.tvCourtName.setText(((ReservationEntity) item).getResCourtname());
-        if(item.getClass().equals(ReservationEntity.class))
-            holder.tvPlayerName.setText(((ReservationEntity) item).getResFirstname() + " " +((ReservationEntity) item).getResLastname());
-        if(item.getClass().equals(ReservationEntity.class))
-            holder.tvDate.setText(((ReservationEntity) item).getReservationDate());
-        if(item.getClass().equals(ReservationEntity.class))
-            holder.tvTime.setText(((ReservationEntity) item).getTimeSlot());
+        if(item.getClass().equals(ReservationWithPlayerAndCourt.class))
+            holder.tvCourtName.setText(((ReservationWithPlayerAndCourt) item).court.getCourtsName());
+        if(item.getClass().equals(ReservationWithPlayerAndCourt.class))
+            holder.tvPlayerName.setText(((ReservationWithPlayerAndCourt) item).player.getFirstname() + " " +((ReservationWithPlayerAndCourt) item).player.getLastname());
+        if(item.getClass().equals(ReservationWithPlayerAndCourt.class))
+            holder.tvDate.setText(((ReservationWithPlayerAndCourt) item).reservation.getReservationDate());
+        if(item.getClass().equals(ReservationWithPlayerAndCourt.class))
+            holder.tvTime.setText(((ReservationWithPlayerAndCourt) item).reservation.getTimeSlot());
     }
 
     @Override
@@ -85,10 +87,10 @@ public class ReservationsRecyclerAdapter<T> extends RecyclerView.Adapter<Reserva
             return 0;
     }
 
-    public void setData(List<T> reservations){
+    public void setData(List<T> reservationsPlayerCourt){
         if(data == null){
-            data = reservations;
-            notifyItemRangeInserted(0, reservations.size());
+            data = reservationsPlayerCourt;
+            notifyItemRangeInserted(0, reservationsPlayerCourt.size());
         }else{
             DiffUtil.DiffResult result = DiffUtil.calculateDiff(new DiffUtil.Callback() {
                 @Override
@@ -98,31 +100,31 @@ public class ReservationsRecyclerAdapter<T> extends RecyclerView.Adapter<Reserva
 
                 @Override
                 public int getNewListSize() {
-                    return reservations.size();
+                    return reservationsPlayerCourt.size();
                 }
 
                 @Override
                 public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-                    if(data instanceof ReservationEntity)
-                        return ((ReservationEntity) data.get(oldItemPosition)).getId().equals(((ReservationEntity)data.get(newItemPosition)).getId());
+                    if(data instanceof ReservationWithPlayerAndCourt)
+                        return ((ReservationWithPlayerAndCourt) data.get(oldItemPosition)).reservation.getId().equals(((ReservationWithPlayerAndCourt)data.get(newItemPosition)).reservation.getId());
                     return false;
                 }
 
                 @Override
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-                    if(data instanceof ReservationEntity){
-                        ReservationEntity newReservation = (ReservationEntity) reservations.get(newItemPosition);
-                        ReservationEntity oldReservation = (ReservationEntity) data.get(newItemPosition);
-                        return newReservation.getId().equals(oldReservation.getId())
-                                && Objects.equals(newReservation.getCourtId(),oldReservation.getCourtId())
-                                && Objects.equals(newReservation.getPlayerId(),oldReservation.getPlayerId())
-                                && Objects.equals(newReservation.getTimeSlot(),oldReservation.getTimeSlot())
-                                && Objects.equals(newReservation.getReservationDate(),oldReservation.getReservationDate());
+                    if(data instanceof ReservationWithPlayerAndCourt){
+                        ReservationWithPlayerAndCourt newReservation = (ReservationWithPlayerAndCourt) reservationsPlayerCourt.get(newItemPosition);
+                        ReservationWithPlayerAndCourt oldReservation = (ReservationWithPlayerAndCourt) data.get(newItemPosition);
+                        return newReservation.reservation.getId().equals(oldReservation.reservation.getId())
+                                && Objects.equals(newReservation.reservation.getCourtId(),oldReservation.reservation.getCourtId())
+                                && Objects.equals(newReservation.reservation.getPlayerId(),oldReservation.reservation.getPlayerId())
+                                && Objects.equals(newReservation.reservation.getTimeSlot(),oldReservation.reservation.getTimeSlot())
+                                && Objects.equals(newReservation.reservation.getReservationDate(),oldReservation.reservation.getReservationDate());
                     }
                     return false;
                 }
             });
-            data = reservations;
+            data = reservationsPlayerCourt;
             result.dispatchUpdatesTo(this);
         }
     }
