@@ -40,6 +40,10 @@ public class ReservationRepository {
         return ((BaseApp) application).getDatabase().reservationDao().getById(id);
     }
 
+    public LiveData<List<ReservationWithPlayerAndCourt>> getReservationsWithPlayerAndCourt(Application application){
+        return ((BaseApp) application).getDatabase().reservationDao().getReservationsWithPlayerAndCourt();
+    }
+
     public LiveData<ReservationWithPlayerAndCourt> getReservationWithPlayerAndCourt(final Long id, Application application){
         return ((BaseApp) application).getDatabase().reservationDao().getReservationWithPlayerAndCourt(id);
     }

@@ -20,6 +20,9 @@ public interface ReservationDao {
     @Query("SELECT * FROM reservations WHERE id = :id")
     public abstract LiveData<ReservationEntity> getById(Long id);
 
+    @Query("SELECT * FROM reservations")
+    public abstract LiveData<List<ReservationWithPlayerAndCourt>> getReservationsWithPlayerAndCourt();
+
     @Query("SELECT * FROM reservations WHERE id = :id")
     public abstract LiveData<ReservationWithPlayerAndCourt> getReservationWithPlayerAndCourt(Long id);
 
