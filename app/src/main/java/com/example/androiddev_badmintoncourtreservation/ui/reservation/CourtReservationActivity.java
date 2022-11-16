@@ -26,6 +26,7 @@ import com.example.androiddev_badmintoncourtreservation.database.entity.Reservat
 import com.example.androiddev_badmintoncourtreservation.database.pojo.ReservationWithPlayerAndCourt;
 import com.example.androiddev_badmintoncourtreservation.ui.BaseActivity;
 import com.example.androiddev_badmintoncourtreservation.util.OnAsyncEventListener;
+import com.example.androiddev_badmintoncourtreservation.util.ReservationHelper;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.court.CourtViewModel;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.player.PlayerListViewModel;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.reservation.ReservationListViewModel;
@@ -71,8 +72,6 @@ public class CourtReservationActivity extends BaseActivity {
     private Button button;
     private Toast toast;
 
-    int test;
-
     private boolean isEdit;
 
     @Override
@@ -97,7 +96,7 @@ public class CourtReservationActivity extends BaseActivity {
         CourtViewModel.Factory factoryCourt = new CourtViewModel.Factory(getApplication(), courtId);
         courtViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) factoryCourt).get(CourtViewModel.class);
 
-        //Set the values
+        //Set the values for a new reservation
         courtViewModel.getCourt().observe(this, courtEntity -> {
             if(courtEntity != null){
                 court = courtEntity;
@@ -216,7 +215,7 @@ public class CourtReservationActivity extends BaseActivity {
             return false;
         }
         //Ensure that the time and date are not in the past
-        if(checkLaterDate(reservation.getReservationDate(), reservation.getTimeSlot())){
+        if(ReservationHelper.checkLaterDate(reservation.getReservationDate(), reservation.getTimeSlot())){
             reservationErrorDialog(R.string.dialog_reservation_past);
             return false;
         }
@@ -360,36 +359,6 @@ public class CourtReservationActivity extends BaseActivity {
             }
         }
         return null;
-    }
-
-    /**
-     * Check if the date and time slot are in the past.
-     * @param reservationDate to check.
-     * @param timeSlot to check.
-     * @return true if they are before. False if they are in the futur.
-     */
-    private boolean checkLaterDate(String reservationDate, String timeSlot) {
-        try {
-            LocalDate today = LocalDate.now();
-            String beginTimeSlot = timeSlot.substring(0, 2);
-            int beginHour = Integer.parseInt(beginTimeSlot);
-
-            Date reservationInputDate = new SimpleDateFormat("dd.MM.yyyy").parse(reservationDate);
-            Date timeNow = Date.from(today.atStartOfDay(ZoneId.systemDefault()).toInstant());
-
-            //Check date
-            if(reservationInputDate.before(timeNow)){
-                return true;
-            }
-            //Check timeslot if same day
-            if (reservationInputDate.equals(timeNow) && beginHour <= LocalDateTime.now(ZoneId.of("Europe/Zurich")).getHour()) {
-                return true;
-            }
-            return false;
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return true;
-        }
     }
 
     /**
