@@ -6,13 +6,12 @@ import androidx.room.Relation;
 import com.example.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
 import com.example.androiddev_badmintoncourtreservation.database.entity.ReservationEntity;
 
-import java.util.List;
 
-public class ReservationWithPlayers {
+public class ReservationWithPlayer {
 
     @Embedded
     public ReservationEntity reservation;
 
     @Relation(parentColumn = "playerId", entityColumn = "id", entity = PlayerEntity.class)
-    public List<PlayerEntity> players;
+    public PlayerEntity player;
 }
