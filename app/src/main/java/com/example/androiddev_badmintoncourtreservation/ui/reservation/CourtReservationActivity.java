@@ -23,7 +23,7 @@ import com.example.androiddev_badmintoncourtreservation.adapter.PlayersListAdapt
 import com.example.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
 import com.example.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
 import com.example.androiddev_badmintoncourtreservation.database.entity.ReservationEntity;
-import com.example.androiddev_badmintoncourtreservation.database.pojo.ReservationWithPlayer;
+import com.example.androiddev_badmintoncourtreservation.database.pojo.ReservationWithPlayerAndCourt;
 import com.example.androiddev_badmintoncourtreservation.ui.BaseActivity;
 import com.example.androiddev_badmintoncourtreservation.util.OnAsyncEventListener;
 import com.example.androiddev_badmintoncourtreservation.viewmodel.court.CourtViewModel;
@@ -55,7 +55,7 @@ public class CourtReservationActivity extends BaseActivity {
     private PlayerEntity player;
 
     private ReservationEntity reservation;
-    private ReservationWithPlayer reservationWithPlayers;
+    private ReservationWithPlayerAndCourt reservationWithPlayers;
     private ReservationListViewModel reservationListViewModel;
     private ReservationViewModel reservationViewModel;
     private List<ReservationEntity> reservations;
@@ -178,8 +178,7 @@ public class CourtReservationActivity extends BaseActivity {
                             tvCourtName.setText(reservationWithPlayers.reservation.getResCourtname());
                             etReservationDate.setText(reservationWithPlayers.reservation.getReservationDate());
                             spReservationTime.setSelection(getIdxFromSpTimeSlot(reservationWithPlayers.reservation.getTimeSlot()));
-                            tvCourtPrice.setVisibility(View.INVISIBLE);
-                            tvPriceTitle.setVisibility(View.INVISIBLE);
+                            tvCourtPrice.setText(Double.toString(reservationPlayers.court.getHourlyPrice()));
                             int positionPlsp = getIdxFromPlayer(reservationWithPlayers.player);
                             spReservationPlayer.setSelection(positionPlsp);
 

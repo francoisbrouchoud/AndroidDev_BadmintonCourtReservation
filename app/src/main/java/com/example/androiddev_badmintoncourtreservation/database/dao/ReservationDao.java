@@ -8,7 +8,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.androiddev_badmintoncourtreservation.database.entity.ReservationEntity;
-import com.example.androiddev_badmintoncourtreservation.database.pojo.ReservationWithPlayer;
+import com.example.androiddev_badmintoncourtreservation.database.pojo.ReservationWithPlayerAndCourt;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public interface ReservationDao {
     public abstract LiveData<ReservationEntity> getById(Long id);
 
     @Query("SELECT * FROM reservations WHERE id = :id")
-    public abstract LiveData<ReservationWithPlayer> getReservationWithPlayers(Long id);
+    public abstract LiveData<ReservationWithPlayerAndCourt> getReservationWithPlayerAndCourt(Long id);
 
     @Insert
     public abstract long insert(ReservationEntity reservation);

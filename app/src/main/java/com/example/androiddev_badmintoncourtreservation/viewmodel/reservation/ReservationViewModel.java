@@ -9,7 +9,8 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.androiddev_badmintoncourtreservation.BaseApp;
 import com.example.androiddev_badmintoncourtreservation.database.entity.ReservationEntity;
-import com.example.androiddev_badmintoncourtreservation.database.pojo.ReservationWithPlayer;
+import com.example.androiddev_badmintoncourtreservation.database.pojo.ReservationWithPlayerAndCourt;
+import com.example.androiddev_badmintoncourtreservation.database.repository.CourtRepository;
 import com.example.androiddev_badmintoncourtreservation.database.repository.PlayerRepository;
 import com.example.androiddev_badmintoncourtreservation.database.repository.ReservationRepository;
 import com.example.androiddev_badmintoncourtreservation.util.OnAsyncEventListener;
@@ -19,26 +20,26 @@ public class ReservationViewModel extends AndroidViewModel {
     private Application application;
     private ReservationRepository repository;
     private final MediatorLiveData<ReservationEntity> observableReservation;
-    private final MediatorLiveData<ReservationWithPlayer> observableReservationPlayers;
+    private final MediatorLiveData<ReservationWithPlayerAndCourt> observableReservationPlayerCourt;
 
-    public ReservationViewModel(@NonNull Application application, final long reservationId, ReservationRepository reservationRepository, PlayerRepository playerRepository) {
+    public ReservationViewModel(@NonNull Application application, final long reservationId, ReservationRepository reservationRepository, PlayerRepository playerRepository, CourtRepository courtRepository) {
         super(application);
 
         this.application = application;
         repository = reservationRepository;
 
         observableReservation = new MediatorLiveData<>();
-        observableReservationPlayers = new MediatorLiveData<>();
+        observableReservationPlayerCourt = new MediatorLiveData<>();
         observableReservation.setValue(null);
-        observableReservationPlayers.setValue(null);
+        observableReservationPlayerCourt.setValue(null);
 
         LiveData<ReservationEntity> reservation;
         reservation = repository.getReservation(reservationId, application);
 
-        LiveData<ReservationWithPlayer> reservationPlayers = reservationRepository.getReservationWithPlayer(reservationId, application);
+        LiveData<ReservationWithPlayerAndCourt> reservationPlayerCourt = reservationRepository.getReservationWithPlayerAndCourt(reservationId, application);
 
         observableReservation.addSource(reservation, observableReservation::setValue);
-        observableReservationPlayers.addSource(reservationPlayers, observableReservationPlayers::setValue);
+        observableReservationPlayerCourt.addSource(reservationPlayerCourt, observableReservationPlayerCourt::setValue);
     }
 
     public static class Factory extends ViewModelProvider.NewInstanceFactory{
@@ -47,18 +48,20 @@ public class ReservationViewModel extends AndroidViewModel {
         private final long reservationId;
         private final ReservationRepository reservationRepository;
         private final PlayerRepository playerRepository;
+        private final CourtRepository courtRepository;
 
         public Factory(@NonNull Application application, long reservationId) {
             this.application = application;
             this.reservationId = reservationId;
             reservationRepository = ((BaseApp) application).getReservationRepository();
             playerRepository = ((BaseApp) application).getPlayerRepository();
+            courtRepository = ((BaseApp) application).getCourtRepository();
         }
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
             //Create a new view model of the reservation
-            return (T) new ReservationViewModel(application, reservationId, reservationRepository, playerRepository);
+            return (T) new ReservationViewModel(application, reservationId, reservationRepository, playerRepository, courtRepository);
         }
     }
 
@@ -71,8 +74,8 @@ public class ReservationViewModel extends AndroidViewModel {
     }
 
 
-    public LiveData<ReservationWithPlayer> getReservationWithPlayers(){
-        return observableReservationPlayers;
+    public LiveData<ReservationWithPlayerAndCourt> getReservationWithPlayers(){
+        return observableReservationPlayerCourt;
     }
 
 
