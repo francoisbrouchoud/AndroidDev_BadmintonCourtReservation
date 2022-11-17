@@ -77,19 +77,38 @@ public class EditPlayerActivity extends BaseActivity {
         etPlayerBirthdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 final Calendar c = Calendar.getInstance();
-
-                int year;
-                int month;
-                int day;
+                int year = 0;
+                int month = 0;
+                int day = 0 ;
 
                 if(isEdit){
                     //Set the value of the date, month and year corresponding to the player's birthdate
                     String bDate = player.getBirthdate();
-                    day = Integer.parseInt(bDate.substring(0,2));
-                    month = Integer.parseInt(bDate.substring(3,5))-1;
-                    year = Integer.parseInt(bDate.substring(6,10));
+                    switch (bDate.length()){
+                        case 10:
+                            year = Integer.parseInt(bDate.substring(6,10));
+                            month = Integer.parseInt(bDate.substring(3,5))-1;
+                            day = Integer.parseInt(bDate.substring(0,2));
+                            break;
+                        case 8:
+                            year = Integer.parseInt(bDate.substring(4,8));
+                            month = Integer.parseInt(String.valueOf(bDate.charAt(2)))-1;
+                            day = Integer.parseInt(String.valueOf(bDate.charAt(0)));
+                            break;
+                        case 9:
+                            if(bDate.charAt(1) == '.'){
+                                //Case if day is lower than 10
+                                day = Integer.parseInt(String.valueOf(bDate.charAt(0)));
+                                month = Integer.parseInt(bDate.substring(2,4))-1;
+                            }else{
+                                //Case if the month is lower than 10
+                                day = Integer.parseInt(bDate.substring(0,2));
+                                month = Integer.parseInt(String.valueOf(bDate.charAt(3)))-1;
+                            }
+                            year = Integer.parseInt(bDate.substring(5,9));
+                            break;
+                    }
                 }else{
                     //Set the values of the current day
                     day = c.get(Calendar.DAY_OF_MONTH);
