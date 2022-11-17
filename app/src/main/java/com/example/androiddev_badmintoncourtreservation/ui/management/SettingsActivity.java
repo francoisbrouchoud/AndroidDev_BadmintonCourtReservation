@@ -1,7 +1,5 @@
 package com.example.androiddev_badmintoncourtreservation.ui.management;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
@@ -11,8 +9,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import com.example.androiddev_badmintoncourtreservation.R;
+import com.example.androiddev_badmintoncourtreservation.ui.BaseActivity;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends BaseActivity {
 
     protected SharedPreferences sharedPreferences;
     private Button aboutButton;
@@ -20,13 +19,9 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        getLayoutInflater().inflate(R.layout.activity_settings, frameLayout);
 
         setTitle(getString(R.string.action_settings));
-
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null)
-            actionBar.setDisplayHomeAsUpEnabled(true);
 
         //Get the default shared preferences
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
