@@ -6,11 +6,14 @@ import android.util.Log;
 import ch.hevs.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
 import ch.hevs.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
 
+/**
+ * Generate sample data
+ */
 public class DatabaseInitializer {
     public static final String TAG = "DatabaseInitializer";
 
     public static void populateDatabase(final AppDatabase db) {
-        Log.i(TAG, "Insertion de données test");
+        Log.i(TAG, "Insert sample data");
         PopulateDbAsync task = new PopulateDbAsync(db);
         task.execute();
     }
@@ -30,37 +33,25 @@ public class DatabaseInitializer {
         ReservationEntity reservation = new ReservationEntity(courtId, playerId, timeSlot, reservationDate);
         db.reservationDao().insert(reservation);
     }
+    */
 
-     */
-
-    private static void populateWithTestData(AppDatabase db) {
+    private static void populateWithSampleData(AppDatabase db) {
         db.playerDao().deleteAll();
-/*
-        addPlayer(db,
-                "Roger", "Federer", "01.01.1980","m", "0790123456", "sampleAddress"
-        );
-        addPlayer(db,
-                "Raf", "Nadal", "01.01.1970","m", "0790523456", "sampleAddress2"
-        );
-        addPlayer(db,
-                "Toto", "Test", "01.01.1960","m", "0790544446", "sampleAddress3"
-        );
-*/
+
         addPlayer(db,
                 "Luca", "Del Buono", "28.12.2000", "m", "0791234567", "1950 Sion");
         addPlayer(db,
                 "François", "Brouchoud", "07.08.1998", "m", "0791234567", "1890 St-Maurice");
+        addPlayer(db, "Steve", "Jobs", "24.02.1955", "m", "012345678", "San Francisco");
+        addPlayer(db, "Elon", "Musk", "28.06.1971", "m", "012345678", "Pretoria");
+        addPlayer(db, "Larry", "Page", "26.03.1973", "m", "012345678", "East Lansing");
+        addPlayer(db, "Bill", "Gates", "28.10.1955", "m", "012345678", "Seattle");
+        addPlayer(db, "Mark", "Zuckerberg", "14.05.1984", "m", "012345678", "New York");
+        addPlayer(db, "Virginia", "Rometty", "29.07.1957", "f", "012345678", "Chicago");
+        addPlayer(db, "Serena", "Williams", "26.09.1981", "f", "012345678", "Saginaw");
+        addPlayer(db, "Bugs", "Bunny", "01.01.1940", "Other", "012345678", "US");
+        addPlayer(db, "Homer", "Simpson", "01.01.1980", "Other", "012345678", "US");
         //Avant d'ajouter d'autres données d'autres tables
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        addCourt(db, "Centre de Sports Les Iles", "Terrain avec fort éclairage", "Tennis Les Iles, Sion",  24);
-        addCourt(db, "Badminton Pont-Chalais", "Prix imbattables", "Rue de Pont-Chalais 30, Sierre",  14);
-        addCourt(db, "Centre de Tennis La Moubra", "Salle bien refroidie", "Route de la Moubra 73, Crans-Montana",  15);
-
 
         try {
             Thread.sleep(1000);
@@ -68,7 +59,26 @@ public class DatabaseInitializer {
             e.printStackTrace();
         }
 
-       // addReservation(db, 1L, 1L, "16-18", "12.11.2022");
+        addCourt(db, "Les Iles : Terrain 1", "Terrain avec fort éclairage", "Tennis Les Iles, Sion",  24);
+        addCourt(db, "Les Iles : Terrain 2", "Terrain avec fort éclairage", "Tennis Les Iles, Sion",  24);
+        addCourt(db, "Les Iles : Terrain 3", "Terrain avec fort éclairage", "Tennis Les Iles, Sion",  24);
+        addCourt(db, "Badminton Pont-Chalais 1", "Prix imbattables", "Rue de Pont-Chalais 30, Sierre",  14);
+        addCourt(db, "Badminton Pont-Chalais 2", "Prix imbattables", "Rue de Pont-Chalais 30, Sierre",  14);
+        addCourt(db, "Centre de Tennis La Moubra 1", "Salle bien refroidie", "Route de la Moubra 73, Crans-Montana",  15);
+        addCourt(db, "Centre de Tennis La Moubra 2", "Salle bien refroidie", "Route de la Moubra 73, Crans-Montana",  15);
+        addCourt(db, "Centre de Tennis La Moubra 3", "Salle bien refroidie", "Route de la Moubra 73, Crans-Montana",  15);
+        addCourt(db, "Martigny Sport : Terrain 1", "Dans la zone industrielle", "Rue du Châble-Bet 22, 1920 Martigny",  20);
+        addCourt(db, "Martigny Sport : Terrain 2", "Dans la zone industrielle", "Rue du Châble-Bet 22, 1920 Martigny",  20);
+        addCourt(db, "Martigny Sport : Terrain 2", "Dans la zone industrielle", "Rue du Châble-Bet 22, 1920 Martigny",  20);
+
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //addReservation(db, 1L, 1L, "16-18", "12.11.2022");
     }
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
@@ -81,7 +91,7 @@ public class DatabaseInitializer {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            populateWithTestData(database);
+            populateWithSampleData(database);
             return null;
         }
     }
