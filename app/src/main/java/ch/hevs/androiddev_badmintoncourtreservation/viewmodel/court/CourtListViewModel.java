@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider;
 import ch.hevs.androiddev_badmintoncourtreservation.BaseApp;
 import ch.hevs.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
 import ch.hevs.androiddev_badmintoncourtreservation.database.repository.CourtRepository;
-
 import java.util.List;
 
 public class CourtListViewModel extends AndroidViewModel {

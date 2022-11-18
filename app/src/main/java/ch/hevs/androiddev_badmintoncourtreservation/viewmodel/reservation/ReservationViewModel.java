@@ -36,7 +36,8 @@ public class ReservationViewModel extends AndroidViewModel {
         LiveData<ReservationEntity> reservation;
         reservation = repository.getReservation(reservationId, application);
 
-        LiveData<ReservationWithPlayerAndCourt> reservationPlayerCourt = reservationRepository.getReservationWithPlayerAndCourt(reservationId, application);
+        LiveData<ReservationWithPlayerAndCourt> reservationPlayerCourt;
+        reservationPlayerCourt = reservationRepository.getReservationWithPlayerAndCourt(reservationId, application);
 
         observableReservation.addSource(reservation, observableReservation::setValue);
         observableReservationPlayerCourt.addSource(reservationPlayerCourt, observableReservationPlayerCourt::setValue);
@@ -73,11 +74,13 @@ public class ReservationViewModel extends AndroidViewModel {
         return observableReservation;
     }
 
-
+    /**
+     * Get the observable reservation with player and court.
+     * @return LiveData of the reservation with the player and the court.
+     */
     public LiveData<ReservationWithPlayerAndCourt> getReservationWithPlayerCourt(){
         return observableReservationPlayerCourt;
     }
-
 
     /**
      * Create a new reservation.

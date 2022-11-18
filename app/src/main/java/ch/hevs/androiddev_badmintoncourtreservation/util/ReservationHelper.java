@@ -8,6 +8,7 @@ import java.time.ZoneId;
 import java.util.Date;
 
 public class ReservationHelper {
+
     /**
      * Check if the date and time slot are in the past.
      * @param reservationDate to check.

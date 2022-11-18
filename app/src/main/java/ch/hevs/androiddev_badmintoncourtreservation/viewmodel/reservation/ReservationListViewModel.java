@@ -71,6 +71,10 @@ public class ReservationListViewModel extends AndroidViewModel {
         return observableReservations;
     }
 
+    /**
+     * Get the reservations with the player and the court using the POJO class.
+     * @return LiveData of reservations with player ant court.
+     */
     public LiveData<List<ReservationWithPlayerAndCourt>> getReservationsWithPlayerCourt(){
         return observableReservationsPlayerCourt;
     }

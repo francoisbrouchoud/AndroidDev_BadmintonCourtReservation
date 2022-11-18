@@ -6,15 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import ch.hevs.androiddev_badmintoncourtreservation.R;
-
 import java.util.List;
 
+/**
+ * Adapter class for the spinner.
+ * @param <T>
+ */
 public class PlayersListAdapter<T> extends ArrayAdapter<T> {
 
     private int mResource;
@@ -58,7 +59,6 @@ public class PlayersListAdapter<T> extends ArrayAdapter<T> {
             viewHolder.itemView.setText(item.toString());
         }
 
-
         return convertView;
     }
 
@@ -70,9 +70,5 @@ public class PlayersListAdapter<T> extends ArrayAdapter<T> {
         mData.clear();
         mData.addAll(data);
         notifyDataSetChanged();
-    }
-
-    public int getItemCount(){
-        return mData.size();
     }
 }

@@ -13,11 +13,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.ViewModelProvider;
-
 import ch.hevs.androiddev_badmintoncourtreservation.R;
 import ch.hevs.androiddev_badmintoncourtreservation.adapter.PlayersListAdapter;
 import ch.hevs.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
@@ -31,7 +29,6 @@ import ch.hevs.androiddev_badmintoncourtreservation.viewmodel.court.CourtViewMod
 import ch.hevs.androiddev_badmintoncourtreservation.viewmodel.player.PlayerListViewModel;
 import ch.hevs.androiddev_badmintoncourtreservation.viewmodel.reservation.ReservationListViewModel;
 import ch.hevs.androiddev_badmintoncourtreservation.viewmodel.reservation.ReservationViewModel;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -194,9 +191,8 @@ public class CourtReservationActivity extends BaseActivity {
                             etReservationDate.setText(reservationWithPlayers.reservation.getReservationDate());
                             spReservationTime.setSelection(getIdxFromSpTimeSlot(reservationWithPlayers.reservation.getTimeSlot()));
                             tvCourtPrice.setText(Double.toString(reservationPlayers.court.getHourlyPrice()));
-                            int positionPlsp = getIdxFromPlayer(reservationWithPlayers.player);
-                            spReservationPlayer.setSelection(positionPlsp);
-
+                            int positionPlSp = getIdxFromPlayer(reservationWithPlayers.player);
+                            spReservationPlayer.setSelection(positionPlSp);
                         }
                     }
             );
@@ -318,20 +314,17 @@ public class CourtReservationActivity extends BaseActivity {
         if(reservation == null) {
             reservationFields = new ReservationEntity();
             //Get the player from the selection of the spinner
-
             reservationFields.setCourtId(court.getId());
-
         }
         else{
+            //If reservation not null, we retrieve the existing reservation
             reservationFields = reservation;
         }
-
         player = players.get(spReservationPlayer.getSelectedItemPosition());
-        reservationFields.setPlayerId(player.getId());
         //Set the values
+        reservationFields.setPlayerId(player.getId());
         reservationFields.setTimeSlot(spReservationTime.getSelectedItem().toString());
         reservationFields.setReservationDate(etReservationDate.getText().toString());
-
 
         return reservationFields;
     }
@@ -406,7 +399,6 @@ public class CourtReservationActivity extends BaseActivity {
                 players = playerEntities;
             }
         });
-
     }
 
     /**
@@ -418,6 +410,11 @@ public class CourtReservationActivity extends BaseActivity {
         return Arrays.asList(getResources().getStringArray(R.array.times)).indexOf(timeSlot);
     }
 
+    /**
+     * Get the index of the player to set it on the spinner adapter.
+     * @param player to find the index.
+     * @return index of the player in the spinner.
+     */
     private int getIdxFromPlayer(PlayerEntity player) {
         if (players != null) {
             for (int i = 0; i < players.size(); i++) {

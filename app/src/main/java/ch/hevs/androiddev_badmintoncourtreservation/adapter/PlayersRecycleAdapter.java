@@ -1,20 +1,15 @@
 package ch.hevs.androiddev_badmintoncourtreservation.adapter;
 
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
-
 import ch.hevs.androiddev_badmintoncourtreservation.R;
-
 import ch.hevs.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
 import ch.hevs.androiddev_badmintoncourtreservation.util.RecyclerViewItemClickListener;
-
 import java.util.List;
 import java.util.Objects;
 
@@ -23,10 +18,8 @@ public class PlayersRecycleAdapter<T> extends RecyclerView.Adapter<PlayersRecycl
     private List<T> data;
     RecyclerViewItemClickListener rvClickListerner;
 
-
-
     public class ViewHolder extends RecyclerView.ViewHolder {
-        //Grabbing the views from the rows, similar to an "onCreate" method
+        //Grab the views from the rows, similar to an "onCreate" method
         TextView tvPlayerFirstName, tvPlayerLastName, tvPlayerBirthdate;
 
         public ViewHolder(@NonNull View itemView) {
@@ -41,12 +34,10 @@ public class PlayersRecycleAdapter<T> extends RecyclerView.Adapter<PlayersRecycl
         this.rvClickListerner = rvClickListerner;
     }
 
-
     @NonNull
     @Override
     public PlayersRecycleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //Inflate the layout and give à look to the rows
-        //TextView tv = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.player_row, parent, false);
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.player_row, parent, false);
         final PlayersRecycleAdapter.ViewHolder vh = new PlayersRecycleAdapter.ViewHolder(view);
@@ -80,6 +71,10 @@ public class PlayersRecycleAdapter<T> extends RecyclerView.Adapter<PlayersRecycl
             return 0;
     }
 
+    /**
+     * Set data on the adapter.
+     * @param players list containing the data.
+     */
     public void setData(List<T> players) {
         if(data == null){
             data = players;
