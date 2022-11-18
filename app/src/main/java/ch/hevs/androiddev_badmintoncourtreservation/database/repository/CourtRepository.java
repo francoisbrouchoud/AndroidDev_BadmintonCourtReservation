@@ -14,6 +14,7 @@ import ch.hevs.androiddev_badmintoncourtreservation.util.OnAsyncEventListener;
 import java.util.List;
 
 public class CourtRepository {
+
     private static CourtRepository instance;
 
     public CourtRepository() {

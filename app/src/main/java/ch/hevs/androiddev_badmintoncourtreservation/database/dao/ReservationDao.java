@@ -14,7 +14,7 @@ import ch.hevs.androiddev_badmintoncourtreservation.database.pojo.ReservationWit
 import java.util.List;
 
 /**
- * Access the reservation data
+ * Access and manage the reservation data
  */
 @Dao
 public interface ReservationDao {

@@ -12,7 +12,7 @@ import ch.hevs.androiddev_badmintoncourtreservation.database.entity.PlayerEntity
 import java.util.List;
 
 /**
- * Access the player data
+ * Access and manage the player data
  */
 @Dao
 public interface PlayerDao {

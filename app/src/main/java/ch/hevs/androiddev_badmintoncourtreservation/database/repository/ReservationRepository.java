@@ -40,10 +40,20 @@ public class ReservationRepository {
         return ((BaseApp) application).getDatabase().reservationDao().getById(id);
     }
 
+    /**
+     * Live data for reservations with player and court (POJO)
+     * @param application
+     * @return LiveData : list of reservations with its player and court
+     */
     public LiveData<List<ReservationWithPlayerAndCourt>> getReservationsWithPlayerAndCourt(Application application){
         return ((BaseApp) application).getDatabase().reservationDao().getReservationsWithPlayerAndCourt();
     }
 
+    /**
+     * Live data for reservations with player and court (POJO)
+     * @param application
+     * @return LiveData : reservation with its player and court
+     */
     public LiveData<ReservationWithPlayerAndCourt> getReservationWithPlayerAndCourt(final Long id, Application application){
         return ((BaseApp) application).getDatabase().reservationDao().getReservationWithPlayerAndCourt(id);
     }
