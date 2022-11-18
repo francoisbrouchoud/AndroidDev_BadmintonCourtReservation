@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:name=".BaseApp"
+        android:name="ch.hevs.androiddev_badmintoncourtreservation.BaseApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -14,14 +14,14 @@
         android:theme="@style/Theme.AndroidDev_BadmintonCourtReservation"
         tools:targetApi="31">
 
-        <activity android:name=".ui.BaseActivity"
+        <activity android:name="ch.hevs.androiddev_badmintoncourtreservation.ui.BaseActivity"
             android:theme="@style/Theme.AndroidDev_BadmintonCourtReservation"/>
 
         <activity
-            android:name=".ui.court.CourtsActivity"
+            android:name="ch.hevs.androiddev_badmintoncourtreservation.ui.court.CourtsActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:parentActivityName=".ui.BaseActivity"
+            android:parentActivityName="ch.hevs.androiddev_badmintoncourtreservation.ui.BaseActivity"
             android:theme="@style/Theme.AndroidDev_BadmintonCourtReservation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,79 +30,79 @@
             </intent-filter>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.BaseActivity" />
+                android:value="ch.hevs.androiddev_badmintoncourtreservation.ui.BaseActivity" />
         </activity>
 
         <activity
-            android:name=".ui.management.AboutActivity"
+            android:name="ch.hevs.androiddev_badmintoncourtreservation.ui.management.AboutActivity"
             android:exported="true"
-            android:parentActivityName=".ui.BaseActivity"
+            android:parentActivityName="ch.hevs.androiddev_badmintoncourtreservation.ui.BaseActivity"
             android:theme="@style/Theme.AndroidDev_BadmintonCourtReservation" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.BaseActivity" />
+                android:value="ch.hevs.androiddev_badmintoncourtreservation.ui.BaseActivity" />
         </activity>
 
         <activity
-            android:name=".ui.management.SettingsActivity"
+            android:name="ch.hevs.androiddev_badmintoncourtreservation.ui.management.SettingsActivity"
             android:exported="true"
-            android:parentActivityName=".ui.BaseActivity"
+            android:parentActivityName="ch.hevs.androiddev_badmintoncourtreservation.ui.BaseActivity"
             android:theme="@style/Theme.AndroidDev_BadmintonCourtReservation">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.BaseActivity" />
+                android:value="ch.hevs.androiddev_badmintoncourtreservation.ui.BaseActivity" />
         </activity>
 
         <activity
-            android:name=".ui.reservation.ReservationsActivity"
+            android:name="ch.hevs.androiddev_badmintoncourtreservation.ui.reservation.ReservationsActivity"
             android:exported="true"
-            android:parentActivityName=".ui.BaseActivity"
+            android:parentActivityName="ch.hevs.androiddev_badmintoncourtreservation.ui.BaseActivity"
             android:theme="@style/Theme.AndroidDev_BadmintonCourtReservation">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.BaseActivity" />
+                android:value="ch.hevs.androiddev_badmintoncourtreservation.ui.BaseActivity" />
         </activity>
 
         <activity
-            android:name=".ui.player.PlayersActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:parentActivityName=".ui.BaseActivity"
-            android:theme="@style/Theme.AndroidDev_BadmintonCourtReservation">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.BaseActivity" />
-        </activity>
-
-        <activity
-            android:name=".ui.reservation.CourtReservationActivity"
+            android:name="ch.hevs.androiddev_badmintoncourtreservation.ui.player.PlayersActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:parentActivityName=".ui.BaseActivity"
+            android:parentActivityName="ch.hevs.androiddev_badmintoncourtreservation.ui.BaseActivity"
             android:theme="@style/Theme.AndroidDev_BadmintonCourtReservation">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.BaseActivity" />
+                android:value="ch.hevs.androiddev_badmintoncourtreservation.ui.BaseActivity" />
         </activity>
 
         <activity
-            android:name=".ui.player.EditPlayerActivity"
+            android:name="ch.hevs.androiddev_badmintoncourtreservation.ui.reservation.CourtReservationActivity"
+            android:exported="true"
             android:label="@string/app_name"
-            android:parentActivityName=".ui.player.PlayersActivity"
+            android:parentActivityName="ch.hevs.androiddev_badmintoncourtreservation.ui.BaseActivity"
             android:theme="@style/Theme.AndroidDev_BadmintonCourtReservation">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.player.PlayersActivity" />
+                android:value="ch.hevs.androiddev_badmintoncourtreservation.ui.BaseActivity" />
         </activity>
 
         <activity
-            android:name=".ui.court.EditCourtActivity"
+            android:name="ch.hevs.androiddev_badmintoncourtreservation.ui.player.EditPlayerActivity"
             android:label="@string/app_name"
-            android:parentActivityName=".ui.court.CourtsActivity"
+            android:parentActivityName="ch.hevs.androiddev_badmintoncourtreservation.ui.player.PlayersActivity"
             android:theme="@style/Theme.AndroidDev_BadmintonCourtReservation">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.court.CourtsActivity" />
+                android:value="ch.hevs.androiddev_badmintoncourtreservation.ui.player.PlayersActivity" />
+        </activity>
+
+        <activity
+            android:name="ch.hevs.androiddev_badmintoncourtreservation.ui.court.EditCourtActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="ch.hevs.androiddev_badmintoncourtreservation.ui.court.CourtsActivity"
+            android:theme="@style/Theme.AndroidDev_BadmintonCourtReservation">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ch.hevs.androiddev_badmintoncourtreservation.ui.court.CourtsActivity" />
         </activity>
 
     </application>

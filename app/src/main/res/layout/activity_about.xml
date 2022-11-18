@@ -11,7 +11,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         android:orientation="vertical"
-        tools:context=".ui.management.AboutActivity">
+        tools:context="ch.hevs.androiddev_badmintoncourtreservation.ui.management.AboutActivity">
 
 
 

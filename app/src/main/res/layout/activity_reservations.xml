@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.reservation.ReservationsActivity">
+    tools:context="ch.hevs.androiddev_badmintoncourtreservation.ui.reservation.ReservationsActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ReservationRv"
