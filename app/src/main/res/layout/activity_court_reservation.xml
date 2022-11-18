@@ -35,7 +35,6 @@
                 tools:ignore="MissingConstraints" />
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,7 +57,6 @@
                 tools:ignore="MissingConstraints" />
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -77,13 +75,11 @@
                 android:inputType="date" />
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="15dp"
             app:boxBackgroundColor="#00FFFFFF">
-
             <TextView
                 android:id="@+id/tv_courtReservation_time"
                 android:layout_width="match_parent"
@@ -96,7 +92,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="52dp"/>
         </com.google.android.material.textfield.TextInputLayout>
-
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -116,9 +111,6 @@
                 android:layout_height="52dp"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-
-
-
         <Button
             android:id="@+id/bt_cr_confirm"
             android:layout_width="match_parent"
@@ -126,5 +118,4 @@
             android:text="@string/btn_editPlayerActivity_create" />
 
     </LinearLayout>
-
 </ScrollView>

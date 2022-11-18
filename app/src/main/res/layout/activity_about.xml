@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -12,8 +13,6 @@
         android:layout_marginTop="16dp"
         android:orientation="vertical"
         tools:context=".ui.management.AboutActivity">
-
-
 
         <TextView
             android:layout_marginTop="16dp"
@@ -55,12 +54,10 @@
             android:paddingTop="20dp"
             android:hint="Enter feedback to send to developers"
             app:hintEnabled="true">
-
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/input_feedback_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-
             <Button
                 android:id="@+id/submit_comment_button"
                 android:layout_width="wrap_content"
@@ -75,7 +72,5 @@
             android:layout_height="wrap_content"
             android:paddingTop="100dp"/>
 
-
     </LinearLayout>
-
 </ScrollView>
