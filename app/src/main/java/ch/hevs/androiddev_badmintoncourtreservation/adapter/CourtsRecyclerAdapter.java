@@ -1,20 +1,16 @@
 package ch.hevs.androiddev_badmintoncourtreservation.adapter;
 
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
-
 import ch.hevs.androiddev_badmintoncourtreservation.R;
 import ch.hevs.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
 import ch.hevs.androiddev_badmintoncourtreservation.util.RecyclerViewItemClickListener;
-
 import java.util.List;
 import java.util.Objects;
 
@@ -24,13 +20,11 @@ public class CourtsRecyclerAdapter<T> extends RecyclerView.Adapter<CourtsRecycle
     RecyclerViewItemClickListener rvClickListerner;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        //Grabbing the views from the rows, similar to an "onCreate" method
-        ImageView imageView;
+        //Grab the views from the rows, similar to an "onCreate" method
         TextView tvCourtName, tvCourtAddress, tvCourtHourlyPrice;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-           // imageView = itemView.findViewById(R.id.imageView3);
             tvCourtName = itemView.findViewById(R.id.tv_pl_courtsname);
             tvCourtAddress = itemView.findViewById(R.id.tv_pl_courtsaddress);
             tvCourtHourlyPrice = itemView.findViewById(R.id.tv_pl_price);
@@ -45,7 +39,6 @@ public class CourtsRecyclerAdapter<T> extends RecyclerView.Adapter<CourtsRecycle
     @Override
     public CourtsRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //Inflate the layout and give à look to the rows
-        //TextView tv = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.court_row, parent, false);
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.court_row, parent, false);
         final ViewHolder vh = new ViewHolder(view);
@@ -66,7 +59,7 @@ public class CourtsRecyclerAdapter<T> extends RecyclerView.Adapter<CourtsRecycle
         if(item.getClass().equals(CourtEntity.class))
             holder.tvCourtAddress.setText(((CourtEntity) item).getAddress());
        if(item.getClass().equals(CourtEntity.class)) {
-           holder.tvCourtHourlyPrice.setText(Double.toString(((CourtEntity) item).getHourlyPrice()) + " CHF");
+           holder.tvCourtHourlyPrice.setText(((CourtEntity) item).getHourlyPrice() + " CHF");
        }
     }
 
@@ -79,6 +72,10 @@ public class CourtsRecyclerAdapter<T> extends RecyclerView.Adapter<CourtsRecycle
             return 0;
     }
 
+    /**
+     * Set data on the adapter.
+     * @param courts list containing the data.
+     */
     public void setData(List<T> courts){
         if(data == null){
             data = courts;
@@ -120,5 +117,4 @@ public class CourtsRecyclerAdapter<T> extends RecyclerView.Adapter<CourtsRecycle
             result.dispatchUpdatesTo(this);
         }
     }
-
 }

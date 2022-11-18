@@ -4,16 +4,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
-
 import ch.hevs.androiddev_badmintoncourtreservation.R;
-
 import ch.hevs.androiddev_badmintoncourtreservation.database.pojo.ReservationWithPlayerAndCourt;
 import ch.hevs.androiddev_badmintoncourtreservation.util.RecyclerViewItemClickListener;
-
 import java.util.List;
 import java.util.Objects;
 
@@ -23,7 +19,7 @@ public class ReservationsRecyclerAdapter<T> extends RecyclerView.Adapter<Reserva
     RecyclerViewItemClickListener rvClickListerner;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-
+        //Grab the views from the rows, similar to an "onCreate" method
         TextView tvCourtName, tvPlayerName, tvDate, tvTime;
 
         public ViewHolder(@NonNull View itemView) {
@@ -43,7 +39,6 @@ public class ReservationsRecyclerAdapter<T> extends RecyclerView.Adapter<Reserva
     @Override
     public ReservationsRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //Inflate the layout and give à look to the rows
-        //TextView tv = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.reservation_row, parent, false);
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.reservation_row, parent, false);
 
@@ -56,12 +51,10 @@ public class ReservationsRecyclerAdapter<T> extends RecyclerView.Adapter<Reserva
         return vh;
     }
 
-
-
     @Override
     public void onBindViewHolder(@NonNull ReservationsRecyclerAdapter.ViewHolder holder, int position) {
+        //Assign values to each row, depends on the position of the recycler view
         T item = data.get(position);
-
         if(item.getClass().equals(ReservationWithPlayerAndCourt.class))
             holder.tvCourtName.setText(((ReservationWithPlayerAndCourt) item).court.getCourtsName());
         if(item.getClass().equals(ReservationWithPlayerAndCourt.class))
@@ -80,6 +73,10 @@ public class ReservationsRecyclerAdapter<T> extends RecyclerView.Adapter<Reserva
             return 0;
     }
 
+    /**
+     * Set data on the adapter.
+     * @param reservationsPlayerCourt list containing the data.
+     */
     public void setData(List<T> reservationsPlayerCourt){
         if(data == null){
             data = reservationsPlayerCourt;
@@ -121,6 +118,4 @@ public class ReservationsRecyclerAdapter<T> extends RecyclerView.Adapter<Reserva
             result.dispatchUpdatesTo(this);
         }
     }
-
-
 }
