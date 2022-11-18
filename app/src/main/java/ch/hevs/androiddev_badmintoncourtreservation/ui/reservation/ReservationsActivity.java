@@ -28,7 +28,6 @@ public class ReservationsActivity extends BaseActivity {
 
     private ReservationsRecyclerAdapter<ReservationWithPlayerAndCourt> adapter;
     private ReservationListViewModel listViewModel;
-    private List<ReservationEntity> reservations;
     private List<ReservationWithPlayerAndCourt> reservationsPlayerCourt;
     private RecyclerView recyclerView;
 

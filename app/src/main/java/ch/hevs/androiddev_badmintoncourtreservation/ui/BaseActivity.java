@@ -51,9 +51,9 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         frameLayout = findViewById(R.id.flContent);
 
         drawerLayout = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toogle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toogle);
-        toogle.syncState();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -97,6 +97,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         Intent intent = null;
         navigationView.setCheckedItem(id);
 
+        //Handle the navigation of the drawer
         switch (id){
             case R.id.nav_court:
                 intent = new Intent(this, CourtsActivity.class);

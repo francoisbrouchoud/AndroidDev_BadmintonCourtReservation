@@ -41,7 +41,7 @@ public class AboutActivity extends BaseActivity {
             logo.setImageResource(R.drawable.hesso);
         }
 
-        submitButton = (Button) findViewById(R.id.submit_comment_button);
+        submitButton = findViewById(R.id.submit_comment_button);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
