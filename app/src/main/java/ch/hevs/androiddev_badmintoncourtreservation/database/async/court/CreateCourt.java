@@ -17,7 +17,6 @@ public class CreateCourt extends AsyncTask<CourtEntity, Void, Void> {
         this.callback = callback;
     }
 
-
     @Override
     protected Void doInBackground(CourtEntity... params) {
         try{
