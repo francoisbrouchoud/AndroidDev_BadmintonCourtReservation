@@ -5,6 +5,9 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+/**
+ * This entity contains all the fields of the court.
+ */
 @Entity(tableName = "courts",
         indices = {
                 @Index(

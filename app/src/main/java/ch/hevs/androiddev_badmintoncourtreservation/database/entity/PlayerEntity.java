@@ -5,6 +5,9 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+/**
+ * This entity contains all the fields of the player.
+ */
 @Entity(tableName = "players",
         indices = {
                 @Index(

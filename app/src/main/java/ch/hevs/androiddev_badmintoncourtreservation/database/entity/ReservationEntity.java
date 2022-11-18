@@ -8,6 +8,9 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+/**
+ * This entity contains all the fields required for a reservation.
+ */
 @Entity(tableName = "reservations",
         foreignKeys = {
                 @ForeignKey(
