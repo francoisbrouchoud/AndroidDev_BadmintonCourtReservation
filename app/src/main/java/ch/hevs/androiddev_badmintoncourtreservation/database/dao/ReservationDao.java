@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import ch.hevs.androiddev_badmintoncourtreservation.database.entity.ReservationEntity;
@@ -20,9 +21,19 @@ public interface ReservationDao {
     @Query("SELECT * FROM reservations WHERE id = :id")
     public abstract LiveData<ReservationEntity> getById(Long id);
 
+    /**
+     * Use to get reservations with its player and court
+     * @return livedata : list of the reservations with its player and court
+     */
+    @Transaction
     @Query("SELECT * FROM reservations")
     public abstract LiveData<List<ReservationWithPlayerAndCourt>> getReservationsWithPlayerAndCourt();
 
+    /**
+     * Use to get reservation with its player and court
+     * @return livedata : reservation with its player and court
+     */
+    @Transaction
     @Query("SELECT * FROM reservations WHERE id = :id")
     public abstract LiveData<ReservationWithPlayerAndCourt> getReservationWithPlayerAndCourt(Long id);
 
