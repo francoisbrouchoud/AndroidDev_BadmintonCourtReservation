@@ -8,6 +8,7 @@ import ch.hevs.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
 import ch.hevs.androiddev_badmintoncourtreservation.util.OnAsyncEventListener;
 
 public class DeleteCourt extends AsyncTask<CourtEntity, Void, Void> {
+
     private Application application;
     private OnAsyncEventListener callback;
     private Exception exception;
@@ -30,13 +31,13 @@ public class DeleteCourt extends AsyncTask<CourtEntity, Void, Void> {
     }
 
     @Override
-    protected void onPostExecute(Void aVoid){
-        if(callback != null)
-            if(exception != null){
+    protected void onPostExecute(Void aVoid) {
+        if (callback != null) {
+            if (exception == null) {
                 callback.onSuccess();
             } else {
                 callback.onFailure(exception);
             }
+        }
     }
-
 }
