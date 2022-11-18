@@ -15,7 +15,6 @@ import androidx.room.PrimaryKey;
                 )
         }
 )
-
 public class CourtEntity {
     @PrimaryKey(autoGenerate = true)
     private Long id;

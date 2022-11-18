@@ -39,15 +39,14 @@ import androidx.room.PrimaryKey;
 public class ReservationEntity {
     @PrimaryKey(autoGenerate = true)
     private Long id;
-    @ColumnInfo(name = "courtId") @NonNull
+    @NonNull
     private Long courtId;
-    @ColumnInfo(name = "playerId") @NonNull
+    @NonNull
     private Long playerId;
     @NonNull
     private String timeSlot;
     @NonNull
     private String reservationDate;
-
 
     @Ignore
     public ReservationEntity() {
@@ -102,6 +101,6 @@ public class ReservationEntity {
 
     @Override
     public String toString() {
-        return reservationDate.toString() + " " + courtId + " " + playerId;
+        return reservationDate + " " + courtId + " " + playerId;
     }
 }

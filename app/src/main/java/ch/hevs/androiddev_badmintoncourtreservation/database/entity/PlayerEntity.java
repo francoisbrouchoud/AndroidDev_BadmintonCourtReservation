@@ -14,7 +14,6 @@ import androidx.room.PrimaryKey;
                         value = {"id"}
                 )}
 )
-
 public class PlayerEntity {
     @PrimaryKey(autoGenerate = true)
     private Long id;
@@ -45,6 +44,7 @@ public class PlayerEntity {
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getFirstname() {
         return firstname;
     }
