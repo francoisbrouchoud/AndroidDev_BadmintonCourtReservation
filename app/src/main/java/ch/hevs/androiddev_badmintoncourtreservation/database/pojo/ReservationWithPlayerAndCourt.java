@@ -7,7 +7,9 @@ import ch.hevs.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
 import ch.hevs.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
 import ch.hevs.androiddev_badmintoncourtreservation.database.entity.ReservationEntity;
 
-
+/**
+ * Table reservation has relation with player and court
+ */
 public class ReservationWithPlayerAndCourt {
 
     @Embedded
