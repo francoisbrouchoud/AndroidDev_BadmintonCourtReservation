@@ -13,6 +13,9 @@ import ch.hevs.androiddev_badmintoncourtreservation.database.pojo.ReservationWit
 
 import java.util.List;
 
+/**
+ * Access the reservation data
+ */
 @Dao
 public interface ReservationDao {
     @Query("SELECT * FROM reservations")

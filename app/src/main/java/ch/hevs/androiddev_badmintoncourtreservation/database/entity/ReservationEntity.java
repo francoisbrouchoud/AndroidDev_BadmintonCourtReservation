@@ -35,7 +35,6 @@ import androidx.room.PrimaryKey;
             )
         }
 )
-
 public class ReservationEntity {
     @PrimaryKey(autoGenerate = true)
     private Long id;

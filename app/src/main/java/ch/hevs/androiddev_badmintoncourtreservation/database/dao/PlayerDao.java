@@ -11,6 +11,9 @@ import ch.hevs.androiddev_badmintoncourtreservation.database.entity.PlayerEntity
 
 import java.util.List;
 
+/**
+ * Access the player data
+ */
 @Dao
 public interface PlayerDao {
     @Query("SELECT * FROM players WHERE id = :id")
