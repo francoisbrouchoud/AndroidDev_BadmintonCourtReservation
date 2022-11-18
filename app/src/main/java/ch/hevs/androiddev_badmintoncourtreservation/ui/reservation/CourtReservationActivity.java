@@ -48,7 +48,7 @@ public class CourtReservationActivity extends BaseActivity {
     private PlayerEntity player;
 
     private ReservationEntity reservation;
-    private ReservationWithPlayerAndCourt reservationWithPlayers;
+    private ReservationWithPlayerAndCourt reservationWithPlayerAndCourt;
     private ReservationListViewModel reservationListViewModel;
     private ReservationViewModel reservationViewModel;
     private List<ReservationEntity> reservations;
@@ -185,13 +185,13 @@ public class CourtReservationActivity extends BaseActivity {
         if(isEdit){
             reservationViewModel.getReservationWithPlayerCourt().observe(this, reservationPlayers -> {
                         if (reservationPlayers != null) {
-                            reservationWithPlayers = reservationPlayers;
+                            reservationWithPlayerAndCourt = reservationPlayers;
                             reservation = reservationPlayers.reservation;
-                            tvCourtName.setText(reservationWithPlayers.court.getCourtsName());
-                            etReservationDate.setText(reservationWithPlayers.reservation.getReservationDate());
-                            spReservationTime.setSelection(getIdxFromSpTimeSlot(reservationWithPlayers.reservation.getTimeSlot()));
+                            tvCourtName.setText(reservationWithPlayerAndCourt.court.getCourtsName());
+                            etReservationDate.setText(reservationWithPlayerAndCourt.reservation.getReservationDate());
+                            spReservationTime.setSelection(getIdxFromSpTimeSlot(reservationWithPlayerAndCourt.reservation.getTimeSlot()));
                             tvCourtPrice.setText(Double.toString(reservationPlayers.court.getHourlyPrice()));
-                            int positionPlSp = getIdxFromPlayer(reservationWithPlayers.player);
+                            int positionPlSp = getIdxFromPlayer(reservationWithPlayerAndCourt.player);
                             spReservationPlayer.setSelection(positionPlSp);
                         }
                     }
