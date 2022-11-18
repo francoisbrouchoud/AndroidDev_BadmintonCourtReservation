@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.androiddev_badmintoncourtreservation'
+    namespace 'ch.hevs.androiddev_badmintoncourtreservation'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.androiddev_badmintoncourtreservation"
+        applicationId "ch.hevs.androiddev_badmintoncourtreservation"
         minSdk 28
         targetSdk 33
         versionCode 1
