@@ -19,7 +19,7 @@ public class ReservationViewModel extends AndroidViewModel {
 
     private Application application;
     private ReservationRepository repository;
-    private final MediatorLiveData<ReservationEntity> observableReservation;
+    // final MediatorLiveData<ReservationEntity> observableReservation;
     private final MediatorLiveData<ReservationWithPlayerAndCourt> observableReservationPlayerCourt;
 
     public ReservationViewModel(@NonNull Application application, final long reservationId, ReservationRepository reservationRepository, PlayerRepository playerRepository, CourtRepository courtRepository) {
@@ -28,18 +28,12 @@ public class ReservationViewModel extends AndroidViewModel {
         this.application = application;
         repository = reservationRepository;
 
-        observableReservation = new MediatorLiveData<>();
         observableReservationPlayerCourt = new MediatorLiveData<>();
-        observableReservation.setValue(null);
         observableReservationPlayerCourt.setValue(null);
-
-        LiveData<ReservationEntity> reservation;
-        reservation = repository.getReservation(reservationId, application);
 
         LiveData<ReservationWithPlayerAndCourt> reservationPlayerCourt;
         reservationPlayerCourt = reservationRepository.getReservationWithPlayerAndCourt(reservationId, application);
 
-        observableReservation.addSource(reservation, observableReservation::setValue);
         observableReservationPlayerCourt.addSource(reservationPlayerCourt, observableReservationPlayerCourt::setValue);
     }
 
@@ -64,14 +58,6 @@ public class ReservationViewModel extends AndroidViewModel {
             //Create a new view model of the reservation
             return (T) new ReservationViewModel(application, reservationId, reservationRepository, playerRepository, courtRepository);
         }
-    }
-
-    /**
-     * Get the observable reservation.
-     * @return LiveData of the reservation.
-     */
-    public LiveData<ReservationEntity> getReservation(){
-        return observableReservation;
     }
 
     /**
