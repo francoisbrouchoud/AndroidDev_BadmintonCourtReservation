@@ -131,7 +131,6 @@ public class EditCourtActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        toast.show();
     }
 
     /**
