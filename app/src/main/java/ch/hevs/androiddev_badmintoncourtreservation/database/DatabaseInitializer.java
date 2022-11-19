@@ -5,6 +5,7 @@ import android.util.Log;
 
 import ch.hevs.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
 import ch.hevs.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
+import ch.hevs.androiddev_badmintoncourtreservation.database.entity.ReservationEntity;
 
 /**
  * Generate sample data
@@ -28,20 +29,16 @@ public class DatabaseInitializer {
         db.courtDao().insert(court);
     }
 
-    /*
     private static void addReservation(final AppDatabase db, final Long courtId, final Long playerId, String timeSlot, String reservationDate){
         ReservationEntity reservation = new ReservationEntity(courtId, playerId, timeSlot, reservationDate);
         db.reservationDao().insert(reservation);
     }
-    */
+
 
     private static void populateWithSampleData(AppDatabase db) {
-        db.playerDao().deleteAll();
 
-        addPlayer(db,
-                "Luca", "Del Buono", "28.12.2000", "m", "0791234567", "1950 Sion");
-        addPlayer(db,
-                "François", "Brouchoud", "07.08.1998", "m", "0791234567", "1890 St-Maurice");
+        addPlayer(db, "Luca", "Del Buono", "28.12.2000", "m", "0791234567", "1950 Sion");
+        addPlayer(db, "François", "Brouchoud", "07.08.1998", "m", "0791234567", "1890 St-Maurice");
         addPlayer(db, "Steve", "Jobs", "24.02.1955", "m", "012345678", "San Francisco");
         addPlayer(db, "Elon", "Musk", "28.06.1971", "m", "012345678", "Pretoria");
         addPlayer(db, "Larry", "Page", "26.03.1973", "m", "012345678", "East Lansing");
@@ -51,7 +48,6 @@ public class DatabaseInitializer {
         addPlayer(db, "Serena", "Williams", "26.09.1981", "f", "012345678", "Saginaw");
         addPlayer(db, "Bugs", "Bunny", "01.01.1940", "Other", "012345678", "US");
         addPlayer(db, "Homer", "Simpson", "01.01.1980", "Other", "012345678", "US");
-        //Avant d'ajouter d'autres données d'autres tables
 
         try {
             Thread.sleep(1000);
@@ -67,9 +63,9 @@ public class DatabaseInitializer {
         addCourt(db, "Centre de Tennis La Moubra 1", "Salle bien refroidie", "Route de la Moubra 73, Crans-Montana",  15);
         addCourt(db, "Centre de Tennis La Moubra 2", "Salle bien refroidie", "Route de la Moubra 73, Crans-Montana",  15);
         addCourt(db, "Centre de Tennis La Moubra 3", "Salle bien refroidie", "Route de la Moubra 73, Crans-Montana",  15);
-        addCourt(db, "Martigny Sport : Terrain 1", "Dans la zone industrielle", "Rue du Châble-Bet 22, 1920 Martigny",  20);
-        addCourt(db, "Martigny Sport : Terrain 2", "Dans la zone industrielle", "Rue du Châble-Bet 22, 1920 Martigny",  20);
-        addCourt(db, "Martigny Sport : Terrain 2", "Dans la zone industrielle", "Rue du Châble-Bet 22, 1920 Martigny",  20);
+        addCourt(db, "Martigny Sport 1", "Dans la zone industrielle", "Rue du Châble-Bet 22, 1920 Martigny",  20);
+        addCourt(db, "Martigny Sport 2", "Dans la zone industrielle", "Rue du Châble-Bet 22, 1920 Martigny",  20);
+        addCourt(db, "Martigny Sport 3", "Dans la zone industrielle", "Rue du Châble-Bet 22, 1920 Martigny",  20);
 
 
         try {
@@ -78,7 +74,8 @@ public class DatabaseInitializer {
             e.printStackTrace();
         }
 
-        //addReservation(db, 1L, 1L, "16-18", "12.11.2022");
+        addReservation(db, 2L, 1L, "19:00–20:00", "25.11.2022");
+        addReservation(db, 5L, 2L, "14:00–15:00", "26.11.2022");
     }
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
