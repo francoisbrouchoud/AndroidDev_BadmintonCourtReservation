@@ -32,4 +32,5 @@ The about page displays some infos about the app. Furthermore it's possible to w
 The database is implemented locally on the phone with Room API.
 
 Here is the database diagram:
+
 <img src="TableAndroidReservation.png" alt="Database table diagram" width="70%">
