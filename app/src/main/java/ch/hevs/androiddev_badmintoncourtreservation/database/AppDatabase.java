@@ -87,9 +87,4 @@ public abstract class AppDatabase extends RoomDatabase{
     private void setDatabaseCreated(){
         mIsDatabaseCreated.postValue(true);
     }
-
-    public LiveData<Boolean> getDatabaseCreated() {
-        return mIsDatabaseCreated;
-    }
-
 }

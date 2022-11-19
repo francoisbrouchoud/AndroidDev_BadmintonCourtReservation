@@ -36,10 +36,6 @@ public class ReservationRepository {
         return ((BaseApp) application).getDatabase().reservationDao().getAll();
     }
 
-    public LiveData<ReservationEntity> getReservation(final Long id, Application application){
-        return ((BaseApp) application).getDatabase().reservationDao().getById(id);
-    }
-
     /**
      * Live data for reservations with player and court (POJO)
      * @param application

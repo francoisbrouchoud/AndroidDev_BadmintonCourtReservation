@@ -1,7 +1,6 @@
 package ch.hevs.androiddev_badmintoncourtreservation.database.entity;
 
 import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
