@@ -27,4 +27,9 @@ It is possible to switch between light and dark mode. This mode will be saved wh
 ### About
 The about page displays some infos about the app. Furthermore it's possible to write feedback and send it to the developers by email. The HES-SO logo will automatically refresh depending on the theme (dark or light).
 
+
+## Database
+The database is implemented locally on the phone with Room API.
+
+Here is the database diagram:
 <img src="TableAndroidReservation.png" alt="Database table diagram" width="70%">
