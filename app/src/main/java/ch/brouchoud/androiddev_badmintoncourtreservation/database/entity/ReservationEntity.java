@@ -1,83 +1,54 @@
 package ch.brouchoud.androiddev_badmintoncourtreservation.database.entity;
 
-import androidx.annotation.NonNull;
-import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.Ignore;
-import androidx.room.Index;
-import androidx.room.PrimaryKey;
+import com.google.firebase.firestore.Exclude;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This entity contains all the fields required for a reservation.
  */
-@Entity(tableName = "reservations",
-        foreignKeys = {
-                @ForeignKey(
-                        entity = PlayerEntity.class,
-                        parentColumns = "id",
-                        childColumns = "playerId",
-                        onDelete = ForeignKey.CASCADE
-                ),
-                @ForeignKey(
-                        entity = CourtEntity.class,
-                        parentColumns = "id",
-                        childColumns = "courtId",
-                        onDelete = ForeignKey.CASCADE
-                )
-        },
-        indices = {
-            @Index(
-                    value = "playerId"
-            ),
-            @Index(
-                    value = "courtId"
-            )
-        }
-)
+
 public class ReservationEntity {
-    @PrimaryKey(autoGenerate = true)
-    private Long id;
-    @NonNull
-    private Long courtId;
-    @NonNull
-    private Long playerId;
-    @NonNull
+    private String id;
+    private String courtId;
+    private String playerId;
     private String timeSlot;
-    @NonNull
     private String reservationDate;
 
     @Ignore
     public ReservationEntity() {
     }
 
-    public ReservationEntity(Long courtId, Long playerId, String timeSlot, String reservationDate) {
+    public ReservationEntity(String courtId, String playerId, String timeSlot, String reservationDate) {
         this.courtId = courtId;
         this.playerId = playerId;
         this.timeSlot = timeSlot;
         this.reservationDate = reservationDate;
     }
-
-    public Long getId() {
+    @Exclude
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getCourtId() {
+    public String getCourtId() {
         return courtId;
     }
 
-    public void setCourtId(Long courtId) {
+    public void setCourtId(String courtId) {
         this.courtId = courtId;
     }
 
-    public Long getPlayerId() {
+    public String getPlayerId() {
         return playerId;
     }
 
-    public void setPlayerId(Long playerId) {
+    public void setPlayerId(String playerId) {
         this.playerId = playerId;
     }
 
@@ -100,5 +71,16 @@ public class ReservationEntity {
     @Override
     public String toString() {
         return reservationDate + " " + courtId + " " + playerId;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("timeSlot", timeSlot);
+        result.put("reservationDate", reservationDate);
+        result.put("courtId", courtId);
+        result.put("playerId", playerId);
+
+        return result;
     }
 }
