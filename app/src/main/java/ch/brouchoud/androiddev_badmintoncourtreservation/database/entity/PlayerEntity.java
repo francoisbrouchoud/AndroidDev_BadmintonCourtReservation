@@ -1,22 +1,19 @@
 package ch.brouchoud.androiddev_badmintoncourtreservation.database.entity;
 
-import androidx.room.Entity;
 import androidx.room.Ignore;
-import androidx.room.Index;
-import androidx.room.PrimaryKey;
+
+import com.google.firebase.firestore.Exclude;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This entity contains all the fields of the player.
  */
-@Entity(tableName = "players",
-        indices = {
-                @Index(
-                        value = {"id"}
-                )}
-)
+
 public class PlayerEntity {
-    @PrimaryKey(autoGenerate = true)
-    private Long id;
+
+    private String id;
     private String firstname;
     private String lastname;
     private String birthdate;
@@ -37,11 +34,12 @@ public class PlayerEntity {
         this.address = address;
     }
 
-    public Long getId() {
+    @Exclude
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -105,5 +103,18 @@ public class PlayerEntity {
     @Override
     public String toString() {
         return firstname + " " + lastname;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("firstname", firstname);
+        result.put("lastname", lastname);
+        result.put("birthdate", birthdate);
+        result.put("gender", gender);
+        result.put("phone", phone);
+        result.put("address", address);
+
+        return result;
     }
 }
