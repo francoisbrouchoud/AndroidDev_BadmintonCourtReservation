@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "340843559923",
+    "project_id": "court-reservation-9c8e7",
+    "storage_bucket": "court-reservation-9c8e7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:340843559923:android:a766dff555f03195067086",
+        "android_client_info": {
+          "package_name": "ch.brouchoud.androiddev_badmintoncourtreservation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "340843559923-0nhk9fd3das4q2m6ndjfle4eauqrtrmm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ch.brouchoud.androiddev_badmintoncourtreservation",
+            "certificate_hash": "283e23d178891704e1c1632f0d4a918c91d4fc6b"
+          }
+        },
+        {
+          "client_id": "340843559923-cseqoo48kpjue2rhitmb82i2ttv80jc6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdFTWXL0m8tWxD-H0rtoKttHYSOYIgNl4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "340843559923-cseqoo48kpjue2rhitmb82i2ttv80jc6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
