@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ch.hevs.androiddev_badmintoncourtreservation.ui.player.PlayersActivity">
+    tools:context="ch.brouchoud.androiddev_badmintoncourtreservation.ui.player.PlayersActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/PlayerRv"

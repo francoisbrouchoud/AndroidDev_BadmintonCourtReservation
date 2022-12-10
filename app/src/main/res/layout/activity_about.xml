@@ -12,7 +12,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         android:orientation="vertical"
-        tools:context="ch.hevs.androiddev_badmintoncourtreservation.ui.management.AboutActivity">
+        tools:context="ch.brouchoud.androiddev_badmintoncourtreservation.ui.management.AboutActivity">
 
         <TextView
             android:layout_marginTop="16dp"

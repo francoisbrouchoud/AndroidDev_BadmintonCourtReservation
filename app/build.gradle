@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'ch.hevs.androiddev_badmintoncourtreservation'
+    namespace 'ch.brouchoud.androiddev_badmintoncourtreservation'
     compileSdk 33
 
     defaultConfig {
-        applicationId "ch.hevs.androiddev_badmintoncourtreservation"
+        applicationId "ch.brouchoud.androiddev_badmintoncourtreservation"
         minSdk 28
         targetSdk 33
         versionCode 1
