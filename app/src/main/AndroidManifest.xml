@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    package="ch.brouchoud.androiddev_badmintoncourtreservation">
 
     <application
-        android:name="ch.brouchoud.androiddev_badmintoncourtreservation.BaseApp"
+        android:name=".BaseApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AndroidDev_BadmintonCourtReservation"
-        tools:targetApi="31">
+        android:theme="@style/Theme.AndroidDev_BadmintonCourtReservation">
 
         <activity android:name="ch.brouchoud.androiddev_badmintoncourtreservation.ui.BaseActivity"
             android:theme="@style/Theme.AndroidDev_BadmintonCourtReservation"/>
