@@ -1,40 +1,24 @@
-plugins {
-    id 'com.android.application'
-}
+apply plugin: 'com.android.application'
 
 android {
-    namespace 'ch.brouchoud.androiddev_badmintoncourtreservation'
-    compileSdk 33
-
+    compileSdkVersion 33
     defaultConfig {
         applicationId "ch.brouchoud.androiddev_badmintoncourtreservation"
-        minSdk 28
-        targetSdk 33
+        minSdkVersion 28
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = ["room.schemaLocation":
-                                     "$projectDir/schemas".toString()]
-            }
-        }
     }
-
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
-    }
-    buildFeatures {
-        viewBinding true
     }
 }
 
@@ -50,14 +34,23 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test:runner:1.4.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-
-    // Android Architecture Components
     def room_version = "2.3.0"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
 
+    // Android Architecture Components
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     implementation "androidx.lifecycle:lifecycle-common-java8:2.3.1"
     implementation 'androidx.preference:preference:1.1.0'
-}
+    // Firebase Dependencies
+    implementation platform('com.google.firebase:firebase-bom:31.1.1')
 
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+
+    // TODO: Add the dependencies for Firebase products you want to use
+    // See https://firebase.google.com/docs/android/setup#available-libraries
+    // For example, add the dependencies for Firebase Authentication and Cloud Firestore
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-firestore'
+}
+apply plugin: 'com.google.gms.google-services'
