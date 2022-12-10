@@ -1,44 +1,40 @@
 package ch.brouchoud.androiddev_badmintoncourtreservation.database.entity;
 
-import androidx.room.Entity;
 import androidx.room.Ignore;
-import androidx.room.Index;
-import androidx.room.PrimaryKey;
+
+import com.google.firebase.firestore.Exclude;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This entity contains all the fields of the court.
  */
-@Entity(tableName = "courts",
-        indices = {
-                @Index(
-                        value = {"id"}
-                )
-        }
-)
+
 public class CourtEntity {
-    @PrimaryKey(autoGenerate = true)
-    private Long id;
+    private String id;
     private String courtsName;
     private String description;
     private String address;
-    private double hourlyPrice;
+    private Double hourlyPrice;
 
     @Ignore
     public CourtEntity() {
     }
 
-    public CourtEntity(String courtsName, String description, String address, double hourlyPrice) {
+    public CourtEntity(String courtsName, String description, String address, Double hourlyPrice) {
         this.courtsName = courtsName;
         this.description = description;
         this.address = address;
         this.hourlyPrice = hourlyPrice;
     }
 
-    public Long getId() {
+    @Exclude
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -70,7 +66,7 @@ public class CourtEntity {
         return hourlyPrice;
     }
 
-    public void setHourlyPrice(double hourlyPrice) {
+    public void setHourlyPrice(Double hourlyPrice) {
         this.hourlyPrice = hourlyPrice;
     }
 
@@ -86,5 +82,16 @@ public class CourtEntity {
     @Override
     public String toString() {
         return courtsName;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("courtsName", courtsName);
+        result.put("description", description);
+        result.put("address", address);
+        result.put("hourlyPrice", hourlyPrice);
+
+        return result;
     }
 }
