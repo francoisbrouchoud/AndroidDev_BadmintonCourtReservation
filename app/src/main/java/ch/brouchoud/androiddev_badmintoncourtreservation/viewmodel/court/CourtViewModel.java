@@ -27,9 +27,11 @@ public class CourtViewModel extends AndroidViewModel {
         observableCourt = new MediatorLiveData<>();
         observableCourt.setValue(null);
 
-        LiveData<CourtEntity> court;
-        court = repository.getCourt(courtId);
-        observableCourt.addSource(court, observableCourt::setValue);
+        if(courtId != null){
+            LiveData<CourtEntity> court;
+            court = repository.getCourt(courtId);
+            observableCourt.addSource(court, observableCourt::setValue);
+        }
     }
 
     public static class Factory extends ViewModelProvider.NewInstanceFactory{
@@ -63,7 +65,7 @@ public class CourtViewModel extends AndroidViewModel {
      * @param callback
      */
     public void createCourt(CourtEntity court, OnAsyncEventListener callback){
-        repository.insert(court, callback);
+        ((BaseApp) getApplication()).getCourtRepository().insert(court, callback);
     }
 
     /**
@@ -72,7 +74,7 @@ public class CourtViewModel extends AndroidViewModel {
      * @param callback
      */
     public void updateCourt(CourtEntity court, OnAsyncEventListener callback){
-        repository.update(court, callback);
+        ((BaseApp) getApplication()).getCourtRepository().update(court, callback);
     }
 
     /**
@@ -81,6 +83,6 @@ public class CourtViewModel extends AndroidViewModel {
      * @param callback
      */
     public void deleteCourt(CourtEntity court, OnAsyncEventListener callback){
-        repository.delete(court, callback);
+        ((BaseApp) getApplication()).getCourtRepository().delete(court, callback);
     }
 }

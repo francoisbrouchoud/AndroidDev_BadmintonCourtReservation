@@ -27,9 +27,11 @@ public class PlayerViewModel extends AndroidViewModel {
         observablePlayer = new MediatorLiveData<>();
         observablePlayer.setValue(null);
 
-        LiveData<PlayerEntity> player;
-        player = repository.getPlayer(playerId);
-        observablePlayer.addSource(player, observablePlayer::setValue);
+        if(playerId != null){
+            LiveData<PlayerEntity> player;
+            player = repository.getPlayer(playerId);
+            observablePlayer.addSource(player, observablePlayer::setValue);
+        }
     }
 
     public static class Factory extends ViewModelProvider.NewInstanceFactory{

@@ -31,10 +31,11 @@ public class ReservationViewModel extends AndroidViewModel {
         observableReservationPlayerCourt = new MediatorLiveData<>();
         observableReservationPlayerCourt.setValue(null);
 
-        LiveData<ReservationWithPlayerAndCourt> reservationPlayerCourt;
-        reservationPlayerCourt = reservationRepository.getReservationWithPlayerAndCourt(reservationId);
-
-        observableReservationPlayerCourt.addSource(reservationPlayerCourt, observableReservationPlayerCourt::setValue);
+        if(reservationId != null){
+            LiveData<ReservationWithPlayerAndCourt> reservationPlayerCourt;
+            reservationPlayerCourt = reservationRepository.getReservationWithPlayerAndCourt(reservationId);
+            observableReservationPlayerCourt.addSource(reservationPlayerCourt, observableReservationPlayerCourt::setValue);
+        }
     }
 
     public static class Factory extends ViewModelProvider.NewInstanceFactory{

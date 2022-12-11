@@ -53,7 +53,7 @@ public class EditCourtActivity extends BaseActivity {
         button = findViewById(R.id.button);
 
         String courtId = getIntent().getStringExtra("courtId");
-        if(Objects.equals(courtId, "0")){
+        if(courtId == null){
             //If the courtId is 0 we assume that we are creating a new one
             setTitle(getString(R.string.title_editCourtActivity_new));
             toast = Toast.makeText(this, R.string.toast_editCourtActivity_new, Toast.LENGTH_LONG);

@@ -62,7 +62,7 @@ public class EditPlayerActivity extends BaseActivity {
         spPlayerGender.setAdapter(adapter);
 
         String playerId = getIntent().getStringExtra("playerId");
-        if(Objects.equals(playerId, "0")){
+        if(playerId == null){
             //If the playerId is 0 we assume that we are creating a new one
             setTitle(getString(R.string.title_editPlayerActivity_new));
             toast = Toast.makeText(this, R.string.toast_editPlayerActivity_new, Toast.LENGTH_LONG);

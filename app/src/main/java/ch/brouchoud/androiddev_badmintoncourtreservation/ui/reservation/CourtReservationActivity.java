@@ -104,7 +104,7 @@ public class CourtReservationActivity extends BaseActivity {
         spReservationTime.setAdapter(adapter);
 
         String reservationId = getIntent().getStringExtra("reservationId");
-        if(Objects.equals(reservationId, "0")){
+        if(reservationId == null){
             setTitle("New court reservation");
             isEdit = false;
         }else{
