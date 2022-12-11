@@ -10,17 +10,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-import ch.brouchoud.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
 import ch.brouchoud.androiddev_badmintoncourtreservation.database.entity.ReservationEntity;
+import ch.brouchoud.androiddev_badmintoncourtreservation.database.pojo.ReservationWithPlayerAndCourt;
 
-public class ReservationLiveData extends LiveData<ReservationEntity> {
+public class ReservationWithPlayerAndCourtLiveData extends LiveData<ReservationWithPlayerAndCourt> {
 
-    private static final String TAG = "ReservationLiveData";
+    private static final String TAG = "ReservationWithPlayerAndCourtLiveData";
 
     private final DatabaseReference reference;
-    private final ReservationLiveData.MyValueEventListener listener = new ReservationLiveData.MyValueEventListener();
+    private final ReservationWithPlayerAndCourtLiveData.MyValueEventListener listener = new ReservationWithPlayerAndCourtLiveData.MyValueEventListener();
 
-    public ReservationLiveData(DatabaseReference ref){
+    public ReservationWithPlayerAndCourtLiveData(DatabaseReference ref){
         reference = ref;
     }
 

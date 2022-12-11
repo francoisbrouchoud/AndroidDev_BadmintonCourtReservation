@@ -38,8 +38,8 @@ public class PlayerLiveData extends LiveData<PlayerEntity> {
     private class MyValueEventListener implements ValueEventListener {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            CourtEntity entity = dataSnapshot.getValue(CourtEntity.class);
-
+            PlayerEntity entity = dataSnapshot.getValue(PlayerEntity.class);
+            entity.setId(dataSnapshot.getKey());
         }
 
         @Override

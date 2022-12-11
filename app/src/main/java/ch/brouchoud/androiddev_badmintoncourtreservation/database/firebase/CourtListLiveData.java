@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ch.brouchoud.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
@@ -39,12 +40,22 @@ public class CourtListLiveData extends LiveData<List<CourtEntity>> {
     private class MyValueEventListener implements ValueEventListener {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+            setValue(toCourts(dataSnapshot));
         }
 
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
             Log.e(TAG, "Can't listen to query " + reference, databaseError.toException());
         }
+    }
+
+    private List<CourtEntity> toCourts(DataSnapshot snapshot) {
+        List<CourtEntity> courts = new ArrayList<>();
+        for (DataSnapshot childSnapshot : snapshot.getChildren()) {
+            CourtEntity entity = childSnapshot.getValue(CourtEntity.class);
+            entity.setId(childSnapshot.getKey());
+            courts.add(entity);
+        }
+        return courts;
     }
 }
