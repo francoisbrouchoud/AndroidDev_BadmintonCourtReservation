@@ -84,7 +84,7 @@ public class CourtReservationActivity extends BaseActivity {
         button = findViewById(R.id.bt_cr_confirm);
 
         //Get the court from the intent
-        long courtId = getIntent().getLongExtra("courtId", 0);
+        String courtId = getIntent().getStringExtra("courtId");
         CourtViewModel.Factory factoryCourt = new CourtViewModel.Factory(getApplication(), courtId);
         courtViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) factoryCourt).get(CourtViewModel.class);
 
@@ -103,8 +103,8 @@ public class CourtReservationActivity extends BaseActivity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.times, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         spReservationTime.setAdapter(adapter);
 
-        long reservationId = getIntent().getLongExtra("reservationId", 0);
-        if(reservationId == 0){
+        String reservationId = getIntent().getStringExtra("reservationId");
+        if(Objects.equals(reservationId, "0")){
             setTitle("New court reservation");
             isEdit = false;
         }else{
@@ -361,9 +361,9 @@ public class CourtReservationActivity extends BaseActivity {
      * @param id of the reservation to retrieve.
      * @return the reservation from the DB.
      */
-    private ReservationEntity getReservationFromDb(Long id){
+    private ReservationEntity getReservationFromDb(String id){
         for (ReservationEntity r : reservations){
-            if(r.getId()==id){
+            if(Objects.equals(r.getId(), id)){
                 return r;
             }
         }

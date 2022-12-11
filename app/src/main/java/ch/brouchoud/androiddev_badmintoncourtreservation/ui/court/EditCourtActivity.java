@@ -11,6 +11,9 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.Objects;
+
 import ch.brouchoud.androiddev_badmintoncourtreservation.R;
 import ch.brouchoud.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
 import ch.brouchoud.androiddev_badmintoncourtreservation.ui.BaseActivity;
@@ -49,8 +52,8 @@ public class EditCourtActivity extends BaseActivity {
         etCourtDescription = findViewById(R.id.et_CourtsDescription);
         button = findViewById(R.id.button);
 
-        long courtId = getIntent().getLongExtra("courtId", 0);
-        if(courtId == 0){
+        String courtId = getIntent().getStringExtra("courtId");
+        if(Objects.equals(courtId, "0")){
             //If the courtId is 0 we assume that we are creating a new one
             setTitle(getString(R.string.title_editCourtActivity_new));
             toast = Toast.makeText(this, R.string.toast_editCourtActivity_new, Toast.LENGTH_LONG);

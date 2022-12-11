@@ -20,6 +20,7 @@ import ch.brouchoud.androiddev_badmintoncourtreservation.util.OnAsyncEventListen
 import ch.brouchoud.androiddev_badmintoncourtreservation.viewmodel.player.PlayerViewModel;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Objects;
 
 public class EditPlayerActivity extends BaseActivity {
 
@@ -60,8 +61,8 @@ public class EditPlayerActivity extends BaseActivity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.genders, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         spPlayerGender.setAdapter(adapter);
 
-        long playerId = getIntent().getLongExtra("playerId", 0);
-        if(playerId == 0){
+        String playerId = getIntent().getStringExtra("playerId");
+        if(Objects.equals(playerId, "0")){
             //If the playerId is 0 we assume that we are creating a new one
             setTitle(getString(R.string.title_editPlayerActivity_new));
             toast = Toast.makeText(this, R.string.toast_editPlayerActivity_new, Toast.LENGTH_LONG);
