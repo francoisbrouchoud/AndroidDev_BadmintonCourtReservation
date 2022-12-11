@@ -21,7 +21,7 @@ public class ReservationListLiveData extends LiveData<List<ReservationEntity>> {
     private static final String TAG = "ReservationListLiveData";
 
     private final DatabaseReference reference;
-    private final ReservationListLiveData.MyValueEventListener listener = new ReservationListLiveData.MyValueEventListener();
+    private final MyValueEventListener listener = new MyValueEventListener();
 
     public ReservationListLiveData(DatabaseReference ref) {
         reference = ref;
@@ -41,7 +41,7 @@ public class ReservationListLiveData extends LiveData<List<ReservationEntity>> {
     private class MyValueEventListener implements ValueEventListener {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            toReservations(dataSnapshot);
+            setValue(toReservations(dataSnapshot));
         }
 
         @Override
