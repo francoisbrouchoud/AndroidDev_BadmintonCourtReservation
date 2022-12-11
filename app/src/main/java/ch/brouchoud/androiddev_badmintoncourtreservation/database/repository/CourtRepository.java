@@ -3,12 +3,14 @@ package ch.brouchoud.androiddev_badmintoncourtreservation.database.repository;
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
+import androidx.preference.Preference;
 
-import ch.brouchoud.androiddev_badmintoncourtreservation.BaseApp;
-import ch.brouchoud.androiddev_badmintoncourtreservation.database.async.court.CreateCourt;
-import ch.brouchoud.androiddev_badmintoncourtreservation.database.async.court.DeleteCourt;
-import ch.brouchoud.androiddev_badmintoncourtreservation.database.async.court.UpdateCourt;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import ch.brouchoud.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
+import ch.brouchoud.androiddev_badmintoncourtreservation.database.firebase.CourtListLiveData;
+import ch.brouchoud.androiddev_badmintoncourtreservation.database.firebase.CourtLiveData;
 import ch.brouchoud.androiddev_badmintoncourtreservation.util.OnAsyncEventListener;
 
 import java.util.List;
@@ -31,26 +33,58 @@ public class CourtRepository {
         return instance;
     }
 
-    public LiveData<CourtEntity> getCourt(final Long id, Application application){
-        return ((BaseApp) application).getDatabase().courtDao().getById(id);
+    public LiveData<CourtEntity> getCourt(final String id){
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("courts")
+                .child(id);
+        return new CourtLiveData(reference);
     }
 
-    public LiveData<List<CourtEntity>> getCourts(Application application){
-        return ((BaseApp) application).getDatabase().courtDao().getAll();
+    public LiveData<List<CourtEntity>> getCourts(){
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("courts");
+        return new CourtListLiveData(reference);
     }
 
-    public void insert(final CourtEntity court, OnAsyncEventListener callback,
-                       Application application) {
-        new CreateCourt(application, callback).execute(court);
+    public void insert(final CourtEntity court, OnAsyncEventListener callback) {
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("courts");
+        String key = reference.push().getKey();
+        FirebaseDatabase.getInstance()
+                .getReference("courts")
+                .child(key)
+                .setValue(court, (databaseError, databaseReference) -> {
+                    if (databaseError != null) {
+                        callback.onFailure(databaseError.toException());
+                    } else {
+                        callback.onSuccess();
+                    }
+                });
     }
 
-    public void update(final CourtEntity court, OnAsyncEventListener callback,
-                       Application application) {
-        new UpdateCourt(application, callback).execute(court);
+    public void update(final CourtEntity court, OnAsyncEventListener callback) {
+        FirebaseDatabase.getInstance()
+                .getReference("courts")
+                .child(court.getId())
+                .updateChildren(court.toMap(), (databaseError, databaseReference) -> {
+                    if (databaseError != null) {
+                        callback.onFailure(databaseError.toException());
+                    } else {
+                        callback.onSuccess();
+                    }
+                });
     }
 
-    public void delete(final CourtEntity court, OnAsyncEventListener callback,
-                       Application application) {
-        new DeleteCourt(application, callback).execute(court);
+    public void delete(final CourtEntity court, OnAsyncEventListener callback) {
+      FirebaseDatabase.getInstance()
+              .getReference("courts")
+              .child(court.getId())
+              .removeValue((databaseError, databaseReference) -> {
+                  if (databaseError != null) {
+                      callback.onFailure(databaseError.toException());
+                  } else {
+                      callback.onSuccess();
+                  }
+              });
     }
 }
