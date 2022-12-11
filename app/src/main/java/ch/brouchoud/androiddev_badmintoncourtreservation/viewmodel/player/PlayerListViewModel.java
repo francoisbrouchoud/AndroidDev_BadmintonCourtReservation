@@ -29,7 +29,7 @@ public class PlayerListViewModel extends AndroidViewModel {
         observablePlayers = new MediatorLiveData<>();
         observablePlayers.setValue(null);
 
-        LiveData<List<PlayerEntity>> players = playerRepository.getPlayers(application);
+        LiveData<List<PlayerEntity>> players = playerRepository.getPlayers();
         observablePlayers.addSource(players, observablePlayers::setValue);
     }
 
@@ -65,6 +65,6 @@ public class PlayerListViewModel extends AndroidViewModel {
      * @param callback
      */
     public void deletePlayer(PlayerEntity player, OnAsyncEventListener callback){
-        repository.delete(player, callback, application);
+        repository.delete(player, callback);
     }
 }

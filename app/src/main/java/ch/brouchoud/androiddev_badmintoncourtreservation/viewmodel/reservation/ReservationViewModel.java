@@ -22,7 +22,7 @@ public class ReservationViewModel extends AndroidViewModel {
     // final MediatorLiveData<ReservationEntity> observableReservation;
     private final MediatorLiveData<ReservationWithPlayerAndCourt> observableReservationPlayerCourt;
 
-    public ReservationViewModel(@NonNull Application application, final long reservationId, ReservationRepository reservationRepository, PlayerRepository playerRepository, CourtRepository courtRepository) {
+    public ReservationViewModel(@NonNull Application application, final String reservationId, ReservationRepository reservationRepository, PlayerRepository playerRepository, CourtRepository courtRepository) {
         super(application);
 
         this.application = application;
@@ -32,7 +32,7 @@ public class ReservationViewModel extends AndroidViewModel {
         observableReservationPlayerCourt.setValue(null);
 
         LiveData<ReservationWithPlayerAndCourt> reservationPlayerCourt;
-        reservationPlayerCourt = reservationRepository.getReservationWithPlayerAndCourt(reservationId, application);
+        reservationPlayerCourt = reservationRepository.getReservationWithPlayerAndCourt(reservationId);
 
         observableReservationPlayerCourt.addSource(reservationPlayerCourt, observableReservationPlayerCourt::setValue);
     }
@@ -40,12 +40,12 @@ public class ReservationViewModel extends AndroidViewModel {
     public static class Factory extends ViewModelProvider.NewInstanceFactory{
         @NonNull
         private final Application application;
-        private final long reservationId;
+        private final String reservationId;
         private final ReservationRepository reservationRepository;
         private final PlayerRepository playerRepository;
         private final CourtRepository courtRepository;
 
-        public Factory(@NonNull Application application, long reservationId) {
+        public Factory(@NonNull Application application, String reservationId) {
             this.application = application;
             this.reservationId = reservationId;
             reservationRepository = ((BaseApp) application).getReservationRepository();
@@ -74,7 +74,7 @@ public class ReservationViewModel extends AndroidViewModel {
      * @param callback
      */
     public void createReservation(ReservationEntity reservation, OnAsyncEventListener callback){
-        repository.insert(reservation, callback, application);
+        repository.insert(reservation, callback);
     }
 
     /**
@@ -83,6 +83,6 @@ public class ReservationViewModel extends AndroidViewModel {
      * @param callback
      */
     public void updateReservation(ReservationEntity reservation, OnAsyncEventListener callback){
-        repository.update(reservation, callback, application);
+        repository.update(reservation, callback);
     }
 }

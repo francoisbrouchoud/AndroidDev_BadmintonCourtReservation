@@ -27,7 +27,7 @@ public class CourtListViewModel extends AndroidViewModel {
         observableCourts = new MediatorLiveData<>();
         observableCourts.setValue(null);
 
-        LiveData<List<CourtEntity>> courts = courtRepository.getCourts(application);
+        LiveData<List<CourtEntity>> courts = courtRepository.getCourts();
         observableCourts.addSource(courts, observableCourts::setValue);
     }
 

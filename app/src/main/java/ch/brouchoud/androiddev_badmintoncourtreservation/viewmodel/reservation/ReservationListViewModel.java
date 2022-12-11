@@ -34,8 +34,8 @@ public class ReservationListViewModel extends AndroidViewModel {
         observableReservations.setValue(null);
         observableReservationsPlayerCourt.setValue(null);
 
-        LiveData<List<ReservationEntity>> reservations = reservationRepository.getReservations(application);
-        LiveData<List<ReservationWithPlayerAndCourt>> reservationsPlayerCourt = reservationRepository.getReservationsWithPlayerAndCourt(application);
+        LiveData<List<ReservationEntity>> reservations = reservationRepository.getReservations();
+        LiveData<List<ReservationWithPlayerAndCourt>> reservationsPlayerCourt = reservationRepository.getReservationsWithPlayerAndCourt();
 
         observableReservations.addSource(reservations, observableReservations::setValue);
         observableReservationsPlayerCourt.addSource(reservationsPlayerCourt, observableReservationsPlayerCourt::setValue);
@@ -85,6 +85,6 @@ public class ReservationListViewModel extends AndroidViewModel {
      * @param callback
      */
     public void deleteReservation(ReservationEntity reservation, OnAsyncEventListener callback){
-        repository.delete(reservation, callback, application);
+        repository.delete(reservation, callback);
     }
 }

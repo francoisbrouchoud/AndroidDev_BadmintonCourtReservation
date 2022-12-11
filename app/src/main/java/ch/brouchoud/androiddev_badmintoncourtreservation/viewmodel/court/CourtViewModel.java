@@ -18,7 +18,7 @@ public class CourtViewModel extends AndroidViewModel {
     private CourtRepository repository;
     private final MediatorLiveData<CourtEntity> observableCourt;
 
-    public CourtViewModel(@NonNull Application application, final long courtId, CourtRepository courtRepository) {
+    public CourtViewModel(@NonNull Application application, final String courtId, CourtRepository courtRepository) {
         super(application);
 
         this.application = application;
@@ -28,17 +28,17 @@ public class CourtViewModel extends AndroidViewModel {
         observableCourt.setValue(null);
 
         LiveData<CourtEntity> court;
-        court = repository.getCourt(courtId, application);
+        court = repository.getCourt(courtId);
         observableCourt.addSource(court, observableCourt::setValue);
     }
 
     public static class Factory extends ViewModelProvider.NewInstanceFactory{
         @NonNull
         private final Application application;
-        private final long courtId;
+        private final String courtId;
         private final CourtRepository repository;
 
-        public Factory(@NonNull Application application, long courtId){
+        public Factory(@NonNull Application application, String courtId){
             this.application = application;
             this.courtId = courtId;
             repository = ((BaseApp) application).getCourtRepository();
@@ -63,7 +63,7 @@ public class CourtViewModel extends AndroidViewModel {
      * @param callback
      */
     public void createCourt(CourtEntity court, OnAsyncEventListener callback){
-        repository.insert(court, callback, application);
+        repository.insert(court, callback);
     }
 
     /**
@@ -72,7 +72,7 @@ public class CourtViewModel extends AndroidViewModel {
      * @param callback
      */
     public void updateCourt(CourtEntity court, OnAsyncEventListener callback){
-        repository.update(court, callback, application);
+        repository.update(court, callback);
     }
 
     /**
@@ -81,6 +81,6 @@ public class CourtViewModel extends AndroidViewModel {
      * @param callback
      */
     public void deleteCourt(CourtEntity court, OnAsyncEventListener callback){
-        repository.delete(court, callback, application);
+        repository.delete(court, callback);
     }
 }

@@ -18,7 +18,7 @@ public class PlayerViewModel extends AndroidViewModel {
     private PlayerRepository repository;
     private final MediatorLiveData<PlayerEntity> observablePlayer;
 
-    public PlayerViewModel(@NonNull Application application, final long playerId, PlayerRepository playerRepository) {
+    public PlayerViewModel(@NonNull Application application, final String playerId, PlayerRepository playerRepository) {
         super(application);
 
         this.application = application;
@@ -28,7 +28,7 @@ public class PlayerViewModel extends AndroidViewModel {
         observablePlayer.setValue(null);
 
         LiveData<PlayerEntity> player;
-        player = repository.getPlayer(playerId, application);
+        player = repository.getPlayer(playerId);
         observablePlayer.addSource(player, observablePlayer::setValue);
     }
 
@@ -36,10 +36,10 @@ public class PlayerViewModel extends AndroidViewModel {
 
         @NonNull
         private final Application application;
-        private final long playerId;
+        private final String playerId;
         private final PlayerRepository repository;
 
-        public Factory(@NonNull Application application, long playerId) {
+        public Factory(@NonNull Application application, String playerId) {
             this.application = application;
             this.playerId = playerId;
             repository = ((BaseApp) application).getPlayerRepository();
@@ -66,7 +66,7 @@ public class PlayerViewModel extends AndroidViewModel {
      * @param callback
      */
     public void createPlayer(PlayerEntity player, OnAsyncEventListener callback){
-        repository.insert(player, callback, application);
+        repository.insert(player, callback);
     }
 
     /**
@@ -75,6 +75,6 @@ public class PlayerViewModel extends AndroidViewModel {
      * @param callback
      */
     public void updatePlayer(PlayerEntity player, OnAsyncEventListener callback){
-        repository.update(player, callback, application);
+        repository.update(player, callback);
     }
 }
