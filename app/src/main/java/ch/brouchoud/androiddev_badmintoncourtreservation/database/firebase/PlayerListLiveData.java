@@ -21,7 +21,7 @@ public class PlayerListLiveData extends LiveData<List<PlayerEntity>> {
     private static final String TAG = "PlayerListLiveData";
 
     private final DatabaseReference reference;
-    private final PlayerListLiveData.MyValueEventListener listener = new PlayerListLiveData.MyValueEventListener();
+    private final MyValueEventListener listener = new MyValueEventListener();
 
     public PlayerListLiveData(DatabaseReference ref) {
         reference = ref;
@@ -41,7 +41,7 @@ public class PlayerListLiveData extends LiveData<List<PlayerEntity>> {
     private class MyValueEventListener implements ValueEventListener {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            toPlayers(dataSnapshot);
+            setValue(toPlayers(dataSnapshot));
         }
 
         @Override
