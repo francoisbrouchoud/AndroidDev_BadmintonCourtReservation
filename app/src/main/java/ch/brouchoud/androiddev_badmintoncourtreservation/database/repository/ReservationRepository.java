@@ -62,14 +62,14 @@ public class ReservationRepository {
         return new ReservationWithPlayerAndCourtLiveData(reference);
     }
 
-    public void insert(final ReservationEntity reservation, OnAsyncEventListener callback) {
+    public void insert(final ReservationWithPlayerAndCourt reservationPC, OnAsyncEventListener callback) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference("reservations");
         String key = reference.push().getKey();
         FirebaseDatabase.getInstance()
                 .getReference("reservations")
                 .child(key)
-                .setValue(reservation, (databaseError, databaseReference) -> {
+                .setValue(reservationPC, (databaseError, databaseReference) -> {
                     if (databaseError != null) {
                         callback.onFailure(databaseError.toException());
                     } else {
@@ -78,11 +78,11 @@ public class ReservationRepository {
                 });
     }
 
-    public void update(final ReservationEntity reservation, OnAsyncEventListener callback) {
+    public void update(final ReservationWithPlayerAndCourt reservationPC, OnAsyncEventListener callback) {
         FirebaseDatabase.getInstance()
                 .getReference("reservations")
-                .child(reservation.getId())
-                .updateChildren(reservation.toMap(), (databaseError, databaseReference) -> {
+                .child(reservationPC.reservation.getId())
+                .updateChildren(reservationPC.reservation.toMap(), (databaseError, databaseReference) -> {
                     if (databaseError != null) {
                         callback.onFailure(databaseError.toException());
                     } else {
