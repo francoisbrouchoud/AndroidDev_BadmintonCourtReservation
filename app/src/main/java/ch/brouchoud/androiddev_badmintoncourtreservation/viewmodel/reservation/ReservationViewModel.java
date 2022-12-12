@@ -71,19 +71,19 @@ public class ReservationViewModel extends AndroidViewModel {
 
     /**
      * Create a new reservation.
-     * @param reservation to create.
+     * @param reservationPC to create.
      * @param callback
      */
-    public void createReservation(ReservationEntity reservation, OnAsyncEventListener callback){
-        repository.insert(reservation, callback);
+    public void createReservation(ReservationWithPlayerAndCourt reservationPC, OnAsyncEventListener callback){
+        ((BaseApp)getApplication()).getReservationRepository().insert(reservationPC, callback);
     }
 
     /**
      * Update an existing reservation.
-     * @param reservation to update.
+     * @param reservationPC to update.
      * @param callback
      */
-    public void updateReservation(ReservationEntity reservation, OnAsyncEventListener callback){
-        repository.update(reservation, callback);
+    public void updateReservation(ReservationWithPlayerAndCourt reservationPC, OnAsyncEventListener callback){
+        ((BaseApp)getApplication()).getReservationRepository().update(reservationPC, callback);
     }
 }
