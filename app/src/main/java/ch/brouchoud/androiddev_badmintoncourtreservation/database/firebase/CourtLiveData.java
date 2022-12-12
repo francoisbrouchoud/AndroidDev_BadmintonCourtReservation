@@ -39,8 +39,10 @@ public class CourtLiveData extends LiveData<CourtEntity> {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
             CourtEntity entity = dataSnapshot.getValue(CourtEntity.class);
-            entity.setId(dataSnapshot.getKey());
-            setValue(entity);
+            if(entity != null){
+                entity.setId(dataSnapshot.getKey());
+                setValue(entity);
+            }
         }
 
         @Override
