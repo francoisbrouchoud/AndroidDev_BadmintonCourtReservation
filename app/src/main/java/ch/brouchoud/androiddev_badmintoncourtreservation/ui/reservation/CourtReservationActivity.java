@@ -199,9 +199,9 @@ public class CourtReservationActivity extends BaseActivity {
         }
 
         button.setOnClickListener(view -> {
-            ReservationEntity reservation = getReservationFromFields();
-            if(checkFields(reservation)){
-                saveChanges(reservation);
+            ReservationWithPlayerAndCourt reservationPC = getReservationFromFields();
+            if(checkFields(reservationPC)){
+                saveChanges(reservationPC);
                 onBackPressed();
                 toast.show();
             }
@@ -210,39 +210,39 @@ public class CourtReservationActivity extends BaseActivity {
 
     /**
      * Check the UI fields according to 5 criteria.
-     * @param reservation to check
+     * @param reservationPC to check
      * @return false if a criteria is not satisfied, true if all criteria are satisfied.
      */
-    private boolean checkFields(ReservationEntity reservation){
+    private boolean checkFields(ReservationWithPlayerAndCourt reservationPC){
         //Check if the fields are not empty
-        if(TextUtils.isEmpty(reservation.getReservationDate())){
+        if(TextUtils.isEmpty(reservationPC.reservation.getReservationDate())){
             etReservationDate.setError(getString(R.string.errorRequired_reservation_date));
             etReservationDate.requestFocus();
             return false;
         }
         //Ensure that the time slot is not empty
-        if(reservation.getTimeSlot() == getString(R.string.hint_sp_time)){
+        if(reservationPC.reservation.getTimeSlot() == getString(R.string.hint_sp_time)){
             tvTime.setError(getString(R.string.errorRequired_reservation_time));
             spReservationTime.requestFocus();
             return false;
         }
         //Ensure that the time and date are not in the past
-        if(ReservationHelper.checkLaterDate(reservation.getReservationDate(), reservation.getTimeSlot())){
+        if(ReservationHelper.checkLaterDate(reservationPC.reservation.getReservationDate(), reservationPC.reservation.getTimeSlot())){
             reservationErrorDialog(R.string.dialog_reservation_past);
             return false;
         }
 
         if(isEdit){
-            if(checkDateAndTimeChange(reservation)){
+            if(checkDateAndTimeChange(reservationPC.reservation)){
                 //If we are editing an existing reservation, we check that there is no reservations for the same court, the same date and the same time
-                if(checkReservationForTimeslot(reservation)){
+                if(checkReservationForTimeslot(reservationPC.reservation)){
                     reservationErrorDialog(R.string.dialog_reservation_exists);
                     return false;
                 }
             }
         }
         else{
-            if(checkReservationForTimeslot(reservation)){
+            if(checkReservationForTimeslot(reservationPC.reservation)){
                 //Even if we are creating a new reservation, we check that there is no reservations for the same court, the same date and the same time
                 reservationErrorDialog(R.string.dialog_reservation_exists);
                 return false;
@@ -272,12 +272,12 @@ public class CourtReservationActivity extends BaseActivity {
 
     /**
      * Save the changes in the database. If we are editing, we update the reservation otherwise we create a new one.
-     * @param reservationToSave in the DB.
+     * @param reservationPCToSave in the DB.
      */
-    private void saveChanges(ReservationEntity reservationToSave){
+    private void saveChanges(ReservationWithPlayerAndCourt reservationPCToSave){
         if(isEdit){
             //Update an existing reservation
-            reservationViewModel.updateReservation(reservationToSave, new OnAsyncEventListener() {
+            reservationViewModel.updateReservation(reservationPCToSave, new OnAsyncEventListener() {
                 @Override
                 public void onSuccess() {
                     Log.d(TAG, "update reservation: success");
@@ -291,7 +291,7 @@ public class CourtReservationActivity extends BaseActivity {
         }
         else{
             //Create a new reservation
-            reservationViewModel.createReservation(reservationToSave, new OnAsyncEventListener() {
+            reservationViewModel.createReservation(reservationPCToSave, new OnAsyncEventListener() {
                 @Override
                 public void onSuccess() {
                     Log.d(TAG, "create reservation: success");
@@ -309,22 +309,29 @@ public class CourtReservationActivity extends BaseActivity {
      * Get the reservation from the UI fields.
      * @return The reservation from the UI fields.
      */
-    private ReservationEntity getReservationFromFields(){
-        ReservationEntity reservationFields;
+    private ReservationWithPlayerAndCourt getReservationFromFields(){
+        ReservationWithPlayerAndCourt reservationFields = new ReservationWithPlayerAndCourt();
+
         if(reservation == null) {
-            reservationFields = new ReservationEntity();
+            reservationFields.reservation = new ReservationEntity();
             //Get the player from the selection of the spinner
-            reservationFields.setCourtId(court.getId());
+            reservationFields.reservation.setCourtId(court.getId());
+
+
         }
         else{
             //If reservation not null, we retrieve the existing reservation
-            reservationFields = reservation;
+            reservationFields.reservation = reservation;
         }
         player = players.get(spReservationPlayer.getSelectedItemPosition());
         //Set the values
-        reservationFields.setPlayerId(player.getId());
-        reservationFields.setTimeSlot(spReservationTime.getSelectedItem().toString());
-        reservationFields.setReservationDate(etReservationDate.getText().toString());
+        reservationFields.court = court;
+        reservationFields.player = player;
+        reservationFields.reservation.setPlayerId(player.getId());
+        reservationFields.reservation.setTimeSlot(spReservationTime.getSelectedItem().toString());
+        reservationFields.reservation.setReservationDate(etReservationDate.getText().toString());
+
+
 
         return reservationFields;
     }
