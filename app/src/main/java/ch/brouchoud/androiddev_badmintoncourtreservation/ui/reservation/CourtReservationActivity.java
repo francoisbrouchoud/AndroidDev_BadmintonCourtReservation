@@ -200,11 +200,11 @@ public class CourtReservationActivity extends BaseActivity {
 
         button.setOnClickListener(view -> {
             ReservationWithPlayerAndCourt reservationPC = getReservationFromFields();
-            if(checkFields(reservationPC)){
+           // if(checkFields(reservationPC)){
                 saveChanges(reservationPC);
                 onBackPressed();
                 toast.show();
-            }
+            //}
         });
     }
 
@@ -322,6 +322,7 @@ public class CourtReservationActivity extends BaseActivity {
         else{
             //If reservation not null, we retrieve the existing reservation
             reservationFields.reservation = reservation;
+            reservationFields.setId(reservation.getId());
         }
         player = players.get(spReservationPlayer.getSelectedItemPosition());
         //Set the values
