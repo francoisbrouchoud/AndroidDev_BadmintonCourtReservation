@@ -40,6 +40,7 @@ public class PlayerLiveData extends LiveData<PlayerEntity> {
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
             PlayerEntity entity = dataSnapshot.getValue(PlayerEntity.class);
             entity.setId(dataSnapshot.getKey());
+            setValue(entity);
         }
 
         @Override
