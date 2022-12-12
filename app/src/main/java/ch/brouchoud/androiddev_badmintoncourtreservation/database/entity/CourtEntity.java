@@ -62,7 +62,7 @@ public class CourtEntity {
         this.address = address;
     }
 
-    public double getHourlyPrice() {
+    public Double getHourlyPrice() {
         return hourlyPrice;
     }
 
