@@ -53,7 +53,7 @@ public class ReservationsActivity extends BaseActivity {
                         Intent.FLAG_ACTIVITY_NO_ANIMATION |
                                 Intent.FLAG_ACTIVITY_NO_HISTORY
                 );
-                intent.putExtra("reservationId", reservationsPlayerCourt.get(position).reservation.getId());
+                intent.putExtra("reservationId", reservationsPlayerCourt.get(position).getId());
                 startActivity(intent);
             }
 

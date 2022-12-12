@@ -81,7 +81,7 @@ public class ReservationRepository {
     public void update(final ReservationWithPlayerAndCourt reservationPC, OnAsyncEventListener callback) {
         FirebaseDatabase.getInstance()
                 .getReference("reservations")
-                .child(reservationPC.reservation.getId())
+                .child(reservationPC.getId())
                 .updateChildren(reservationPC.reservation.toMap(), (databaseError, databaseReference) -> {
                     if (databaseError != null) {
                         callback.onFailure(databaseError.toException());
