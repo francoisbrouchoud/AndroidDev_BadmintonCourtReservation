@@ -11,6 +11,16 @@ import ch.brouchoud.androiddev_badmintoncourtreservation.database.entity.Reserva
  * Table reservation has relation with player and court
  */
 public class ReservationWithPlayerAndCourt {
+    public String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public ReservationEntity reservation;
 
     public PlayerEntity player;

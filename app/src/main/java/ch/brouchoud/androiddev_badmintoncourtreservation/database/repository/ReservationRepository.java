@@ -91,10 +91,11 @@ public class ReservationRepository {
                 });
     }
 
-    public void delete(final ReservationEntity reservation, OnAsyncEventListener callback) {
+    public void delete(final ReservationWithPlayerAndCourt reservationPC, OnAsyncEventListener callback) {
+        System.out.println(reservationPC.getId());
         FirebaseDatabase.getInstance()
                 .getReference("reservations")
-                .child(reservation.getId())
+                .child(reservationPC.getId())
                 .removeValue((databaseError, databaseReference) -> {
                     if (databaseError != null) {
                         callback.onFailure(databaseError.toException());
