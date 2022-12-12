@@ -56,12 +56,10 @@ public class ReservationWithPlayerAndCourtListLiveData extends LiveData<List<Res
         List<ReservationWithPlayerAndCourt> reservationWithPlayerAndCourts = new ArrayList<>();
         for (DataSnapshot childSnapshot : snapshot.getChildren()){
             ReservationWithPlayerAndCourt reservationWithPlayerAndCourt = new ReservationWithPlayerAndCourt();
-            reservationWithPlayerAndCourt.court = childSnapshot.getValue(CourtEntity.class);
-            reservationWithPlayerAndCourt.court.setId(childSnapshot.getKey());
-            reservationWithPlayerAndCourt.player = childSnapshot.getValue(PlayerEntity.class);
-            reservationWithPlayerAndCourt.player.setId(childSnapshot.getKey());
-            reservationWithPlayerAndCourt.reservation = childSnapshot.getValue(ReservationEntity.class);
-            reservationWithPlayerAndCourt.reservation.setId(childSnapshot.getKey());
+            reservationWithPlayerAndCourt.court = childSnapshot.child("court").getValue(CourtEntity.class);
+            reservationWithPlayerAndCourt.player = childSnapshot.child("player").getValue(PlayerEntity.class);
+            reservationWithPlayerAndCourt.reservation = childSnapshot.child("reservation").getValue(ReservationEntity.class);
+            reservationWithPlayerAndCourt.reservation.setId(childSnapshot.child("reservation").getKey());
             reservationWithPlayerAndCourts.add(reservationWithPlayerAndCourt);
         }
         return reservationWithPlayerAndCourts;
