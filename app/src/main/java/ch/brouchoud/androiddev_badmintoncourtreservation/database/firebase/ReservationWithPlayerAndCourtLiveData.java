@@ -10,6 +10,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import ch.brouchoud.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
+import ch.brouchoud.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
 import ch.brouchoud.androiddev_badmintoncourtreservation.database.entity.ReservationEntity;
 import ch.brouchoud.androiddev_badmintoncourtreservation.database.pojo.ReservationWithPlayerAndCourt;
 
@@ -38,13 +43,23 @@ public class ReservationWithPlayerAndCourtLiveData extends LiveData<ReservationW
     private class MyValueEventListener implements ValueEventListener {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            ReservationEntity entity = dataSnapshot.getValue(ReservationEntity.class);
-            entity.setId(dataSnapshot.getKey());
+            setValue(toReservationWithPlayerAndCourt(dataSnapshot));
         }
 
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
             Log.e(TAG, "Can't listen to query " + reference, databaseError.toException());
         }
+    }
+
+    private ReservationWithPlayerAndCourt toReservationWithPlayerAndCourt(DataSnapshot dataSnapshot) {
+            ReservationWithPlayerAndCourt reservationWithPlayerAndCourt = new ReservationWithPlayerAndCourt();
+            reservationWithPlayerAndCourt.court = dataSnapshot.child("court").getValue(CourtEntity.class);
+            reservationWithPlayerAndCourt.player = dataSnapshot.child("player").getValue(PlayerEntity.class);
+            reservationWithPlayerAndCourt.reservation = dataSnapshot.child("reservation").getValue(ReservationEntity.class);
+            reservationWithPlayerAndCourt.reservation.setId(dataSnapshot.child("reservation").getKey());
+            reservationWithPlayerAndCourt.setId(dataSnapshot.getKey());
+
+        return reservationWithPlayerAndCourt;
     }
 }
