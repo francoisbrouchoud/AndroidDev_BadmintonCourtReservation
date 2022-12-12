@@ -208,6 +208,13 @@ public class EditCourtActivity extends BaseActivity {
             etCourtAddress.requestFocus();
             return false;
         }
+
+        if(court.getHourlyPrice() == null || TextUtils.isEmpty(court.getHourlyPrice().toString()) ){
+            etCourtHourlyPrice.setError(getString(R.string.errorRequired_court_price));
+            etCourtHourlyPrice.requestFocus();
+            return false;
+        }
+
         //Ensure that the courts description is not empty
         if(TextUtils.isEmpty(court.getDescription())){
             etCourtDescription.setError(getString(R.string.errorRequired_court_description));
