@@ -29,6 +29,8 @@ import ch.brouchoud.androiddev_badmintoncourtreservation.viewmodel.court.CourtVi
 import ch.brouchoud.androiddev_badmintoncourtreservation.viewmodel.player.PlayerListViewModel;
 import ch.brouchoud.androiddev_badmintoncourtreservation.viewmodel.reservation.ReservationListViewModel;
 import ch.brouchoud.androiddev_badmintoncourtreservation.viewmodel.reservation.ReservationViewModel;
+import ch.brouchoud.androiddev_badmintoncourtreservation.viewmodel.reservation.ReservationWithPlayerAndCourtListViewModel;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -52,6 +54,7 @@ public class CourtReservationActivity extends BaseActivity {
     private ReservationListViewModel reservationListViewModel;
     private ReservationViewModel reservationViewModel;
     private List<ReservationEntity> reservations;
+    private List<ReservationWithPlayerAndCourt> reservationsWithPlayerAndCourt;
 
     private TextView tvCourtName;
     private TextView tvCourtPrice;
@@ -176,8 +179,18 @@ public class CourtReservationActivity extends BaseActivity {
         reservationListViewModel.getReservations().observe(this, reservationEntities -> {
             if(reservationEntities != null){
                 reservations = reservationEntities;
+
             }
         });
+
+        ReservationWithPlayerAndCourtListViewModel.Factory factoryReservationPC = new ReservationWithPlayerAndCourtListViewModel.Factory(getApplication());
+        ReservationWithPlayerAndCourtListViewModel viewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) factoryReservationPC).get(ReservationWithPlayerAndCourtListViewModel.class);
+        viewModel.getReservationsWithPlayerAndCourt().observe(this, reservationWithPlayerAndCourts -> {
+            if(reservationWithPlayerAndCourts != null){
+                reservationsWithPlayerAndCourt = reservationWithPlayerAndCourts;
+            }
+        });
+
 
         setupViewModel();
         setupPlayerSpinner();
@@ -200,11 +213,11 @@ public class CourtReservationActivity extends BaseActivity {
 
         button.setOnClickListener(view -> {
             ReservationWithPlayerAndCourt reservationPC = getReservationFromFields();
-           // if(checkFields(reservationPC)){
+            if(checkFields(reservationPC)){
                 saveChanges(reservationPC);
                 onBackPressed();
                 toast.show();
-            //}
+            }
         });
     }
 
@@ -343,12 +356,15 @@ public class CourtReservationActivity extends BaseActivity {
      * @return true if there already is a reservation for the same court at the same time and date. False otherwise.
      */
     private boolean checkReservationForTimeslot(ReservationEntity reservation){
-        for(ReservationEntity r : reservations){
-            if(Objects.equals(r.getCourtId(), reservation.getCourtId()) && Objects.equals(r.getReservationDate(), reservation.getReservationDate()) && Objects.equals(r.getTimeSlot(), reservation.getTimeSlot())){
+        for(ReservationWithPlayerAndCourt r : reservationsWithPlayerAndCourt){
+
+            if(Objects.equals(r.reservation.getCourtId(), reservation.getCourtId()) && Objects.equals(r.reservation.getReservationDate(), reservation.getReservationDate()) && Objects.equals(r.reservation.getTimeSlot(), reservation.getTimeSlot())){
                 return true;
             }
         }
         return false;
+
+
     }
 
     /**
