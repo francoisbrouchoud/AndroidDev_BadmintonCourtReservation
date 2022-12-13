@@ -237,7 +237,7 @@ public class CourtReservationActivity extends BaseActivity {
         }
 
         if(isEdit){
-            if(checkDateAndTimeChange(reservationPC.reservation)){
+            if(checkDateAndTimeChange(reservationPC)){
                 //If we are editing an existing reservation, we check that there is no reservations for the same court, the same date and the same time
                 if(checkReservationForTimeslot(reservationPC.reservation)){
                     reservationErrorDialog(R.string.dialog_reservation_exists);
@@ -355,12 +355,13 @@ public class CourtReservationActivity extends BaseActivity {
 
     /**
      * Check if the time or date have changed.
-     * @param r reservation to check.
+     * @param rpc reservation to check.
      * @return false if time and date haven't changed. True if they have.
      */
-    private boolean checkDateAndTimeChange(ReservationEntity r){
-        ReservationEntity reservationDb = getReservationFromDb(r.getId());
-        if(reservationDb.getReservationDate().equals(r.getReservationDate()) && reservationDb.getTimeSlot().equals(r.getTimeSlot())){
+    private boolean checkDateAndTimeChange(ReservationWithPlayerAndCourt rpc){
+        String test = rpc.getId();
+        ReservationWithPlayerAndCourt reservationDb = getReservationFromDb(test);
+        if(reservationDb.reservation.getReservationDate().equals(rpc.reservation.getReservationDate()) && reservationDb.reservation.getTimeSlot().equals(rpc.reservation.getTimeSlot())){
             return false;
         }
         return true;
@@ -371,10 +372,10 @@ public class CourtReservationActivity extends BaseActivity {
      * @param id of the reservation to retrieve.
      * @return the reservation from the DB.
      */
-    private ReservationEntity getReservationFromDb(String id){
+    private ReservationWithPlayerAndCourt getReservationFromDb(String id){
         for (ReservationWithPlayerAndCourt r : reservationsWithPlayerAndCourt){
-            if(Objects.equals(r.reservation.getId(), id)){
-                return r.reservation;
+            if(Objects.equals(r.getId(), id)){
+                return r;
             }
         }
         return null;
