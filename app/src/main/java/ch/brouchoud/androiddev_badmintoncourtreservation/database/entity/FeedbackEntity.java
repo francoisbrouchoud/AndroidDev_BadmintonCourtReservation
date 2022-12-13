@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This entity contains all the fields of the court.
+ * This entity contains all the fields of the feedback.
  */
 
 public class FeedbackEntity {
