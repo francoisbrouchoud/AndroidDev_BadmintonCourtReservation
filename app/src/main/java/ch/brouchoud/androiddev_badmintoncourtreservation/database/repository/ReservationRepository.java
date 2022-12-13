@@ -1,8 +1,5 @@
 package ch.brouchoud.androiddev_badmintoncourtreservation.database.repository;
 
-import android.app.Application;
-import android.provider.ContactsContract;
-
 import androidx.lifecycle.LiveData;
 
 import com.google.firebase.database.DatabaseReference;
@@ -92,7 +89,6 @@ public class ReservationRepository {
     }
 
     public void delete(final ReservationWithPlayerAndCourt reservationPC, OnAsyncEventListener callback) {
-        System.out.println(reservationPC.getId());
         FirebaseDatabase.getInstance()
                 .getReference("reservations")
                 .child(reservationPC.getId())

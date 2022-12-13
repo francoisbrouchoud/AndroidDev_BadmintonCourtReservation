@@ -1,9 +1,6 @@
 package ch.brouchoud.androiddev_badmintoncourtreservation.database.repository;
 
-import android.app.Application;
-
 import androidx.lifecycle.LiveData;
-import androidx.preference.Preference;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;

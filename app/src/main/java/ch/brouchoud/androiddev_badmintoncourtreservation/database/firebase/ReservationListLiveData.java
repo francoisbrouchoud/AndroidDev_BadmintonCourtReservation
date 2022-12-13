@@ -13,7 +13,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.brouchoud.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
 import ch.brouchoud.androiddev_badmintoncourtreservation.database.entity.ReservationEntity;
 
 public class ReservationListLiveData extends LiveData<List<ReservationEntity>> {

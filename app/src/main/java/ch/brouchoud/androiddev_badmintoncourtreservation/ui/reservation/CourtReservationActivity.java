@@ -53,7 +53,6 @@ public class CourtReservationActivity extends BaseActivity {
     private ReservationWithPlayerAndCourt reservationWithPlayerAndCourt;
     private ReservationListViewModel reservationListViewModel;
     private ReservationViewModel reservationViewModel;
-    private List<ReservationEntity> reservations;
     private List<ReservationWithPlayerAndCourt> reservationsWithPlayerAndCourt;
     private String reservationId;
 
@@ -174,15 +173,6 @@ public class CourtReservationActivity extends BaseActivity {
 
         ReservationViewModel.Factory factoryReservation = new ReservationViewModel.Factory(getApplication(),reservationId);
         reservationViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) factoryReservation).get(ReservationViewModel.class);
-
-        ReservationListViewModel.Factory factoryReservationList = new ReservationListViewModel.Factory(getApplication());
-        reservationListViewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) factoryReservationList).get(ReservationListViewModel.class);
-        reservationListViewModel.getReservations().observe(this, reservationEntities -> {
-            if(reservationEntities != null){
-                reservations = reservationEntities;
-
-            }
-        });
 
         ReservationWithPlayerAndCourtListViewModel.Factory factoryReservationPC = new ReservationWithPlayerAndCourtListViewModel.Factory(getApplication());
         ReservationWithPlayerAndCourtListViewModel viewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) factoryReservationPC).get(ReservationWithPlayerAndCourtListViewModel.class);

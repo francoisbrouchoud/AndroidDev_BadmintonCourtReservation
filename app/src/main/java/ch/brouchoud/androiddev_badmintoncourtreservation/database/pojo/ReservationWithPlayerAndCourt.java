@@ -1,8 +1,5 @@
 package ch.brouchoud.androiddev_badmintoncourtreservation.database.pojo;
 
-import androidx.room.Embedded;
-import androidx.room.Relation;
-
 import com.google.firebase.firestore.Exclude;
 
 import java.util.HashMap;

@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import ch.brouchoud.androiddev_badmintoncourtreservation.R;
 import ch.brouchoud.androiddev_badmintoncourtreservation.adapter.ReservationsRecyclerAdapter;
-import ch.brouchoud.androiddev_badmintoncourtreservation.database.entity.ReservationEntity;
 import ch.brouchoud.androiddev_badmintoncourtreservation.database.pojo.ReservationWithPlayerAndCourt;
 import ch.brouchoud.androiddev_badmintoncourtreservation.ui.BaseActivity;
 import ch.brouchoud.androiddev_badmintoncourtreservation.util.OnAsyncEventListener;

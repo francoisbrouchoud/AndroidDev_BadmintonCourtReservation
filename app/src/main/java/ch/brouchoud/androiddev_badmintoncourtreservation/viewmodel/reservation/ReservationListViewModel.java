@@ -64,14 +64,6 @@ public class ReservationListViewModel extends AndroidViewModel {
     }
 
     /**
-     * Get the observable reservations.
-     * @return LiveData of the reservations.
-     */
-    public LiveData<List<ReservationEntity>> getReservations(){
-        return observableReservations;
-    }
-
-    /**
      * Get the reservations with the player and the court using the POJO class.
      * @return LiveData of reservations with player ant court.
      */

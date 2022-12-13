@@ -1,14 +1,11 @@
 package ch.brouchoud.androiddev_badmintoncourtreservation.database.repository;
 
-import android.app.Application;
-
 import androidx.lifecycle.LiveData;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import ch.brouchoud.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
-import ch.brouchoud.androiddev_badmintoncourtreservation.database.firebase.CourtListLiveData;
 import ch.brouchoud.androiddev_badmintoncourtreservation.database.firebase.PlayerListLiveData;
 import ch.brouchoud.androiddev_badmintoncourtreservation.database.firebase.PlayerLiveData;
 import ch.brouchoud.androiddev_badmintoncourtreservation.util.OnAsyncEventListener;

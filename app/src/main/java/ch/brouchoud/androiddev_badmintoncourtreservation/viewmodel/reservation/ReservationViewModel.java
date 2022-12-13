@@ -19,7 +19,6 @@ public class ReservationViewModel extends AndroidViewModel {
 
     private Application application;
     private ReservationRepository repository;
-    // final MediatorLiveData<ReservationEntity> observableReservation;
     private final MediatorLiveData<ReservationWithPlayerAndCourt> observableReservationPlayerCourt;
 
     public ReservationViewModel(@NonNull Application application, final String reservationId, ReservationRepository reservationRepository, PlayerRepository playerRepository, CourtRepository courtRepository) {

@@ -10,7 +10,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-import ch.brouchoud.androiddev_badmintoncourtreservation.database.entity.CourtEntity;
 import ch.brouchoud.androiddev_badmintoncourtreservation.database.entity.PlayerEntity;
 
 public class PlayerLiveData extends LiveData<PlayerEntity> {
