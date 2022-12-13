@@ -55,6 +55,7 @@ public class CourtReservationActivity extends BaseActivity {
     private ReservationViewModel reservationViewModel;
     private List<ReservationEntity> reservations;
     private List<ReservationWithPlayerAndCourt> reservationsWithPlayerAndCourt;
+    private String reservationId;
 
     private TextView tvCourtName;
     private TextView tvCourtPrice;
@@ -106,7 +107,7 @@ public class CourtReservationActivity extends BaseActivity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.times, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         spReservationTime.setAdapter(adapter);
 
-        String reservationId = getIntent().getStringExtra("reservationId");
+        reservationId = getIntent().getStringExtra("reservationId");
         if(reservationId == null){
             setTitle("New court reservation");
             isEdit = false;
@@ -335,7 +336,7 @@ public class CourtReservationActivity extends BaseActivity {
         else{
             //If reservation not null, we retrieve the existing reservation
             reservationFields.reservation = reservation;
-            reservationFields.setId(reservation.getId());
+            reservationFields.setId(reservationId);
         }
         player = players.get(spReservationPlayer.getSelectedItemPosition());
         //Set the values
@@ -357,14 +358,11 @@ public class CourtReservationActivity extends BaseActivity {
      */
     private boolean checkReservationForTimeslot(ReservationEntity reservation){
         for(ReservationWithPlayerAndCourt r : reservationsWithPlayerAndCourt){
-
             if(Objects.equals(r.reservation.getCourtId(), reservation.getCourtId()) && Objects.equals(r.reservation.getReservationDate(), reservation.getReservationDate()) && Objects.equals(r.reservation.getTimeSlot(), reservation.getTimeSlot())){
                 return true;
             }
         }
         return false;
-
-
     }
 
     /**
@@ -386,9 +384,9 @@ public class CourtReservationActivity extends BaseActivity {
      * @return the reservation from the DB.
      */
     private ReservationEntity getReservationFromDb(String id){
-        for (ReservationEntity r : reservations){
-            if(Objects.equals(r.getId(), id)){
-                return r;
+        for (ReservationWithPlayerAndCourt r : reservationsWithPlayerAndCourt){
+            if(Objects.equals(r.reservation.getId(), id)){
+                return r.reservation;
             }
         }
         return null;
