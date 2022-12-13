@@ -63,6 +63,9 @@ public class AboutActivity extends BaseActivity {
         return super.onNavigationItemSelected(item);
     }
 
+    /**
+     * Here the feedback are added to the JSON Tree with info about the user device
+     */
     private void sendFeedbackOnFirebase() {
         FeedbackEntity feedbackEntity = new FeedbackEntity(new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.getDefault()).format(new Date()), System.getProperty("os.version"), Build.DEVICE, Build.MODEL, feedback.getText().toString() );
         DatabaseReference reference = FirebaseDatabase.getInstance()
