@@ -83,6 +83,6 @@ public class CourtViewModel extends AndroidViewModel {
      * @param callback
      */
     public void deleteCourt(CourtEntity court, OnAsyncEventListener callback){
-        ((BaseApp) getApplication()).getCourtRepository().delete(court, callback);
+       repository.delete(court, callback);
     }
 }

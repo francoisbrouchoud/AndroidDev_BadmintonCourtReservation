@@ -81,10 +81,10 @@ public class ReservationListViewModel extends AndroidViewModel {
 
     /**
      * Delete a reservation.
-     * @param reservation to delete.
+     * @param reservationPC to delete.
      * @param callback
      */
-    public void deleteReservation(ReservationEntity reservation, OnAsyncEventListener callback){
-        repository.delete(reservation, callback);
+    public void deleteReservation(ReservationWithPlayerAndCourt reservationPC, OnAsyncEventListener callback){
+        repository.delete(reservationPC, callback);
     }
 }

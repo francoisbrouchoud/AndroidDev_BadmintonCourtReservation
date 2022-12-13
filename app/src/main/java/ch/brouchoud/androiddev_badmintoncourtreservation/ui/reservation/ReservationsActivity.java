@@ -53,7 +53,7 @@ public class ReservationsActivity extends BaseActivity {
                         Intent.FLAG_ACTIVITY_NO_ANIMATION |
                                 Intent.FLAG_ACTIVITY_NO_HISTORY
                 );
-                intent.putExtra("reservationId", reservationsPlayerCourt.get(position).reservation.getId());
+                intent.putExtra("reservationId", reservationsPlayerCourt.get(position).getId());
                 startActivity(intent);
             }
 
@@ -85,7 +85,8 @@ public class ReservationsActivity extends BaseActivity {
      * @param position of the item on which the user has clicked.
      */
     private void deleteReservationDialog(int position) {
-        final ReservationEntity reservation = reservationsPlayerCourt.get(position).reservation;
+        //final ReservationEntity reservation = reservationsPlayerCourt.get(position).reservation;
+        final ReservationWithPlayerAndCourt reservationPC = reservationsPlayerCourt.get(position);
         LayoutInflater inflater = LayoutInflater.from(this);
         final View view = inflater.inflate(R.layout.row_delete_item, null);
 
@@ -97,7 +98,7 @@ public class ReservationsActivity extends BaseActivity {
 
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.alert_playersActivity_btnPositive), (dialog, which) -> {
             Toast toast = Toast.makeText(this, getString(R.string.toast_reservationActivity_delete), Toast.LENGTH_LONG);
-            listViewModel.deleteReservation(reservation, new OnAsyncEventListener() {
+            listViewModel.deleteReservation(reservationPC, new OnAsyncEventListener() {
                 @Override
                 public void onSuccess() {
                     Log.d(TAG, "delete reservation: success");

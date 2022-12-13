@@ -84,6 +84,6 @@ public class ReservationViewModel extends AndroidViewModel {
      * @param callback
      */
     public void updateReservation(ReservationWithPlayerAndCourt reservationPC, OnAsyncEventListener callback){
-        ((BaseApp)getApplication()).getReservationRepository().update(reservationPC, callback);
+        repository.update(reservationPC, callback);
     }
 }

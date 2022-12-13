@@ -60,6 +60,7 @@ public class ReservationWithPlayerAndCourtListLiveData extends LiveData<List<Res
             reservationWithPlayerAndCourt.player = childSnapshot.child("player").getValue(PlayerEntity.class);
             reservationWithPlayerAndCourt.reservation = childSnapshot.child("reservation").getValue(ReservationEntity.class);
             reservationWithPlayerAndCourt.reservation.setId(childSnapshot.child("reservation").getKey());
+            reservationWithPlayerAndCourt.setId(childSnapshot.getKey());
             reservationWithPlayerAndCourts.add(reservationWithPlayerAndCourt);
         }
         return reservationWithPlayerAndCourts;
