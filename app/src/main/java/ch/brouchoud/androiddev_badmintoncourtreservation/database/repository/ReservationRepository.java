@@ -82,7 +82,7 @@ public class ReservationRepository {
         FirebaseDatabase.getInstance()
                 .getReference("reservations")
                 .child(reservationPC.getId())
-                .updateChildren(reservationPC.reservation.toMap(), (databaseError, databaseReference) -> {
+                .updateChildren(reservationPC.toMap(), (databaseError, databaseReference) -> {
                     if (databaseError != null) {
                         callback.onFailure(databaseError.toException());
                     } else {

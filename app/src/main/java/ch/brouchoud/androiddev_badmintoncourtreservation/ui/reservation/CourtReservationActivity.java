@@ -330,17 +330,15 @@ public class CourtReservationActivity extends BaseActivity {
             reservationFields.reservation = new ReservationEntity();
             //Get the player from the selection of the spinner
             reservationFields.reservation.setCourtId(court.getId());
-
-
+            reservationFields.court = court;
         }
         else{
             //If reservation not null, we retrieve the existing reservation
             reservationFields.reservation = reservation;
             reservationFields.setId(reservationId);
+            reservationFields.court = reservationWithPlayerAndCourt.court;
         }
         player = players.get(spReservationPlayer.getSelectedItemPosition());
-        //Set the values
-        reservationFields.court = court;
         reservationFields.player = player;
         reservationFields.reservation.setPlayerId(player.getId());
         reservationFields.reservation.setTimeSlot(spReservationTime.getSelectedItem().toString());
