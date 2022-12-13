@@ -2,9 +2,8 @@ package ch.brouchoud.androiddev_badmintoncourtreservation.ui.management;
 
 import androidx.annotation.NonNull;
 import androidx.preference.PreferenceManager;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,7 +12,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import ch.brouchoud.androiddev_badmintoncourtreservation.R;
+import ch.brouchoud.androiddev_badmintoncourtreservation.database.entity.FeedbackEntity;
 import ch.brouchoud.androiddev_badmintoncourtreservation.ui.BaseActivity;
 
 public class AboutActivity extends BaseActivity {
@@ -45,7 +52,7 @@ public class AboutActivity extends BaseActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendFeedbackByEmail();
+                sendFeedbackOnFirebase();
             }
         });
     }
@@ -56,22 +63,18 @@ public class AboutActivity extends BaseActivity {
         return super.onNavigationItemSelected(item);
     }
 
-    private void sendFeedbackByEmail() {
-        String feedbackText = feedback.getText().toString();
-        Intent intent = new Intent(Intent.ACTION_SENDTO);
-        String[] TO = {"luca.delbuono@students.hevs.ch", "francois.brouchoud@hevs.ch" };
-        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
-        intent.putExtra(Intent.EXTRA_EMAIL, TO);
-        intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback : Court Reservation app");
-        intent.putExtra(Intent.EXTRA_TEXT, feedbackText);
+    private void sendFeedbackOnFirebase() {
+        FeedbackEntity feedbackEntity = new FeedbackEntity(new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.getDefault()).format(new Date()), System.getProperty("os.version"), Build.DEVICE, Build.MODEL, feedback.getText().toString() );
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("feedbacks");
+        String key = reference.push().getKey();
+        FirebaseDatabase.getInstance()
+                .getReference("feedbacks")
+                .child(key)
+                .setValue(feedbackEntity);
+        feedback.setText("");
+        Toast.makeText(AboutActivity.this, "Thank you for your feedback!", Toast.LENGTH_SHORT).show();
 
-        try {
-            startActivity(Intent.createChooser(intent, "Send email"));
-            finish();
-
-        } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(AboutActivity.this, "No mail client installed !", Toast.LENGTH_SHORT).show();
-        }
     }
 
 }
